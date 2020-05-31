@@ -21,3 +21,14 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+/.idea/$CACHE_FILE$
+/.idea/.gitignore
+/.idea/aws.xml
+/.idea/codeStyles/codeStyleConfig.xml
+/.idea/compiler.xml
+/.idea/dictionaries
+/.idea/lc-reporting-ui.iml
+/.idea/misc.xml
+/.idea/modules.xml
+/.idea/inspectionProfiles/Project_Default.xml
+/.idea/vcs.xml
