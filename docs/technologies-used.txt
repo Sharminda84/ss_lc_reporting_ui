@@ -1,0 +1,11 @@
+This react based UI uses these technologies
+
+- Styling
+- Functional components
+- Higher order components
+- React hooks
+- Routing
+- Redux/Redux saga
+- Authentication
+
+

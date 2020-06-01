@@ -1,0 +1,5 @@
+Changing the look and feel of the UI
+
+Application font size: App.css -> body -> font-size
+Header background: Header.css -> .header -> background-color
+Main component area background: App.css -> .App -> background
