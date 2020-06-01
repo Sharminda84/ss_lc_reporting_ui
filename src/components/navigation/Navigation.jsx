@@ -7,7 +7,10 @@ function Navigation(props) {
     return (
         <div className='navigation'>
             <div className='navigationItem'>
-                <Link to={"/members"}>Member Sign-ups</Link>
+                <Link to={"/home"}>Home</Link>
+            </div>
+            <div className='navigationItem'>
+                <Link to={"/members"}>Members</Link>
             </div>
             <div className='navigationItem'>
                 <Link to={"/orders"}>Orders</Link>

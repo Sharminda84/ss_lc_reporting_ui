@@ -5,6 +5,7 @@ import AppHeader from './components/header/Header';
 import Navigation from "./components/navigation/Navigation";
 import AppFooter from './components/footer/Footer';
 import './App.css';
+import Home from "./components/home/Home";
 import Members from "./components/members/Members";
 import Orders from "./components/orders/Orders";
 
@@ -17,7 +18,7 @@ function App() {
           <Navigation />
           <div className='AppMainSection'>
             <Switch>
-                <Route path="/" exact component={Members}/>
+                <Route path="/" exact component={Home}/>
                 <Route path="/members" exact component={Members}/>
                 <Route path="/orders" exact component={Orders}/>
                 <Redirect to="/" />

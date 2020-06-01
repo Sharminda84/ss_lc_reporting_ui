@@ -1,10 +1,14 @@
 Changing the look and feel of the UI
-
+====================================
 Application font size: App.css -> body -> font-size
+
 Navigation:
   background color: Navigation.css -> .navigation -> background-color
   navigation item color: Navigation.css -> .navigationItem -> background
+
 Main component area background: App.css -> .App -> background
+
 Header background: Header.css -> .header -> background-color
+
 Footer background: Footer.css -> .footer -> background
 
