@@ -1,7 +1,7 @@
 .navigation {
     display: flex;
     flex-direction: column;
-    background-color: #DAAD86;
+    background-color: #8FC1E3;
     width: 260px;
     height: calc(100vh - 130px);
 
@@ -10,7 +10,7 @@
 }
 
 .navigationItem {
-    background: #8D8741;
+    background: #31708E;
     width: 100%;
 
     display: flex;
@@ -32,7 +32,7 @@
 }
 
 .navigationItem a:hover {
-    background-color: #785e43;
+    background-color: #173847;
     box-sizing: border-box;
 }
 
