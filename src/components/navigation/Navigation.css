@@ -2,12 +2,13 @@
     display: flex;
     flex-direction: column;
     background-color: #8FC1E3;
-    width: 260px;
+    width: 250px;
     height: calc(100vh - 130px);
 
     /* Horizontal Align - depends upon flex-direction too */
     align-items: center;
     overflow: scroll;
+    font-size: 16px;
 }
 
 .navigationItem {
@@ -19,9 +20,8 @@
     align-items: center;
 
     padding: 0px;
-    box-sizing: border-box;
-    border-bottom: 1px solid #EEE;
     color: azure;
+    border-bottom: 1px solid #EEE;
 }
 
 .navigationItem a {
@@ -37,16 +37,20 @@
     box-sizing: border-box;
 }
 
-.navigationItemSelected {
-    background: #B998C5;
-    color: black;
+.collapsableNavigationItem {
+    padding: 15px;
+}
+
+.navigationSubItem {
+    background: #66b3e0;
     width: 100%;
 
     display: flex;
     flex-direction: column;
     align-items: center;
-    box-sizing: border-box;
-    border-bottom: 1px solid #EEE;
+
+    padding: 0px;
+    color: azure;
 }
 
 .navigationItemBottom {

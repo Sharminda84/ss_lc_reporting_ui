@@ -1,21 +1,27 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Navigation.css';
+import NavigationItem from "./NavigationItem";
 
 function Navigation(props) {
+
+    const memberNavigation = props.memberNavigation;
+    const ordersNavigation = props.ordersNavigation;
 
     return (
         <div className='navigation'>
             <div className='navigationItem'>
                 <Link to={"/home"}>Home</Link>
             </div>
-            <div className='navigationItem'>
-                <Link to={"/members"}>Members</Link>
-            </div>
-            <div className='navigationItem'>
-                <Link to={"/orders"}>Orders</Link>
-            </div>
-            <div className='navigationItem navigationItemBottom'>...</div>
+            <NavigationItem
+                name="Members"
+                structure={memberNavigation}
+            />
+            <NavigationItem
+                name="Orders"
+                structure={ordersNavigation}
+            />
+            <div className='navigationItem'>...</div>
         </div>
     );
 }
