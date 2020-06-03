@@ -5,22 +5,18 @@ import NavigationItem from "./NavigationItem";
 
 function Navigation(props) {
 
-    const memberNavigation = props.memberNavigation;
-    const ordersNavigation = props.ordersNavigation;
-
     return (
         <div className='navigation'>
             <div className='navigationItem'>
                 <Link to={"/home"}>Home</Link>
             </div>
-            <NavigationItem
-                name="Members"
-                structure={memberNavigation}
-            />
-            <NavigationItem
-                name="Orders"
-                structure={ordersNavigation}
-            />
+            {
+                props.navigationItems.map((navigationItem, index) =>
+                    <NavigationItem key={index}
+                                    name={navigationItem.name}
+                                    structure={navigationItem.navigationSubItems}
+                    />)
+            }
             <div className='navigationItem'>...</div>
         </div>
     );

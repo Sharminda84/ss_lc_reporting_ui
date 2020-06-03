@@ -1,10 +1,9 @@
 import { connect } from 'react-redux';
 import _get from 'lodash.get';
-import Navigation from '../components/navigation/Navigation';
+import Navigation from '../../components/navigation/Navigation';
 
 const mapStateToProps = state => ({
-  memberNavigation: _get(state, 'navigation.memberNavigation', {}),
-  ordersNavigation: _get(state, 'navigation.ordersNavigation', {}),
+  navigationItems: _get(state, 'navigation.navigationItems', {}),
 });
 
 const mapDispatchToProps = dispatch => ({
