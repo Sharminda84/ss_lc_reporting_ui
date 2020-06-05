@@ -12,3 +12,12 @@ Header background: Header.css -> .header -> background-color
 
 Footer background: Footer.css -> .footer -> background
 
+
+
+DB Queries for reporting
+========================
+
+1. For calculating daily revenue
+select from_unixtime(tranTime/1000, '%Y-%m-%d ') as tranDay, sum(tranAmount) from CustomerOrder
+group by tranDay
+order by tranDay desc

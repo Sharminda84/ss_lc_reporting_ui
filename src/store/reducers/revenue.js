@@ -1,43 +1,17 @@
+import { FETCH_REVENUE_DATA, LOAD_REVENUE_DATA } from '../actions/revenue';
+
 const initialState = {
-  navigationItems: [
-      {
-          name: 'Members',
-          navigationSubItems: [
-              {
-                  subItemName: 'Members',
-                  subItemPath: '/members'
-              }
-          ],
-      },
-      {
-          name: 'Orders',
-          navigationSubItems: [
-              {
-                  subItemName: 'Today\'s Orders',
-                  subItemPath: '/orders/todays'
-              },
-              {
-                  subItemName: 'Orders History',
-                  subItemPath: '/orders/history'
-              }
-          ],
-      },
-      {
-          name: 'Revenue',
-          navigationSubItems: [
-              {
-                  subItemName: 'Revenue Report',
-                  subItemPath: '/revenue/report'
-              }
-          ]
-      }
-  ],
+  revenueData: [],
 };
 
-const navigation = ( state = initialState, action ) => {
+const revenue = ( state = initialState, action ) => {
     switch ( action.type ) {
+        case FETCH_REVENUE_DATA:
+            return state;
+        case LOAD_REVENUE_DATA:
+            return {...state, revenueData: action.payload.revenueData };
         default: return state;
     }
 };
 
-export default navigation;
+export default revenue;

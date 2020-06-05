@@ -1,13 +1,13 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import AppHeader from './components/header/Header';
-import Navigation from './containers/navigation/NavigationContainer';
+import Navigation from './containers/navigation/Navigation';
 import AppFooter from './components/footer/Footer';
 import './App.css';
 import Home from './components/home/Home';
 import Members from './components/members/Members';
 import Orders from './components/orders/Orders';
-import Revenue from './components/revenue/Revenue';
+import Revenue from './containers/revenue/Revenue';
 
 
 function App() {
