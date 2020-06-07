@@ -19,11 +19,20 @@ function App() {
           <Navigation />
           <div className='AppMainSection'>
             <Switch>
-                <Route path='/' exact component={Home}/>
-                <Route path='/members' exact component={Members}/>
-                <Route path='/orders/todays' exact component={Orders}/>
-                <Route path='/orders/history' exact component={Orders}/>
-                <Route path='/revenue/report' exact component={Revenue}/>
+                <Route path='/' exact component={Home} />
+                <Route path='/members/signups' exact component={Members} />
+                <Route path='/members/signups-chart' exact component={Members} />
+                <Route path='/orders/daily' exact component={Orders} />
+                <Route path='/orders/history/weekly' exact component={Orders} />
+                <Route path='/orders/history/monthly' exact component={Orders} />
+                <Route path='/orders/history/alltime' exact component={Orders} />
+                <Route path='/orders/history/top10/birthday' exact component={Home} />
+                <Route path='/orders/history/top10/leaving' exact component={Home} />
+                <Route path='/discount/outstanding' exact component={Home} />
+                <Route path='/discount/claimed' exact component={Home} />
+                <Route path='/discount/claimed-times' exact component={Home} />
+                <Route path='/analytics/aquisition-cost' exact component={Home} />
+                <Route path='/revenue/report' exact component={Revenue} />
                 <Redirect to='/' />
             </Switch>
           </div>

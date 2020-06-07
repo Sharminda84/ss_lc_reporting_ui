@@ -4,8 +4,12 @@ const initialState = {
           name: 'Members',
           navigationSubItems: [
               {
-                  subItemName: 'Members',
-                  subItemPath: '/members'
+                  subItemName: 'Sign-up Report',
+                  subItemPath: '/members/signups'
+              },
+              {
+                  subItemName: 'Sign-up Rates Chart',
+                  subItemPath: '/members/signups-chart'
               }
           ],
       },
@@ -13,12 +17,20 @@ const initialState = {
           name: 'Orders',
           navigationSubItems: [
               {
-                  subItemName: 'Today\'s Orders',
-                  subItemPath: '/orders/todays'
+                  subItemName: 'Daily Orders',
+                  subItemPath: '/orders/daily'
               },
               {
-                  subItemName: 'Orders History',
-                  subItemPath: '/orders/history'
+                  subItemName: '7-Days Previous Orders',
+                  subItemPath: '/orders/history/weekly'
+              },
+              {
+                  subItemName: '30-Days Previous Orders',
+                  subItemPath: '/orders/history/monthly'
+              },
+              {
+                  subItemName: 'All-time Previous Orders',
+                  subItemPath: '/orders/history/alltime'
               }
           ],
       },
@@ -30,7 +42,46 @@ const initialState = {
                   subItemPath: '/revenue/report'
               }
           ]
-      }
+      },
+      {
+          name: 'Analytics',
+          navigationSubItems: [
+              {
+                  subItemName: 'Customer Aq. Cost',
+                  subItemPath: '/analytics/aquisition-cost'
+              }
+          ]
+      },
+      {
+          name: 'Top 10 Card Designs by Sales',
+          navigationSubItems: [
+              {
+                  subItemName: 'Birthday',
+                  subItemPath: '/orders/history/top10/birthday'
+              },
+              {
+                  subItemName: 'Leaving',
+                  subItemPath: '/orders/history/top10/leaving'
+              }
+          ]
+      },
+      {
+          name: 'Discount Codes',
+          navigationSubItems: [
+              {
+                  subItemName: 'Amount Outstanding',
+                  subItemPath: '/discount/outstanding'
+              },
+              {
+                  subItemName: 'Amount Claimed',
+                  subItemPath: '/discount/claimed'
+              },
+              {
+                  subItemName: 'Avg time from sending discount to claiming it',
+                  subItemPath: '/discount/claimed-times'
+              }
+          ]
+      },
   ],
 };
 

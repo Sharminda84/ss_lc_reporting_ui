@@ -21,7 +21,7 @@ body {
   display: flex;
   flex-direction: column;
   padding: 20px;
-  color: #173847;
+  color: #b4ead1;
   height: calc(100vh - 170px);
   overflow: auto;
 }
