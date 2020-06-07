@@ -5,7 +5,7 @@ import Navigation from './containers/navigation/Navigation';
 import AppFooter from './components/footer/Footer';
 import './App.css';
 import Home from './components/home/Home';
-import Members from './components/members/Members';
+import MemberSignUps from './containers/members/MemberSignUps';
 import Orders from './components/orders/Orders';
 import Revenue from './containers/revenue/Revenue';
 
@@ -20,8 +20,8 @@ function App() {
           <div className='AppMainSection'>
             <Switch>
                 <Route path='/' exact component={Home} />
-                <Route path='/members/signups' exact component={Members} />
-                <Route path='/members/signups-chart' exact component={Members} />
+                <Route path='/members/signups' exact component={MemberSignUps} />
+                <Route path='/members/signups-chart' exact component={MemberSignUps} />
                 <Route path='/orders/daily' exact component={Orders} />
                 <Route path='/orders/history/weekly' exact component={Orders} />
                 <Route path='/orders/history/monthly' exact component={Orders} />
