@@ -4,6 +4,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import './MemberSignUps.css';
 import DataTable from '../table/DataTable';
+import Chart from "../chart/Chart";
 
 function MemberSignUps(props) {
     const [startDate, setStartDate] = useState(new Date());
@@ -11,6 +12,23 @@ function MemberSignUps(props) {
     const { fetchMembersData, membersTableConfig, memberSignUps } = props;
 
     useEffect(() => {fetchMembersData()}, [fetchMembersData]);
+
+    const convertToChartData = () => {
+        const chartData = [];
+        memberSignUps
+            .reduce((members, member) => {
+                const key = new Date(member.joined).getTime();
+                if (!members.has(key)) {
+                    members.set(key, 0);
+                }
+
+                members.set(key, members.get(key) + 1);
+                return members;
+            }, new Map())
+            .forEach((count, date) => chartData.push([date, count]));
+
+        return chartData;
+    }
 
     return (
         <div>
@@ -30,7 +48,19 @@ function MemberSignUps(props) {
             </div>
             {
                 memberSignUps.length > 0 &&
-                <div className='MemberSignUpDateSection'>
+                <div>
+                    <Chart
+                        chartType='area'
+                        title='Member Sign Ups'
+                        subTitle='Click and drag in the plot area to zoom in'
+                        xAxisType='datetime'
+                        yAxisLabel='Sign Ups'
+                        chartData={convertToChartData()} />
+                </div>
+            }
+            {
+                memberSignUps.length > 0 &&
+                <div>
                     <DataTable tableHeaders={membersTableConfig} tableData={memberSignUps} />
                 </div>
             }

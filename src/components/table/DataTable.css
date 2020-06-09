@@ -4,6 +4,7 @@
 .DataTable table {
     border-spacing: 0;
     border: 1px solid black;
+    width: 100%;
 }
 
 .DataTable tr:last-child td {
