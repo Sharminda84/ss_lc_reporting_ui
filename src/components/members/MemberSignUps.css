@@ -1,0 +1,19 @@
+.MemberSignUpDateSection {
+    display: flex;
+    flex-direction: row;
+    margin-right: 20px;
+    align-items: flex-end;
+}
+
+.MemberSignUpDateSection div {
+    margin-right: 10px;
+    font-size: 15px;
+}
+
+.MemberSignUpDateSection button {
+    background-color: #66b3e0;
+    margin-left: 20px;
+    border-radius: 3px;
+    padding: 1px 20px 1px 20px;
+    font-size: 13px;
+}
