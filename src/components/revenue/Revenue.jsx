@@ -11,7 +11,7 @@ function Revenue(props) {
     }, [fetchRevenueData]);
 
     return (
-        <div className='AppMainSection'>
+        <div>
             <Chart
                 chartType='area'
                 title='Revenue over time'

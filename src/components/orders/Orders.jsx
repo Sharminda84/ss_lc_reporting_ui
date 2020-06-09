@@ -4,7 +4,7 @@ import '../../App.css';
 function Orders(props) {
 
     return (
-        <div className='AppMainSection'>
+        <div>
            ORDERS...
         </div>
     );

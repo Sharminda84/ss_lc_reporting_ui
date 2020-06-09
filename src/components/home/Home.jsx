@@ -4,7 +4,7 @@ import '../../App.css';
 function Home(props) {
 
     return (
-        <div className='AppMainSection'>
+        <div>
             HOME...
         </div>
     );

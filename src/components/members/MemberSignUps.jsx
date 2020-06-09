@@ -41,7 +41,7 @@ function MemberSignUps(props) {
     ];
 
     return (
-        <div className='AppMainSection'>
+        <div>
             <h2>
                 Specify Sign-Up date range
             </h2>

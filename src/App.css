@@ -24,4 +24,5 @@ body {
   color: #b4ead1;
   height: calc(100vh - 170px);
   overflow: auto;
+  width: 100%;
 }
