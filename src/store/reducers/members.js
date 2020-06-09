@@ -1,18 +1,46 @@
 import { FETCH_MEMBERS_DATA, LOAD_MEMBERS_DATA } from '../actions/members';
-import _ from 'lodash';
+import SelectColumnFilter from '../../components/table/DataTable';
 
 const initialState = {
-    memberSignUps: {},
+    memberSignUps: [],
+    membersTableConfig: [
+        {
+            Header: 'First Name',
+            accessor: 'firstName',
+            filter: 'fuzzyText',
+
+        },
+        {
+            Header: 'Last Name',
+            accessor: 'lastName',
+            filter: 'fuzzyText',
+        },
+        {
+            Header: 'Email Address',
+            accessor: 'emailAddress',
+            filter: 'fuzzyText',
+        },
+        {
+            Header: 'Date Joined',
+            accessor: 'joined',
+            filter: 'fuzzyText',
+        },
+        {
+            Header: 'Email Validated',
+            accessor: 'emailValidated',
+            filter: SelectColumnFilter,
+        },
+    ],
 };
 
-const memebrs = (state = initialState, action) => {
+const members = (state = initialState, action) => {
     switch (action.type) {
         case FETCH_MEMBERS_DATA:
             return state;
         case LOAD_MEMBERS_DATA:
-            return {...state, memberSignUps: _.merge(state.memberSignUps, action.payload)};
+            return {...state, memberSignUps: action.payload};
         default: return state;
     }
 };
 
-export default memebrs;
+export default members;

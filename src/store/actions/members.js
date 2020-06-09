@@ -11,7 +11,5 @@ export const fetchMembersData = (startDate, endDate) => ({
 
 export const loadMembersData = (membersData) => ({
     type: LOAD_MEMBERS_DATA,
-    payload: {
-        membersData
-    }
+    payload: membersData,
 });
