@@ -7,7 +7,7 @@ function fetchMemberSignUpsFromStaticFile(startDate, endDate) {
     return _.orderBy(allMembers, member => member.joined, 'desc');
 }
 
-export function* fetchMemberSignups(startDate, endDate) {
-    const members = fetchMemberSignUpsFromStaticFile(startDate, endDate);
+export function* fetchMemberSignups(action) {
+    const members = fetchMemberSignUpsFromStaticFile(action.payload.startDate, action.payload.endDate);
     yield put(loadMembersData(members));
 }

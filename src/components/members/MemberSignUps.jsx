@@ -11,7 +11,7 @@ function MemberSignUps(props) {
     const [endDate, setEndDate] = useState(new Date());
     const { fetchMembersData, membersTableConfig, memberSignUps } = props;
 
-    useEffect(() => {fetchMembersData()}, [fetchMembersData]);
+    useEffect(() => {fetchMembersData(startDate, endDate)}, [fetchMembersData]);
 
     const convertToChartData = () => {
         const chartData = [];
@@ -44,7 +44,7 @@ function MemberSignUps(props) {
                 <DatePicker
                     selected={endDate}
                     onChange={(newEndDate) => setEndDate(newEndDate)} />
-                <button>Fetch</button>
+                <button onClick={() => fetchMembersData(startDate, endDate)}>Fetch</button>
             </div>
             {
                 memberSignUps.length > 0 &&

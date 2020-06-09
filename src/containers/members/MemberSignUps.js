@@ -9,7 +9,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchMembersData: () => dispatch(memberActions.fetchMembersData()),
+  fetchMembersData: (startDate, endDate) => dispatch(memberActions.fetchMembersData(startDate, endDate)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MemberSignUps);
