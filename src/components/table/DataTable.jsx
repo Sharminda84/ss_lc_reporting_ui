@@ -129,8 +129,8 @@ function DataTable(props) {
     );
 
     const { tableHeaders, tableData } = props;
-    const columns = React.useMemo(() => tableHeaders, []);
-    const data = React.useMemo(() => tableData, []);
+    const columns = tableHeaders;
+    const data = tableData;
 
     const {
         getTableProps,
