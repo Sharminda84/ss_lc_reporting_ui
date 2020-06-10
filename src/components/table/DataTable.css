@@ -24,6 +24,7 @@
 
 .DataTable td {
     background-color: #3C3F41;
+    color: ghostwhite;
 }
 
 .DataTable th:last-child {

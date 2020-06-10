@@ -6,7 +6,9 @@ import AppFooter from './components/footer/Footer';
 import './App.css';
 import Home from './components/home/Home';
 import MemberSignUps from './containers/members/MemberSignUps';
-import Orders from './components/orders/Orders';
+import DailyOrders from './containers/orders/DailyOrders';
+import WeeklyOrders from './containers/orders/WeeklyOrders';
+import MonthlyOrders from './containers/orders/MonthlyOrders';
 import Revenue from './containers/revenue/Revenue';
 
 
@@ -22,10 +24,10 @@ function App() {
                 <Route path='/' exact component={Home} />
                 <Route path='/members/signups' exact component={MemberSignUps} />
                 <Route path='/members/signups-chart' exact component={MemberSignUps} />
-                <Route path='/orders/daily' exact component={Orders} />
-                <Route path='/orders/history/weekly' exact component={Orders} />
-                <Route path='/orders/history/monthly' exact component={Orders} />
-                <Route path='/orders/history/alltime' exact component={Orders} />
+                <Route path='/orders/daily' exact component={DailyOrders} />
+                <Route path='/orders/history/weekly' exact component={WeeklyOrders} />
+                <Route path='/orders/history/monthly' exact component={MonthlyOrders} />
+                <Route path='/orders/history/alltime' exact component={MonthlyOrders} />
                 <Route path='/orders/history/top10/birthday' exact component={Home} />
                 <Route path='/orders/history/top10/leaving' exact component={Home} />
                 <Route path='/discount/outstanding' exact component={Home} />

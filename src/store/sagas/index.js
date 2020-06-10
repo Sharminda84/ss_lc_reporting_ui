@@ -2,8 +2,10 @@ import { takeEvery } from 'redux-saga/effects';
 import { takeFirst } from './effects';
 import { FETCH_REVENUE_DATA } from '../actions/revenue';
 import { FETCH_MEMBERS_DATA } from '../actions/members';
+import { FETCH_DAILY_ORDERS_DATA, FETCH_WEEKLY_ORDERS_DATA, FETCH_MONTHLY_ORDERS_DATA, FETCH_ORDERS_DATA } from '../actions/orders';
 import { fetchRevenueDataSaga } from './revenue';
 import { fetchMemberSignups } from './members';
+import { fetchDailyOrders, fetchWeeklyOrders, fetchMonthlyOrders, fetchAllOrders } from './orders';
 
 
 export function* watchRevenueActions() {
@@ -11,5 +13,21 @@ export function* watchRevenueActions() {
 }
 
 export function* watchMembersActions() {
-    yield takeEvery(FETCH_MEMBERS_DATA, fetchMemberSignups)
+    yield takeEvery(FETCH_MEMBERS_DATA, fetchMemberSignups);
+}
+
+export function* watchDailyOrdersAction() {
+    yield takeEvery(FETCH_DAILY_ORDERS_DATA, fetchDailyOrders);
+}
+
+export function* watchWeeklyOrdersAction() {
+    yield takeEvery(FETCH_WEEKLY_ORDERS_DATA, fetchWeeklyOrders);
+}
+
+export function* watchMonthlyOrdersAction() {
+    yield takeEvery(FETCH_MONTHLY_ORDERS_DATA, fetchMonthlyOrders);
+}
+
+export function* watchOrdersAction() {
+    yield takeEvery(FETCH_ORDERS_DATA, fetchAllOrders);
 }
