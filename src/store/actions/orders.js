@@ -23,7 +23,7 @@ export const loadOrdersData = (ordersData) => ({
     payload: ordersData,
 });
 
-export const fetchDailyOrdersData = () => console.log('==> daily order action fired') || ({
+export const fetchDailyOrdersData = () => ({
     type: FETCH_DAILY_ORDERS_DATA,
 });
 

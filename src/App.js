@@ -9,6 +9,7 @@ import MemberSignUps from './containers/members/MemberSignUps';
 import DailyOrders from './containers/orders/DailyOrders';
 import WeeklyOrders from './containers/orders/WeeklyOrders';
 import MonthlyOrders from './containers/orders/MonthlyOrders';
+import AllOrders from './containers/orders/AllOrders';
 import Revenue from './containers/revenue/Revenue';
 
 
@@ -27,7 +28,7 @@ function App() {
                 <Route path='/orders/daily' exact component={DailyOrders} />
                 <Route path='/orders/history/weekly' exact component={WeeklyOrders} />
                 <Route path='/orders/history/monthly' exact component={MonthlyOrders} />
-                <Route path='/orders/history/alltime' exact component={MonthlyOrders} />
+                <Route path='/orders/history/alltime' exact component={AllOrders} />
                 <Route path='/orders/history/top10/birthday' exact component={Home} />
                 <Route path='/orders/history/top10/leaving' exact component={Home} />
                 <Route path='/discount/outstanding' exact component={Home} />

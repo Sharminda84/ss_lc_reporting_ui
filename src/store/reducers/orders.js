@@ -16,7 +16,6 @@ const initialState = {
             Header: 'Order Date',
             accessor: 'transactionTime',
             filter: 'fuzzyText',
-
         },
         {
             Header: 'Customer',

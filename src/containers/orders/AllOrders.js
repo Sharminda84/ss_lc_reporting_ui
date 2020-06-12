@@ -4,12 +4,12 @@ import Orders from '../../components/orders/Orders';
 import * as orderActions from '../../store/actions/orders';
 
 const mapStateToProps = state => ({
-  orders: _get(state, 'orders.weeklyOrders', {}),
+  orders: _get(state, 'orders.orders', {}),
   ordersTableConfig: _get(state, 'orders.ordersTableConfig', {}),
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  fetchOrdersData: () => dispatch(orderActions.fetchDailyOrdersData(ownProps.startDate, ownProps.endDate)),
+  fetchOrdersData: () => dispatch(orderActions.fetchOrdersData(ownProps.startDate, ownProps.endDate)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Orders);
