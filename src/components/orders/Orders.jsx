@@ -5,7 +5,7 @@ import DataTable from '../table/DataTable';
 import _ from 'lodash';
 
 function Orders(props) {
-    const { fetchOrdersData, ordersTableConfig, orders, displayChart = true } = props;
+    const { fetchOrdersData, ordersTableConfig, orders, displayChart = true, title } = props;
 
     useEffect(() => {fetchOrdersData()}, [fetchOrdersData]);
 
@@ -39,7 +39,7 @@ function Orders(props) {
                 <div>
                     <Chart
                         chartType='area'
-                        title='Orders'
+                        title={title}
                         subTitle='Click and drag in the plot area to zoom in'
                         xAxisType='datetime'
                         yAxisLabel='Orders'

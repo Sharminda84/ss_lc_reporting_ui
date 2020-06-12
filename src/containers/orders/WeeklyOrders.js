@@ -6,6 +6,7 @@ import * as orderActions from '../../store/actions/orders';
 const mapStateToProps = state => ({
   orders: _get(state, 'orders.weeklyOrders', {}),
   ordersTableConfig: _get(state, 'orders.ordersTableConfig', {}),
+  title: 'Weekly Orders'
 });
 
 const mapDispatchToProps = dispatch => ({
