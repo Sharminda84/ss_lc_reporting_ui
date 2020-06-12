@@ -15,7 +15,7 @@ function Orders(props) {
             .reduce((allOrders, order) => {
                 const transactionDate = new Date(order.transactionTime);
                 const key = transactionDate.getFullYear() + '-' +
-                            transactionDate.getMonth() + '-' +
+                            (transactionDate.getMonth() + 1) + '-' +
                             transactionDate.getDate()
 
                 if (!allOrders.has(key)) {
