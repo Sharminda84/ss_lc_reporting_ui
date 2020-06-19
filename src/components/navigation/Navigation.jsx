@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Navigation.css';
-import NavigationItem from "./NavigationItem";
+import NavigationItem from './NavigationItem';
 
 function Navigation(props) {
 

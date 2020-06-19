@@ -4,7 +4,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import './MemberSignUps.css';
 import DataTable from '../table/DataTable';
-import Chart from "../chart/Chart";
+import Chart from '../chart/Chart';
 
 function MemberSignUps(props) {
     const [startDate, setStartDate] = useState(new Date());

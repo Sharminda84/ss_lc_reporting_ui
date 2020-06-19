@@ -11,7 +11,7 @@ import WeeklyOrders from './containers/orders/WeeklyOrders';
 import MonthlyOrders from './containers/orders/MonthlyOrders';
 import AllOrders from './containers/orders/AllOrders';
 import Revenue from './containers/revenue/Revenue';
-
+import Login from './containers/security/Login';
 
 function App() {
   return (
@@ -19,6 +19,7 @@ function App() {
       <div className='App'>
         <AppHeader />
         <div className='AppBody'>
+          <Login />
           <Navigation />
           <div className='AppMainSection'>
             <Switch>

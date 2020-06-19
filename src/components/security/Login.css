@@ -1,0 +1,70 @@
+.login {
+    position: absolute;
+    height: 30%;
+    width: 30%;
+    background: #87bde0;
+
+    display: grid;
+    grid-template-columns: 15% 25% 45% 15%;
+    grid-template-rows: 15% 20% 20% 20% 25%;
+}
+
+.title {
+    grid-column-start: 1;
+    grid-column-end: 5;
+    grid-row: 1;
+    background: #31708E;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    padding-top: 2%;
+}
+
+.user {
+    margin-top: 30%;
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row: 2;
+    font-size: 17px;
+}
+
+.userInput {
+    margin-top: 15%;
+    grid-column-start: 3;
+    grid-column-end: 4;
+    grid-row: 2;
+    font-size: 17px;
+}
+
+.password {
+    margin-top: 30%;
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row: 3;
+    font-size: 17px;
+}
+
+.passwordInput {
+    margin-top: 15%;
+    grid-column-end: 4;
+    grid-row: 3;
+    font-size: 17px;
+}
+
+.loginErrorMessage {
+    margin-top: 5%;
+    grid-column: 3;
+    grid-row: 4;
+    color: darkred;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.loginButton {
+    grid-column: 3;
+    grid-row: 5;
+    margin: 17px 35% 17px 0;
+    font-size: 15px;
+    button-radius: 35px;
+    background: #31708E;
+}
