@@ -14,3 +14,4 @@ export const configureStore = () => {
 };
 
 export const dispatch = action => store && store.dispatch(action);
+export const applicationState = store && store.getState();

@@ -1,12 +1,33 @@
-import { put } from 'redux-saga/effects';
+import { put, call, select } from 'redux-saga/effects';
 import { loginSuccess, loginError } from '../actions/security';
+import axios from 'axios';
+import * as ReportingServerURLs from './ReportingServerURLs';
 
 export function* loginUser(action) {
-    const loginStatus = action.payload.user === 'test' && action.payload.password === 'test';
-
-    if (loginStatus) {
-        yield put(loginSuccess());
-    } else {
+    const user = action.payload.user;
+    const password = action.payload.password;
+    try {
+        yield call(sendLogInRequest, user, password);
+        yield put(loginSuccess(user, password));
+    } catch (error) {
         yield put(loginError());
     }
 }
+
+const sendLogInRequest = (user, password) => {
+    const config = {
+        auth: {
+            username: user,
+            password: password,
+        },
+    };
+
+    return axios
+        .get(ReportingServerURLs.PING_URL, config)
+        .then(response => {
+            if (response.status !== 200) {
+                throw new Error('Login not successfull');
+            }
+            return 'Login Success';
+        });
+};

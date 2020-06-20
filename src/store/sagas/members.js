@@ -1,13 +1,16 @@
 import { call, put, select } from 'redux-saga/effects';
 import { loadMembersData } from '../actions/members';
 import _ from 'lodash';
-import allMembers from './static-data/members.json';
-
-function fetchMemberSignUpsFromStaticFile(startDate, endDate) {
-    return _.orderBy(allMembers, member => member.joined, 'desc');
-}
+import { sendGetRequest } from '../networkUtils';
+import * as ReportingServerURLs from './ReportingServerURLs';
 
 export function* fetchMemberSignups(action) {
-    const members = fetchMemberSignUpsFromStaticFile(action.payload.startDate, action.payload.endDate);
-    yield put(loadMembersData(members));
+    try {
+        const fetchMembersURL = `${ReportingServerURLs.FETCH_ALL_MEMBERS_URL}`;
+        const members = yield call(sendGetRequest, fetchMembersURL);
+        const membersSorted = _.orderBy(members, member => member.joined, 'asc');
+        yield put(loadMembersData(membersSorted));
+    } catch (error) {
+        console.log('ERROR.....');
+    }
 }
