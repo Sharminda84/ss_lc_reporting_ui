@@ -6,15 +6,20 @@ import './MemberSignUps.css';
 import DataTable from '../table/DataTable';
 import Chart from '../chart/Chart';
 import _ from 'lodash';
-
-const dateToString = (date) => `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`
+import { dateToString } from '../../utils';
 
 function MemberSignUps(props) {
-    const [startDate, setStartDate] = useState(new Date());
-    const [endDate, setEndDate] = useState(new Date());
+    const [startDate, setStartDate] = useState(new Date().getTime() - 30*24*60*60*1000);
+    const [endDate, setEndDate] = useState(new Date().getTime());
     const { fetchMembersData, membersTableConfig, memberSignUps } = props;
 
     useEffect(() => {fetchMembersData(startDate, endDate)}, [fetchMembersData]);
+
+    const memberSignUpsForTable = memberSignUps.map(member => {
+       member.joined = dateToString(new Date(member.joined));
+       member.emailValidated = member.emailValidated ? 'yes' : 'no';
+       return member;
+    });
 
     const convertToChartData = () => {
         const chartData = [];
@@ -42,11 +47,11 @@ function MemberSignUps(props) {
                 <div>From</div>
                 <DatePicker
                     selected={startDate}
-                    onChange={(newStartDate) => setStartDate(newStartDate)} />
+                    onChange={(newStartDate) => setStartDate(newStartDate.getTime())} />
                 <div>To</div>
                 <DatePicker
                     selected={endDate}
-                    onChange={(newEndDate) => setEndDate(newEndDate)} />
+                    onChange={(newEndDate) => setEndDate(newEndDate.getTime())} />
                 <button onClick={() => fetchMembersData(startDate, endDate)}>Fetch</button>
             </div>
             {
@@ -64,7 +69,7 @@ function MemberSignUps(props) {
             {
                 memberSignUps.length > 0 &&
                 <div>
-                    <DataTable tableHeaders={membersTableConfig} tableData={memberSignUps} />
+                    <DataTable tableHeaders={membersTableConfig} tableData={memberSignUpsForTable} />
                 </div>
             }
         </div>

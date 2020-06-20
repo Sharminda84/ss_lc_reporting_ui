@@ -28,7 +28,7 @@ const initialState = {
         {
             Header: 'Email Validated',
             accessor: 'emailValidated',
-            filter: SelectColumnFilter,
+            filter: 'fuzzyText',
         },
     ],
 };

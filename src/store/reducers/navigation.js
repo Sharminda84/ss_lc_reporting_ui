@@ -7,10 +7,6 @@ const initialState = {
                   subItemName: 'Sign-up Report',
                   subItemPath: '/members/signups'
               },
-              {
-                  subItemName: 'Sign-up Rates Chart',
-                  subItemPath: '/members/signups-chart'
-              }
           ],
       },
       {
