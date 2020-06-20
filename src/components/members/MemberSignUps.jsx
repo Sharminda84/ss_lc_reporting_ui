@@ -41,7 +41,7 @@ function MemberSignUps(props) {
     return (
         <div>
             <h2>
-                Specify Sign-Up date range
+                Sign-Ups Date Range
             </h2>
             <div className='MemberSignUpDateSection'>
                 <div>From</div>
