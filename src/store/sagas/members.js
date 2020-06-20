@@ -2,7 +2,6 @@ import { call, put } from 'redux-saga/effects';
 import { loadMembersData } from '../actions/members';
 import { sendGetRequest } from '../networkUtils';
 import * as ReportingServerURLs from './ReportingServerURLs';
-import { dateToString } from '../../utils';
 
 export function* fetchMemberSignups(action) {
     try {

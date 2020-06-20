@@ -3,6 +3,7 @@ import '../../App.css';
 import Chart from '../chart/Chart';
 import DataTable from '../table/DataTable';
 import _ from 'lodash';
+import {dateToString} from "../../utils";
 
 function Orders(props) {
     const { fetchOrdersData, ordersTableConfig, orders, displayChart = true, title } = props;
@@ -30,10 +31,19 @@ function Orders(props) {
         return _.orderBy(chartData, data => data[0], 'asc');
     }
 
-    const convertToTableData = () => orders.map(order => _.merge(order, {transactionTime: new Date(order.transactionTime).toLocaleDateString('en-GB')}));
+    const ordersForTable = orders.map(order => {
+        order.transactionTime = dateToString(new Date(order.transactionTime));
+        order.orderType = order.deliveryAddress1 !== '' ? 'Physical Card' : 'E-Card';
+        return order;
+    });
 
     return (
         <div>
+            {
+                orders.length === 0 && <div>
+                    No Orders...
+                </div>
+            }
             {
                 displayChart && orders.length > 0 &&
                 <div>
@@ -48,7 +58,7 @@ function Orders(props) {
             }
             {
                 orders.length > 0 && <div>
-                    <DataTable tableHeaders={ordersTableConfig} tableData={orders} />
+                    <DataTable tableHeaders={ordersTableConfig} tableData={ordersForTable} />
                 </div>
             }
         </div>

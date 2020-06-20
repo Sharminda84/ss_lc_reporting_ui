@@ -40,7 +40,7 @@ const initialState = {
         {
             Header: 'Order Type',
             accessor: 'orderType',
-            filter: SelectColumnFilter,
+            filter: 'fuzzyText',
         },
     ],
 };
