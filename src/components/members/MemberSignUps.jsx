@@ -5,6 +5,9 @@ import 'react-datepicker/dist/react-datepicker.css';
 import './MemberSignUps.css';
 import DataTable from '../table/DataTable';
 import Chart from '../chart/Chart';
+import _ from 'lodash';
+
+const dateToString = (date) => `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`
 
 function MemberSignUps(props) {
     const [startDate, setStartDate] = useState(new Date());
@@ -17,7 +20,7 @@ function MemberSignUps(props) {
         const chartData = [];
         memberSignUps
             .reduce((members, member) => {
-                const key = new Date(member.joined).getTime();
+                const key = new Date(dateToString(new Date(member.joined))).getTime();
                 if (!members.has(key)) {
                     members.set(key, 0);
                 }
@@ -27,7 +30,7 @@ function MemberSignUps(props) {
             }, new Map())
             .forEach((count, date) => chartData.push([date, count]));
 
-        return chartData;
+        return _.orderBy(chartData, data => data[0], 'asc')
     }
 
     return (
