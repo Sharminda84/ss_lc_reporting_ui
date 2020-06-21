@@ -7,7 +7,7 @@
 
     /* Horizontal Align - depends upon flex-direction too */
     align-items: center;
-    overflow: hidden;
+    overflow: scroll;
     font-size: 14px;
 }
 
