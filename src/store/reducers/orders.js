@@ -43,6 +43,36 @@ const initialState = {
             filter: 'fuzzyText',
         },
     ],
+    ordersSummaryTableConfig: [
+        {
+            Header: 'Card Type',
+            accessor: 'cardType',
+        },
+        {
+            Header: 'eCard Sales',
+            accessor: 'eCardSales',
+        },
+        {
+            Header: 'eCard Revenue',
+            accessor: 'eCardRevenue',
+        },
+        {
+            Header: 'Printed Sales',
+            accessor: 'printedSales',
+        },
+        {
+            Header: 'Printed Revenue',
+            accessor: 'printedRevenue',
+        },
+        {
+            Header: 'Total Sales',
+            accessor: 'totalSales',
+        },
+        {
+            Header: 'Total Revenue',
+            accessor: 'totalRevenue',
+        },
+    ],
 };
 
 const orders = (state = initialState, action) => {

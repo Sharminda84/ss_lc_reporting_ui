@@ -128,7 +128,7 @@ function DataTable(props) {
         []
     );
 
-    const { tableHeaders, tableData } = props;
+    const { tableHeaders, tableData, showGlobalFilter = true } = props;
     const columns = tableHeaders;
     const data = tableData;
 
@@ -164,20 +164,23 @@ function DataTable(props) {
                             ))}
                         </tr>
                     ))}
-                    <tr>
-                        <th
-                            colSpan={visibleColumns.length}
-                            style={{
-                                textAlign: 'left',
-                            }}
-                        >
-                            <GlobalFilter
-                                preGlobalFilteredRows={preGlobalFilteredRows}
-                                globalFilter={state.globalFilter}
-                                setGlobalFilter={setGlobalFilter}
-                            />
-                        </th>
-                    </tr>
+                    {
+                        showGlobalFilter &&
+                        <tr>
+                            <th
+                                colSpan={visibleColumns.length}
+                                style={{
+                                    textAlign: 'left',
+                                }}
+                            >
+                                <GlobalFilter
+                                    preGlobalFilteredRows={preGlobalFilteredRows}
+                                    globalFilter={state.globalFilter}
+                                    setGlobalFilter={setGlobalFilter}
+                                />
+                            </th>
+                        </tr>
+                    }
                 </thead>
                 <tbody {...getTableBodyProps()}>
                 {rows.map(row => {
