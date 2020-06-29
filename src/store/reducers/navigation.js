@@ -31,15 +31,6 @@ const initialState = {
           ],
       },
       {
-          name: 'Revenue',
-          navigationSubItems: [
-              {
-                  subItemName: 'Revenue Report',
-                  subItemPath: '/revenue/report'
-              }
-          ]
-      },
-      {
           name: 'Analytics',
           navigationSubItems: [
               {

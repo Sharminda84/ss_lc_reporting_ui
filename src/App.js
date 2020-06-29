@@ -10,7 +10,6 @@ import DailyOrders from './containers/orders/DailyOrders';
 import WeeklyOrders from './containers/orders/WeeklyOrders';
 import MonthlyOrders from './containers/orders/MonthlyOrders';
 import AllOrders from './containers/orders/AllOrders';
-import Revenue from './containers/revenue/Revenue';
 import Login from './containers/security/Login';
 
 function App() {
@@ -35,7 +34,6 @@ function App() {
                 <Route path='/discount/claimed' exact component={Home} />
                 <Route path='/discount/claimed-times' exact component={Home} />
                 <Route path='/analytics/aquisition-cost' exact component={Home} />
-                <Route path='/revenue/report' exact component={Revenue} />
                 <Redirect to='/' />
             </Switch>
           </div>
