@@ -167,7 +167,7 @@ const generateCardDrilldownDataSeries = (orderBreakdownPieChartDrilldownData) =>
             data: []
         };
         cardTypeDetails.forEach((cardNameDetails, cardName) => {
-            cardTypeRecord.data.push([cardName.split('.')[cardName.split('.').length-1], cardNameDetails]);
+            cardTypeRecord.data.push([cardName.split('.')[cardName.split('.').length-1].replace('Writer', ''), cardNameDetails]);
         });
         printedCardsDrillDownData.push(cardTypeRecord);
     });
