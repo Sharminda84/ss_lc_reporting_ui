@@ -17,45 +17,38 @@ CARD_TYPES.set(4, "New Baby Card");
 CARD_TYPES.set(5, "New Daddy Card");
 CARD_TYPES.set(6, "Welcome Card");
 
-function Orders(props) {
-    const { fetchOrdersData, ordersTableConfig, ordersSummaryTableConfig, orders, displayChart = true, title } = props;
+const round = num => Math.round((num + Number.EPSILON) * 100) / 100;
 
-    useEffect(() => {fetchOrdersData()}, [fetchOrdersData]);
+// Process orders for generating the order chart
+const convertToChartData = (orders) => {
+    const chartData = [];
+    orders
+        .reduce((allOrders, order) => {
+            const transactionDate = new Date(order.transactionTime);
+            const key = transactionDate.getFullYear() + '-' +
+                (transactionDate.getMonth() + 1) + '-' +
+                transactionDate.getDate()
 
-    const round = num => Math.round((num + Number.EPSILON) * 100) / 100
+            if (!allOrders.has(key)) {
+                allOrders.set(key, 0);
+            }
 
-    // Process orders for generating the order chart
-    const convertToChartData = () => {
-        const chartData = [];
-        orders
-            .reduce((allOrders, order) => {
-                const transactionDate = new Date(order.transactionTime);
-                const key = transactionDate.getFullYear() + '-' +
-                            (transactionDate.getMonth() + 1) + '-' +
-                            transactionDate.getDate()
+            allOrders.set(key, allOrders.get(key) + 1);
+            return allOrders;
+        }, new Map())
+        .forEach((count, date) => chartData.push([new Date(date).getTime(), count]));
 
-                if (!allOrders.has(key)) {
-                    allOrders.set(key, 0);
-                }
+    return _.orderBy(chartData, data => data[0], 'asc');
+}
 
-                allOrders.set(key, allOrders.get(key) + 1);
-                return allOrders;
-            }, new Map())
-            .forEach((count, date) => chartData.push([new Date(date).getTime(), count]));
-
-        return _.orderBy(chartData, data => data[0], 'asc');
-    }
-
-    // Process orders to generate the orders summary
-    // 1. Orders summary
-    // 2. Printed card Orders breakdown pie chart + drill-down data structure
-    // 3. ECard Orders breakdown pie chart + drill-down data structure (map)
-
-    const ordersSummary = new Map();
-    const printedCardOrderBreakdownPieChartData = new Map();
-    const printedCardOrderBreakdownPieChartDrilldownData = new Map();
-    const eCardOrderBreakdownPieChartData = new Map();
-    const eCardOrderBreakdownPieChartDrilldownData = new Map();
+// Process orders to generate the orders summary
+// 1. Orders summary
+// 2. Printed card Orders breakdown pie chart + drill-down data structure
+// 3. ECard Orders breakdown pie chart + drill-down data structure (map)
+const buildOrderSummariesMaps = (orders, 
+                                 ordersSummary,
+                                 printedCardOrderBreakdownPieChartData, printedCardOrderBreakdownPieChartDrilldownData,
+                                 eCardOrderBreakdownPieChartData, eCardOrderBreakdownPieChartDrilldownData) => {
     orders.forEach(order => {
         // 1. Order summary
         const cardType = CARD_TYPES.get(order.leavingCard ? order.leavingCard.cardType : -1);
@@ -130,33 +123,44 @@ function Orders(props) {
             cardTypeMap.set(cardName, cardTypeMap.get(cardName) + order.transactionAmount);
         }
     });
+}
 
-    // Generate data structures for presentation
-
-    // Orders Summary
-    const generateOrdersSummary = [];
+const generateOrdersSummaryArray = ordersSummary => {
+    const ordersSummaryArray = [];
     ordersSummary.forEach((summary, orderType) => {
         summary.eCardRevenue = `£${round(summary.eCardRevenue)}`
         summary.printedRevenue = `£${round(summary.printedRevenue)}`
         summary.totalRevenue = `£${round(summary.totalRevenue)}`
-        generateOrdersSummary.push(summary);
+        ordersSummaryArray.push(summary);
     });
+    return ordersSummaryArray;
+}
 
-    // Process orders to generate the order details table data
-    const ordersForTable = orders.map(order => {
-        order.transactionTime = dateToString(new Date(order.transactionTime));
-        order.orderType = order.deliveryAddress !== '' ? 'Physical Card' : 'E-Card';
-        order.transactionAmount = `£${order.transactionAmount}`
-        return order;
-    });
+const generateOrdersForTable = orders => orders.map(order => {
+    const clonedOrder = _.cloneDeep(order);
+    clonedOrder.transactionTime = dateToString(new Date(clonedOrder.transactionTime));
+    clonedOrder.orderType = clonedOrder.deliveryAddress !== '' ? 'Physical Card' : 'E-Card';
+    clonedOrder.transactionAmount = `£${clonedOrder.transactionAmount}`
+    return clonedOrder;
+});
 
-    // Printed cards pie chart data
+const generateCardDataSeries = (name, orderBreakdownPieChartData) => {
     const printedCardsData = [];
-    const printedCardsDrillDownData = [];
-    printedCardOrderBreakdownPieChartData.forEach((cardTypeDetails, cardType) => {
+    orderBreakdownPieChartData.forEach((cardTypeDetails, cardType) => {
         printedCardsData.push(cardTypeDetails);
     });
-    printedCardOrderBreakdownPieChartDrilldownData.forEach((cardTypeDetails, cardType) => {
+    const printedCardsDataSeries = [];
+    printedCardsDataSeries.push({
+        name,
+        colorByPoint: true,
+        data: printedCardsData
+    });
+    return printedCardsDataSeries;
+}
+
+const generateCardDrilldownDataSeries = (orderBreakdownPieChartDrilldownData) => {
+    const printedCardsDrillDownData = [];
+    orderBreakdownPieChartDrilldownData.forEach((cardTypeDetails, cardType) => {
         const cardTypeRecord = {
             name: cardType,
             id: cardType,
@@ -167,42 +171,33 @@ function Orders(props) {
         });
         printedCardsDrillDownData.push(cardTypeRecord);
     });
-    const printedCardsDataSeries = [];
-    printedCardsDataSeries.push({
-        name: 'PrintedCards',
-        colorByPoint: true,
-        data: printedCardsData
-    });
-    const printedCardsDrillDownDataSeries = {
+    
+    return {
         series: printedCardsDrillDownData
     };
+}
 
-    // ECards pie chart data
-    const eCardsData = [];
-    const eCardsDrillDownData = [];
-    eCardOrderBreakdownPieChartData.forEach((cardTypeDetails, cardType) => {
-        eCardsData.push(cardTypeDetails);
-    });
-    eCardOrderBreakdownPieChartDrilldownData.forEach((cardTypeDetails, cardType) => {
-        const cardTypeRecord = {
-            name: cardType,
-            id: cardType,
-            data: []
-        };
-        cardTypeDetails.forEach((cardNameDetails, cardName) => {
-            cardTypeRecord.data.push([cardName.split('.')[cardName.split('.').length-1], cardNameDetails]);
-        });
-        eCardsDrillDownData.push(cardTypeRecord);
-    });
-    const eCardsDataSeries = [];
-    eCardsDataSeries.push({
-        name: 'ECards',
-        colorByPoint: true,
-        data: eCardsData
-    });
-    const eCardsDrillDownDataSeries = {
-        series: eCardsDrillDownData
-    };
+function Orders(props) {
+    const { fetchOrdersData, ordersTableConfig, ordersSummaryTableConfig, orders, displayChart = true, title } = props;
+
+    useEffect(() => {fetchOrdersData()}, [fetchOrdersData]);
+
+    const ordersSummary = new Map();
+    const printedCardOrderBreakdownPieChartData = new Map();
+    const printedCardOrderBreakdownPieChartDrilldownData = new Map();
+    const eCardOrderBreakdownPieChartData = new Map();
+    const eCardOrderBreakdownPieChartDrilldownData = new Map();
+    buildOrderSummariesMaps(orders, ordersSummary, 
+        printedCardOrderBreakdownPieChartData, printedCardOrderBreakdownPieChartDrilldownData, 
+        eCardOrderBreakdownPieChartData, eCardOrderBreakdownPieChartDrilldownData);
+    
+    // Generate data structures for presentation
+    const ordersSummaryArray = generateOrdersSummaryArray(ordersSummary);
+    const ordersForTable = generateOrdersForTable(orders);
+    const printedCardsDataSeries = generateCardDataSeries('PrintedCards', printedCardOrderBreakdownPieChartData);
+    const printedCardsDrillDownDataSeries = generateCardDrilldownDataSeries(printedCardOrderBreakdownPieChartDrilldownData);
+    const eCardsDataSeries = generateCardDataSeries('eCards', eCardOrderBreakdownPieChartData);
+    const eCardsDrillDownDataSeries = generateCardDrilldownDataSeries(eCardOrderBreakdownPieChartDrilldownData);
 
     return (
         <div>
@@ -236,13 +231,13 @@ function Orders(props) {
                         subTitle='Click and drag in the plot area to zoom in'
                         xAxisType='datetime'
                         yAxisLabel='Orders'
-                        chartData={convertToChartData()} />
+                        chartData={convertToChartData(orders)} />
                 </div>
             }
             {
                 orders.length > 0 && ordersSummaryTableConfig &&
                 <div>
-                    <DataTable tableHeaders={ordersSummaryTableConfig} tableData={generateOrdersSummary} showGlobalFilter={false} />
+                    <DataTable tableHeaders={ordersSummaryTableConfig} tableData={ordersSummaryArray} showGlobalFilter={false} />
                 </div>
             }
             {
