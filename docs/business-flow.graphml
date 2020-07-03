@@ -172,7 +172,7 @@ feature of a product to an investor<y:LabelModel><y:SmartNodeLabelModel distance
     <node id="n11">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.sbgn.Macromolecule">
-          <y:Geometry height="34.0" width="80.0" x="600.3817501068115" y="616.887996673584"/>
+          <y:Geometry height="34.0" width="80.0" x="772.3817501068115" y="616.887996673584"/>
           <y:Fill color="#FFFFFF" transparent="false"/>
           <y:BorderStyle hasColor="false" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="32.265625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="center" visible="true" width="79.509765625" x="0.2451171875" xml:space="preserve" y="0.8671875">Leaving Card
@@ -220,7 +220,7 @@ Site DB<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:Mo
     <node id="n14">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.sbgn.Macromolecule">
-          <y:Geometry height="40.0" width="80.0" x="568.0" y="964.0"/>
+          <y:Geometry height="40.0" width="80.0" x="585.0" y="964.0"/>
           <y:Fill color="#FFFFFF" transparent="false"/>
           <y:BorderStyle hasColor="false" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="14" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="20.48828125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="center" visible="true" width="200.0205078125" x="-30.33853673453268" xml:space="preserve" y="4.0">Leaving Card Site Analytics<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="-0.5" nodeRatioX="0.37089646464646653" nodeRatioY="-0.5" offsetX="0.0" offsetY="4.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
@@ -271,8 +271,8 @@ Site DB<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:Mo
           <y:Geometry height="34.0" width="80.0" x="-359.85474967956543" y="922.663990020752"/>
           <y:Fill color="#FFFFFF" transparent="false"/>
           <y:BorderStyle hasColor="false" type="line" width="1.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="32.265625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="center" visible="true" width="220.76171875" x="340.97389030456543" xml:space="preserve" y="193.20319747924805">- Ad info (ID, keywords, conversions)
-- A/B Testing and conversions<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="-0.5" labelRatioY="-0.5" nodeRatioX="0.5" nodeRatioY="0.5" offsetX="260.97389030456543" offsetY="159.20319747924805" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="32.265625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="center" visible="true" width="220.76171875" x="585.489041819717" xml:space="preserve" y="123.20319747924805">- Ad info (ID, keywords, conversions)
+- A/B Testing and conversions<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="-0.5" labelRatioY="-0.5" nodeRatioX="0.5" nodeRatioY="0.5" offsetX="505.48904181971704" offsetY="89.20319747924805" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:StyleProperties>
             <y:Property class="java.lang.Integer" name="com.yworks.sbgn.style.radius" value="10"/>
           </y:StyleProperties>
@@ -520,7 +520,9 @@ vouchers to members who have opted in
     <edge id="e3" source="n2" target="n10">
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0">
+            <y:Point x="625.5" y="627.443998336792"/>
+          </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
           <y:BendStyle smoothed="false"/>
@@ -577,6 +579,19 @@ vouchers to members who have opted in
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e9" source="n25" target="n5">
+      <data key="d9"/>
+      <data key="d10">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="-74.98484848484838" ty="-0.5">
+            <y:Point x="-230.98484848484838" y="1160.9936111719926"/>
+          </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
           <y:BendStyle smoothed="false"/>
