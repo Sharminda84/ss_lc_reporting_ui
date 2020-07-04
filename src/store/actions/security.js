@@ -11,7 +11,7 @@ export const triggerLogin = (user, password) => ({
     }
 });
 
-export const loginSuccess = (user, password) => console.log('fired success....') || ({
+export const loginSuccess = (user, password) => ({
     type: LOGIN_USER,
     payload: {
         user,
@@ -19,7 +19,7 @@ export const loginSuccess = (user, password) => console.log('fired success....')
     }
 });
 
-export const loginError = () => console.log('fired error') || ({
+export const loginError = () => ({
     type: LOGIN_ERROR,
     payload: {
     }
