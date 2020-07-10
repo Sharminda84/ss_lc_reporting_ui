@@ -167,11 +167,15 @@ const generateCardDrilldownDataSeries = (orderBreakdownPieChartDrilldownData) =>
             data: []
         };
         cardTypeDetails.forEach((cardNameDetails, cardName) => {
-            cardTypeRecord.data.push([cardName.split('.')[cardName.split('.').length-1].replace('Writer', ''), cardNameDetails]);
+            cardTypeRecord.data.push({
+                name: cardName.split('.')[cardName.split('.').length-1].replace('Writer', ''),
+                y: cardNameDetails,
+                imageSource: 'https://ichef.bbci.co.uk/news/660/cpsprodpb/E4CB/production/_113317585_hi061680721.jpg'
+            });
         });
         printedCardsDrillDownData.push(cardTypeRecord);
     });
-    
+
     return {
         series: printedCardsDrillDownData
     };

@@ -7,7 +7,7 @@ import drilldown from "highcharts/modules/drilldown.js";
 drilldown(HighCharts);
 
 const getChartOptions = (title, subTitle, series, drilldown) => {
-    return {
+    const chart = {
         chart: {
           type: 'pie'
         },
@@ -29,17 +29,20 @@ const getChartOptions = (title, subTitle, series, drilldown) => {
             series: {
                 dataLabels: {
                     enabled: true,
-                    format: '{point.name}: £{point.y:.1f}'
+                    format: '{point.name}: £{point.y:.2f}'
                 }
             }
         },
         tooltip: {
+            useHTML: true,
             headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
-            pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>£{point.y:.2f}</b>'
+            pointFormat: '<img alt="" width="100" height="100" src="{point.imageSource}" /><br/><span style="color:{point.color}">{point.name}</span>: <b>£{point.y:.2f}</b>'
         },
         series,
         drilldown
-    }
+    };
+
+    return chart;
 };
 
 function Chart(props) {

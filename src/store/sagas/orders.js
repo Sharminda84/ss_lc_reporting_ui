@@ -11,7 +11,7 @@ export function* fetchDailyOrders() {
         const sortedOrders = _.orderBy(orders, order => order.transactionTime, 'desc');
         yield put(loadDailyOrdersData(sortedOrders));
     } catch (error) {
-        console.log('ERROR.....');
+        console.log(error);
     }
 }
 
@@ -22,7 +22,7 @@ export function* fetchWeeklyOrders() {
         const sortedOrders = _.orderBy(orders, order => order.transactionTime, 'desc');
         yield put(loadWeeklyOrdersData(sortedOrders));
     } catch (error) {
-        console.log('ERROR.....');
+        console.log(error);
     }
 }
 
@@ -33,7 +33,7 @@ export function* fetchMonthlyOrders() {
         const sortedOrders = _.orderBy(orders, order => order.transactionTime, 'desc');
         yield put(loadMonthlyOrdersData(sortedOrders));
     } catch (error) {
-        console.log('ERROR.....');
+        console.log(error);
     }
 }
 
@@ -44,6 +44,6 @@ export function* fetchAllOrders() {
         const sortedOrders = _.orderBy(orders, order => order.transactionTime, 'desc');
         yield put(loadOrdersData(sortedOrders));
     } catch (error) {
-        console.log('ERROR.....');
+        console.log(error);
     }
 }

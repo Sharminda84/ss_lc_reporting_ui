@@ -38,6 +38,11 @@
     box-sizing: border-box;
 }
 
+.navigationItem a:focus {
+    background-color: #05232f;
+    box-sizing: border-box;
+}
+
 .collapsableNavigationItem {
     padding: 15px;
 }
