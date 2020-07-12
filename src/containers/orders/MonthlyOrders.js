@@ -7,7 +7,8 @@ const mapStateToProps = state => ({
   orders: _get(state, 'orders.monthlyOrders', {}),
   ordersTableConfig: _get(state, 'orders.ordersTableConfig', {}),
   ordersSummaryTableConfig: _get(state, 'orders.ordersSummaryTableConfig', {}),
-  title: '30-Days Orders'
+  title: '30-Days Orders',
+  cardInfo: _get(state, 'refData.cardInfo', new Map())
 });
 
 const mapDispatchToProps = dispatch => ({

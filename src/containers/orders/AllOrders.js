@@ -7,7 +7,8 @@ const mapStateToProps = state => ({
   orders: _get(state, 'orders.orders', {}),
   ordersTableConfig: _get(state, 'orders.ordersTableConfig', {}),
   ordersSummaryTableConfig: _get(state, 'orders.ordersSummaryTableConfig', {}),
-  title: 'Orders'
+  title: 'Orders',
+  cardInfo: _get(state, 'refData.cardInfo', new Map())
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({

@@ -158,7 +158,7 @@ const generateCardDataSeries = (name, orderBreakdownPieChartData) => {
     return printedCardsDataSeries;
 }
 
-const generateCardDrilldownDataSeries = (orderBreakdownPieChartDrilldownData) => {
+const generateCardDrilldownDataSeries = (orderBreakdownPieChartDrilldownData, cardInfo) => {
     const printedCardsDrillDownData = [];
     orderBreakdownPieChartDrilldownData.forEach((cardTypeDetails, cardType) => {
         const cardTypeRecord = {
@@ -167,10 +167,12 @@ const generateCardDrilldownDataSeries = (orderBreakdownPieChartDrilldownData) =>
             data: []
         };
         cardTypeDetails.forEach((cardNameDetails, cardName) => {
+            const cardNameShort = cardName.split('.')[cardName.split('.').length-1].replace('Writer', '');
+            let cardURL = cardInfo.get(cardNameShort).cardURL;
             cardTypeRecord.data.push({
-                name: cardName.split('.')[cardName.split('.').length-1].replace('Writer', ''),
+                name: cardNameShort,
                 y: cardNameDetails,
-                imageSource: 'https://ichef.bbci.co.uk/news/660/cpsprodpb/E4CB/production/_113317585_hi061680721.jpg'
+                imageSource: cardURL
             });
         });
         printedCardsDrillDownData.push(cardTypeRecord);
@@ -182,7 +184,7 @@ const generateCardDrilldownDataSeries = (orderBreakdownPieChartDrilldownData) =>
 }
 
 function Orders(props) {
-    const { fetchOrdersData, ordersTableConfig, ordersSummaryTableConfig, orders, displayChart = true, title } = props;
+    const { fetchOrdersData, ordersTableConfig, ordersSummaryTableConfig, orders, displayChart = true, title, cardInfo } = props;
 
     useEffect(() => {fetchOrdersData()}, [fetchOrdersData]);
 
@@ -199,9 +201,9 @@ function Orders(props) {
     const ordersSummaryArray = generateOrdersSummaryArray(ordersSummary);
     const ordersForTable = generateOrdersForTable(orders);
     const printedCardsDataSeries = generateCardDataSeries('PrintedCards', printedCardOrderBreakdownPieChartData);
-    const printedCardsDrillDownDataSeries = generateCardDrilldownDataSeries(printedCardOrderBreakdownPieChartDrilldownData);
+    const printedCardsDrillDownDataSeries = generateCardDrilldownDataSeries(printedCardOrderBreakdownPieChartDrilldownData, cardInfo);
     const eCardsDataSeries = generateCardDataSeries('eCards', eCardOrderBreakdownPieChartData);
-    const eCardsDrillDownDataSeries = generateCardDrilldownDataSeries(eCardOrderBreakdownPieChartDrilldownData);
+    const eCardsDrillDownDataSeries = generateCardDrilldownDataSeries(eCardOrderBreakdownPieChartDrilldownData, cardInfo);
 
     return (
         <div>

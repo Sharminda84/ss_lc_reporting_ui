@@ -35,7 +35,7 @@ const getChartOptions = (title, subTitle, series, drilldown) => {
         },
         tooltip: {
             useHTML: true,
-            headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+            headerFormat: '<span style="font-size:11px"><b>{series.name}</b></span><br>',
             pointFormat: '<img alt="" width="100" height="100" src="{point.imageSource}" /><br/><span style="color:{point.color}">{point.name}</span>: <b>£{point.y:.2f}</b>'
         },
         series,
