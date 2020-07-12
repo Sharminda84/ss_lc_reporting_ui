@@ -1,6 +1,7 @@
 import { put, call } from 'redux-saga/effects';
 import { loginSuccess, loginError } from '../actions/security';
 import { fetchCardInfo } from '../actions/refData';
+import { fetchTopCards} from '../actions/orders';
 import axios from 'axios';
 import * as ReportingServerURLs from './ReportingServerURLs';
 
@@ -11,6 +12,7 @@ export function* loginUser(action) {
         yield call(sendLogInRequest, user, password);
         yield put(loginSuccess(user, password));
         yield put(fetchCardInfo());
+        yield put(fetchTopCards());
     } catch (error) {
         yield put(loginError());
     }

@@ -1,0 +1,7 @@
+.TopCards {
+    display: inline-block;
+}
+
+.TopCardsItem {
+    padding: 40px;
+}

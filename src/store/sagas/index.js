@@ -1,10 +1,10 @@
 import { takeEvery } from 'redux-saga/effects';
 import { FETCH_MEMBERS_DATA } from '../actions/members';
-import { FETCH_DAILY_ORDERS_DATA, FETCH_WEEKLY_ORDERS_DATA, FETCH_MONTHLY_ORDERS_DATA, FETCH_ORDERS_DATA } from '../actions/orders';
+import { FETCH_DAILY_ORDERS_DATA, FETCH_WEEKLY_ORDERS_DATA, FETCH_MONTHLY_ORDERS_DATA, FETCH_ORDERS_DATA, FETCH_TOP_CARDS } from '../actions/orders';
 import { TRIGGER_LOGIN } from '../actions/security';
 import { FETCH_CARD_INFO } from '../actions/refData';
 import { fetchMemberSignups } from './members';
-import { fetchDailyOrders, fetchWeeklyOrders, fetchMonthlyOrders, fetchAllOrders } from './orders';
+import { fetchDailyOrders, fetchWeeklyOrders, fetchMonthlyOrders, fetchAllOrders, fetchTopCards } from './orders';
 import { loginUser } from './security';
 import { fetchCardInfo } from './refData';
 
@@ -34,4 +34,8 @@ export function* watchLoginAction() {
 
 export function* watchFetchCardInfoAction() {
     yield takeEvery(FETCH_CARD_INFO, fetchCardInfo);
+}
+
+export function* watchFetchTopCardsAction() {
+    yield takeEvery(FETCH_TOP_CARDS, fetchTopCards);
 }

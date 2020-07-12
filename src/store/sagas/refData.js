@@ -2,6 +2,7 @@ import { call, put } from 'redux-saga/effects';
 import { loadCardInfo } from '../actions/refData';
 import { sendGetRequest } from '../networkUtils';
 import * as ReportingServerURLs from './ReportingServerURLs';
+import { getCardName } from '../../utils';
 
 export function* fetchCardInfo() {
     try {
@@ -16,7 +17,7 @@ export function* fetchCardInfo() {
 const processData = cardInfoResults => {
     const cardInfoProcessed = new Map();
     cardInfoResults.forEach(cardInfo => {
-        const cardName = cardInfo[0].split('.')[cardInfo[0].split('.').length-1].replace('Writer', '');
+        const cardName = getCardName(cardInfo[0]);
         const cardDetails = {
             cardURL: cardInfo[1],
         };

@@ -1,11 +1,11 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import '../../App.css';
 import './Orders.css';
 import Chart from '../chart/Chart';
 import PieChart from '../chart/PieChart';
 import DataTable from '../table/DataTable';
 import _ from 'lodash';
-import { dateToString } from "../../utils";
+import { dateToString, getCardName } from '../../utils';
 
 const CARD_TYPES = new Map();
 CARD_TYPES.set(-1, "Unknown");
@@ -167,7 +167,7 @@ const generateCardDrilldownDataSeries = (orderBreakdownPieChartDrilldownData, ca
             data: []
         };
         cardTypeDetails.forEach((cardNameDetails, cardName) => {
-            const cardNameShort = cardName.split('.')[cardName.split('.').length-1].replace('Writer', '');
+            const cardNameShort = getCardName(cardName);
             let cardURL = cardInfo.get(cardNameShort).cardURL;
             cardTypeRecord.data.push({
                 name: cardNameShort,

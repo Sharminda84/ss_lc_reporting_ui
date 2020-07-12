@@ -18,15 +18,15 @@ const initialState = {
               },
               {
                   subItemName: '7-Days Previous Orders',
-                  subItemPath: '/orders/history/weekly'
+                  subItemPath: '/orders/weekly'
               },
               {
                   subItemName: '30-Days Previous Orders',
-                  subItemPath: '/orders/history/monthly'
+                  subItemPath: '/orders/monthly'
               },
               {
                   subItemName: 'All-time Previous Orders',
-                  subItemPath: '/orders/history/alltime'
+                  subItemPath: '/orders/alltime'
               }
           ],
       },
@@ -40,16 +40,36 @@ const initialState = {
           ]
       },
       {
-          name: 'Top 10 Card Designs by Sales',
+          name: 'Top Card Designs by Sales',
           navigationSubItems: [
               {
-                  subItemName: 'Birthday',
-                  subItemPath: '/orders/history/top10/birthday'
+                  subItemName: 'Leaving',
+                  subItemPath: '/orders/top10/leaving'
               },
               {
-                  subItemName: 'Leaving',
-                  subItemPath: '/orders/history/top10/leaving'
-              }
+                  subItemName: 'Birthday',
+                  subItemPath: '/orders/top10/birthday'
+              },
+              {
+                  subItemName: 'Maternity',
+                  subItemPath: '/orders/top10/maternity'
+              },
+              {
+                  subItemName: 'New Baby',
+                  subItemPath: '/orders/top10/new-baby'
+              },
+              {
+                  subItemName: 'New Daddy',
+                  subItemPath: '/orders/top10/new-daddy'
+              },
+              {
+                  subItemName: 'Welcome',
+                  subItemPath: '/orders/top10/welcome'
+              },
+              {
+                  subItemName: 'Chistmas',
+                  subItemPath: '/orders/top10/christmas'
+              },
           ]
       },
       {

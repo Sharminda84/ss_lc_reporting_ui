@@ -1,5 +1,8 @@
 import { call, put } from 'redux-saga/effects';
-import { loadDailyOrdersData, loadWeeklyOrdersData, loadMonthlyOrdersData, loadOrdersData } from '../actions/orders';
+import {
+    loadDailyOrdersData, loadWeeklyOrdersData, loadMonthlyOrdersData,
+    loadOrdersData, loadTopCards }
+from '../actions/orders';
 import _ from 'lodash';
 import { sendGetRequest } from '../networkUtils';
 import * as ReportingServerURLs from "./ReportingServerURLs";
@@ -43,6 +46,16 @@ export function* fetchAllOrders() {
         const orders = yield call(sendGetRequest, fetchMembersURL);
         const sortedOrders = _.orderBy(orders, order => order.transactionTime, 'desc');
         yield put(loadOrdersData(sortedOrders));
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export function* fetchTopCards() {
+    try {
+        const fetchTopCardsURL = ReportingServerURLs.FETCH_TOP_CARDS;
+        const topCards = yield call(sendGetRequest, fetchTopCardsURL);
+        yield put(loadTopCards(topCards));
     } catch (error) {
         console.log(error);
     }

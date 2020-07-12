@@ -6,4 +6,6 @@ export const FETCH_ALL_ORDERS = REPORTING_SERVER_URL + '/reporting/orders/all';
 export const FETCH_TODAYS_ORDERS = REPORTING_SERVER_URL + '/reporting/orders/today';
 export const FETCH_WEEKLY_ORDERS = REPORTING_SERVER_URL + '/reporting/orders/week';
 export const FETCH_MONTHLY_ORDERS = REPORTING_SERVER_URL + '/reporting/orders/month';
-export const FETCH_CARD_INFO = REPORTING_SERVER_URL + '/cardinfo';
+export const FETCH_CARD_INFO = REPORTING_SERVER_URL + '/reporting/cardinfo';
+export const FETCH_TOP_CARDS = REPORTING_SERVER_URL + '/reporting/cards/top';
+

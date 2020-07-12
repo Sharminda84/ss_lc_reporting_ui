@@ -1,10 +1,10 @@
 import {
-    FETCH_ORDERS_DATA, LOAD_ORDERS_DATA,
-    FETCH_DAILY_ORDERS_DATA, LOAD_DAILY_ORDERS_DATA,
-    FETCH_WEEKLY_ORDERS_DATA, LOAD_WEEKLY_ORDERS_DATA,
-    FETCH_MONTHLY_ORDERS_DATA, LOAD_MONTHLY_ORDERS_DATA
+    LOAD_ORDERS_DATA,
+    LOAD_DAILY_ORDERS_DATA,
+    LOAD_WEEKLY_ORDERS_DATA,
+    LOAD_MONTHLY_ORDERS_DATA,
+    LOAD_TOP_CARDS,
 } from '../actions/orders';
-import SelectColumnFilter from '../../components/table/DataTable';
 
 const initialState = {
     orders: [],
@@ -73,18 +73,11 @@ const initialState = {
             accessor: 'totalRevenue',
         },
     ],
+    topCards: [],
 };
 
 const orders = (state = initialState, action) => {
     switch (action.type) {
-        case FETCH_ORDERS_DATA:
-            return state;
-        case FETCH_DAILY_ORDERS_DATA:
-            return state;
-        case FETCH_WEEKLY_ORDERS_DATA:
-            return state;
-        case FETCH_MONTHLY_ORDERS_DATA:
-            return state;
         case LOAD_ORDERS_DATA:
             return {...state, orders: action.payload};
         case LOAD_DAILY_ORDERS_DATA:
@@ -93,7 +86,8 @@ const orders = (state = initialState, action) => {
             return {...state, weeklyOrders: action.payload};
         case LOAD_MONTHLY_ORDERS_DATA:
             return {...state, monthlyOrders: action.payload};
-
+        case LOAD_TOP_CARDS:
+            return {...state, topCards: action.payload};
         default: return state;
     }
 };

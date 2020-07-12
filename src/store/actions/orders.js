@@ -10,6 +10,9 @@ export const LOAD_WEEKLY_ORDERS_DATA = 'orders/LOAD_WEEKLY_ORDERS_DATA';
 export const FETCH_MONTHLY_ORDERS_DATA = 'orders/FETCH_MONTHLY_ORDERS_DATA';
 export const LOAD_MONTHLY_ORDERS_DATA = 'orders/LOAD_MONTHLY_ORDERS_DATA';
 
+export const FETCH_TOP_CARDS = 'orders/FETCH_TOP_CARDS';
+export const LOAD_TOP_CARDS = 'orders/LOAD_TOP_CARDS';
+
 export const fetchOrdersData = (startDate, endDate) => ({
     type: FETCH_ORDERS_DATA,
     payload: {
@@ -48,4 +51,13 @@ export const fetchMonthlyOrdersData = () => ({
 export const loadMonthlyOrdersData = (ordersData) => ({
     type: LOAD_MONTHLY_ORDERS_DATA,
     payload: ordersData,
+});
+
+export const fetchTopCards = () => ({
+    type: FETCH_TOP_CARDS,
+});
+
+export const loadTopCards = (topCards) => ({
+    type: LOAD_TOP_CARDS,
+    payload: topCards,
 });
