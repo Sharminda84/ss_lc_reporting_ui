@@ -1,8 +1,8 @@
-import { FETCH_MEMBERS_DATA, LOAD_MEMBERS_DATA } from '../actions/members';
-import SelectColumnFilter from '../../components/table/DataTable';
+import { LOAD_MEMBERS_DATA, LAOD_CARDS_FOR_MEMBERS } from '../actions/members';
 
 const initialState = {
     memberSignUps: [],
+    memberCards: [],
     membersTableConfig: [
         {
             Header: 'First Name',
@@ -35,10 +35,10 @@ const initialState = {
 
 const members = (state = initialState, action) => {
     switch (action.type) {
-        case FETCH_MEMBERS_DATA:
-            return state;
         case LOAD_MEMBERS_DATA:
             return {...state, memberSignUps: action.payload};
+        case LAOD_CARDS_FOR_MEMBERS:
+            return {...state, memberCards: action.payload};
         default: return state;
     }
 };

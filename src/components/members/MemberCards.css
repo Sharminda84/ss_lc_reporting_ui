@@ -1,0 +1,49 @@
+.MemberCardsStream {
+    display: inline-block;
+}
+
+.MemberCardsStream h2 {
+    margin: 40px;
+}
+
+.MemberCard {
+    margin: 40px;
+    padding: 40px;
+    border-style: groove;
+    width: 800px;
+    background-color: #5a7582;
+}
+
+.MemberCard table {
+    background-color: #848B90;
+    margin-bottom: 20px;
+    padding: 0;
+}
+
+.MemberCard tbody {
+    display: table-row-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
+
+.MemberCard tr {
+    display: table-row;
+    vertical-align: inherit;
+    border-color: inherit;
+}
+
+.MemberCard td {
+    padding: 15px;
+    text-align: center;
+    border: 1px solid #FFF;
+}
+
+.MemberCardDetails {
+    display: flex;
+    flex-direction: row;
+}
+
+.MemberCardTextInfo {
+   display: block;
+   margin-left: 20px;
+}

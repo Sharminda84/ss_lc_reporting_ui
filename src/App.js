@@ -6,6 +6,7 @@ import AppFooter from './components/footer/Footer';
 import './App.css';
 import Home from './components/home/Home';
 import MemberSignUps from './containers/members/MemberSignUps';
+import MemberCardsStream from './containers/members/MemberCardsStream';
 import DailyOrders from './containers/orders/DailyOrders';
 import WeeklyOrders from './containers/orders/WeeklyOrders';
 import MonthlyOrders from './containers/orders/MonthlyOrders';
@@ -29,7 +30,7 @@ function App() {
           <Navigation />
           <div className='AppMainSection'>
             <Switch>
-                <Route path='/' exact component={Home} />
+                <Route path='/' exact component={MemberCardsStream} />
                 <Route path='/members/signups' exact component={MemberSignUps} />
 
                 <Route path='/orders/daily' exact component={DailyOrders} />
