@@ -5,21 +5,24 @@ import { getCardName } from '../../utils';
 function MemberCard(props) {
     const cardInfo = props.cardInfo;
     const memberFirstName = props.card[0];
-    const memberLastName = props.card[1];
-    const memberID = props.card[2];
-    const memberJoinedDate = new Date(parseInt(props.card[3]));
+    const memberLastName = "****";
+    const memberID = props.card[1];
+    const memberJoinedDate = new Date(parseInt(props.card[2]));
     const memberJoined = `${memberJoinedDate.toLocaleDateString()} ${memberJoinedDate.toLocaleTimeString()}`;
-    const emailAddress = props.card[4];
-    const memberValidated = props.card[5];
-    const leaverFirstName = props.card[6];
-    const leaverLastName = props.card[7];
-    const cardURL = props.card[8];
-    const cardImageURL = cardInfo.get(getCardName(props.card[9])).cardURL;
-    const leavingDate = props.card[10] === '0' ? '' : new Date(parseInt(props.card[10]));
+    let emailAddress = props.card[3];
+    if (props.card[3]) {
+        emailAddress = "****" + emailAddress.substring(emailAddress.lastIndexOf("@"));
+    }
+    const memberValidated = props.card[4];
+    const leaverFirstName = props.card[5];
+    const leaverLastName = "****";
+    // const cardURL = props.card[6];
+    const cardImageURL = cardInfo.get(getCardName(props.card[7])) ? cardInfo.get(getCardName(props.card[7])).cardURL : '';
+    const leavingDate = props.card[8] === '0' ? '' : new Date(parseInt(props.card[8]));
     const leavingDateString = leavingDate === '' ? '' : leavingDate.toLocaleDateString();
-    const messageCount = props.card[11];
-    const orderId = props.card[12];
-    const deliveryAddress = props.card[13];
+    const messageCount = props.card[9];
+    const orderId = props.card[10];
+    const deliveryAddress = props.card[10];
     const eCardOrderd = orderId != null && deliveryAddress == null ? 'Y' : 'N';
     const physicalCardOrdered = orderId != null && deliveryAddress != null ? 'Y' : 'N';
 
@@ -47,7 +50,6 @@ function MemberCard(props) {
                     <h4>Signatures: {messageCount}</h4>
                     <h4>eCard Ordered: {eCardOrderd}</h4>
                     <h4>Printed Card Ordered: {physicalCardOrdered}</h4>
-                    <h4><a href={`https://www.leavingcard.com/card/view/${cardURL}`}>Card URL</a></h4>
                 </div>
             </div>
         </div>
