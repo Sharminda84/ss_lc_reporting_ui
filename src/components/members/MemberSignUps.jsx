@@ -16,7 +16,8 @@ function MemberSignUps(props) {
     useEffect(() => {fetchMembersData(startDate, endDate)}, [fetchMembersData]);
 
     const memberSignUpsForTable = memberSignUps.map(member => {
-       member.joined = dateToString(new Date(member.joined));
+       // member.joined = dateToString(new Date(member.joined));
+       member.joined = new Date(member.joined).toDateString();
        member.emailValidated = member.emailValidated ? 'yes' : 'no';
        return member;
     });
@@ -25,7 +26,9 @@ function MemberSignUps(props) {
         const chartData = [];
         memberSignUps
             .reduce((members, member) => {
-                const key = new Date(dateToString(new Date(member.joined))).getTime();
+                const joinedDate = new Date(member.joined);
+                joinedDate.setHours(0, 0, 0, 0);
+                const key = joinedDate.getTime() + 24*60*60*1000;
                 if (!members.has(key)) {
                     members.set(key, 0);
                 }
@@ -47,11 +50,11 @@ function MemberSignUps(props) {
                 <div>From</div>
                 <DatePicker
                     selected={startDate}
-                    onChange={(newStartDate) => setStartDate(newStartDate.getTime())} />
+                    onChange={(newStartDate) => console.log('new start: ' + newStartDate) || setStartDate(newStartDate.getTime())} />
                 <div>To</div>
                 <DatePicker
                     selected={endDate}
-                    onChange={(newEndDate) => setEndDate(newEndDate.getTime())} />
+                    onChange={(newEndDate) => console.log('new end: ' + newEndDate) || setEndDate(newEndDate.getTime())} />
                 <button onClick={() => fetchMembersData(startDate, endDate)}>Fetch</button>
             </div>
             {

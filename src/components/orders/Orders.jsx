@@ -198,6 +198,9 @@ function Orders(props) {
         eCardOrderBreakdownPieChartData, eCardOrderBreakdownPieChartDrilldownData);
     
     // Generate data structures for presentation
+    const totalOrdersValue = orders.reduce((total, order) => {
+        return total + order.transactionAmount;
+    }, 0.0);
     const ordersSummaryArray = generateOrdersSummaryArray(ordersSummary);
     const ordersForTable = generateOrdersForTable(orders);
     const printedCardsDataSeries = generateCardDataSeries('PrintedCards', printedCardOrderBreakdownPieChartData);
@@ -210,6 +213,12 @@ function Orders(props) {
             {
                 orders.length === 0 && <div>
                     No Orders...
+                </div>
+            }
+            {
+                displayChart && orders.length > 0 &&
+                <div className='orderTotal'>
+                    Total Sales: £{round(totalOrdersValue)}
                 </div>
             }
             {

@@ -3,3 +3,13 @@
     text-align: center;
     width: 50%;
 }
+
+.orderTotal {
+    text-align: center;
+    background-color: #3C3F41;
+    font-size: 18px;
+    font-weight: bold;
+    color: ghostwhite;
+    padding: 15px;
+    margin-bottom: 20px;
+}
