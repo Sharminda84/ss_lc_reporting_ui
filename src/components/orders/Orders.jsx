@@ -36,7 +36,7 @@ const convertToChartData = (orders) => {
             allOrders.set(key, allOrders.get(key) + 1);
             return allOrders;
         }, new Map())
-        .forEach((count, date) => chartData.push([new Date(date).getTime(), count]));
+        .forEach((count, date) => chartData.push([new Date(date).getTime() + 24*60*60*1000, count]));
 
     return _.orderBy(chartData, data => data[0], 'asc');
 }
@@ -216,7 +216,7 @@ function Orders(props) {
                 </div>
             }
             {
-                displayChart && orders.length > 0 &&
+                orders.length > 0 &&
                 <div className='orderTotal'>
                     Total Sales: £{round(totalOrdersValue)}
                 </div>
