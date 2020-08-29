@@ -34,8 +34,8 @@ const initialState = {
           name: 'Analytics',
           navigationSubItems: [
               {
-                  subItemName: 'Customer Aq. Cost',
-                  subItemPath: '/analytics/aquisition-cost'
+                  subItemName: 'Reports',
+                  subItemPath: '/analytics/reports'
               }
           ]
       },

@@ -1,0 +1,27 @@
+.Reporting {
+    display: inline-block;
+}
+
+.ReportingItem {
+    padding: 40px;
+}
+
+.ReportingItem h1 {
+    background-color: #3C3F41;
+    font-size: 18px;
+    font-weight: bold;
+    color: ghostwhite;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.ReportingItem h2 {
+    font-size: 15px;
+    color: ghostwhite;
+}
+
+.ReportingItem a {
+    margin-top: 20px;
+    font-size: 15px;
+    color: ghostwhite;
+}

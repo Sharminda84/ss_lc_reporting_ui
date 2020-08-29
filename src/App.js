@@ -19,6 +19,7 @@ import TopMaternityCardsContainer from './containers/orders/TopMaternityCardsCon
 import TopNewBabyCardsContainer from './containers/orders/TopNewBabyCardsContainer';
 import TopNewDaddyCardsContainer from './containers/orders/TopNewDaddyCardsContainer';
 import TopNewWelcomeCardsContainer from './containers/orders/TopNewWelcomeCardsContainer';
+import ReportingContainer from './containers/analytics/Reporting';
 
 function App() {
   return (
@@ -50,7 +51,7 @@ function App() {
                 <Route path='/discount/claimed' exact component={Home} />
                 <Route path='/discount/claimed-times' exact component={Home} />
 
-                <Route path='/analytics/aquisition-cost' exact component={Home} />
+                <Route path='/analytics/reports' exact component={ReportingContainer} />
                 <Redirect to='/' />
             </Switch>
           </div>
