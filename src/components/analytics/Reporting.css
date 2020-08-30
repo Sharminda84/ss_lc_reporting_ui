@@ -8,7 +8,7 @@
 
 .ReportingItem h1 {
     background-color: #3C3F41;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: bold;
     color: ghostwhite;
     padding: 15px;
@@ -16,12 +16,19 @@
 }
 
 .ReportingItem h2 {
-    font-size: 15px;
+    font-size: 14px;
     color: ghostwhite;
+    font-weight: normal;
 }
 
 .ReportingItem a {
     margin-top: 20px;
     font-size: 15px;
     color: ghostwhite;
+}
+
+.ReportingItem button {
+    background-color: #66b3e0;
+    border-radius: 8px;
+    padding: 10px 15px;
 }

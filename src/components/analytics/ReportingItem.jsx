@@ -5,12 +5,14 @@ import './Reporting.css';
 function NavigationItem(props) {
 
     const downloadReport = () => {
+        document.body.classList.add('busy-cursor');
         props.fetchData(`${REPORTING_SERVER_URL}${props.reportURL}`)
             .then(data => {
                 const reportCSV = props.reportGenerator(data);
                 const link = document.createElement('a');
                 link.setAttribute('href', reportCSV);
                 link.setAttribute('download', props.reportName);
+                document.body.classList.remove('busy-cursor');
                 link.click();
             });
     };
