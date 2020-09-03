@@ -6,7 +6,6 @@ import './MemberSignUps.css';
 import DataTable from '../table/DataTable';
 import Chart from '../chart/Chart';
 import _ from 'lodash';
-import { dateToString } from '../../utils';
 
 function MemberSignUps(props) {
     const [startDate, setStartDate] = useState(new Date().getTime() - 30*24*60*60*1000);

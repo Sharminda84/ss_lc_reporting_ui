@@ -24,11 +24,11 @@ export function* fetchMemberSignups(action) {
     }
 }
 
-export function* fetchCardsForMembers() {
+export function* fetchCardsForMembers(action) {
     try {
-        const fetchCardsForMembersURL = encodeURI(`${ReportingServerURLs.FETCH_CARDS_FOR_MEMBERS_URL}`);
+        const fetchCardsForMembersURL = encodeURI(`${ReportingServerURLs.FETCH_CARDS_FOR_MEMBERS_URL}?date=${action.payload}`);
         const cards = yield call(sendGetRequest, fetchCardsForMembersURL);
-        yield put(loadCardsForMembers(cards));
+        yield put(loadCardsForMembers(cards, action.payload));
     } catch (error) {
         console.log(`Error while fetching cards for members: ${error}`);
     }

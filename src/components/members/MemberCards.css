@@ -6,6 +6,19 @@
     margin: 40px;
 }
 
+.MemberCardsStreamDate {
+    display: flex;
+    flex-direction: row;
+    margin-left: 40px;
+    align-items: flex-end;
+    margin-bottom: 20px;
+    font-size: 15px;
+}
+
+.MemberCardsStreamDate div {
+    margin-right: 20px;
+}
+
 .MemberCard {
     margin: 40px;
     padding: 40px;

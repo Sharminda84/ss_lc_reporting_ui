@@ -16,12 +16,16 @@ export const loadMembersData = (membersData) => ({
     payload: membersData,
 });
 
-export const fetchCardsForMembers = () => ({
+export const fetchCardsForMembers = (date) => ({
     type: FETCH_CARDS_FOR_MEMBERS,
+    payload: date
 });
 
-export const loadCardsForMembers = (cardsForMembers) => ({
+export const loadCardsForMembers = (cardsForMembers, date) => ({
     type: LAOD_CARDS_FOR_MEMBERS,
-    payload: cardsForMembers,
+    payload: {
+        cardsForMembers,
+        date
+    },
 });
 

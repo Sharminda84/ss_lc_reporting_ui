@@ -22,9 +22,15 @@ function MemberCard(props) {
     const leavingDateString = leavingDate === '' ? '' : leavingDate.toLocaleDateString();
     const messageCount = props.card[9];
     const orderId = props.card[10];
-    const deliveryAddress = props.card[10];
+    const deliveryAddress = props.card[11];
     const eCardOrderd = orderId != null && deliveryAddress == null ? 'Y' : 'N';
     const physicalCardOrdered = orderId != null && deliveryAddress != null ? 'Y' : 'N';
+    const cardCreationTime = props.card[12] !== null && props.card[12] !== 0 ?
+        new Date(parseInt(props.card[12])) : '';
+    const cardCreationTimeString = cardCreationTime === ''
+        ? ''
+        : cardCreationTime.toLocaleDateString() + ' ' + cardCreationTime.toLocaleTimeString();
+    const cardEnabled = props.card[13] === '0' ? 'Yes' : 'No';
 
     return (
         <div className='MemberCard'>
@@ -42,14 +48,16 @@ function MemberCard(props) {
             </div>
             <div className='MemberCardDetails'>
                 <div>
-                    <img src={cardImageURL} width={150} height={212}/>
+                    <img src={cardImageURL} width={191} height={270}/>
                 </div>
                 <div className='MemberCardTextInfo'>
+                    <h4>Card Creation Time: {cardCreationTimeString}</h4>
                     <h4>Leaver: {leaverFirstName} {leaverLastName}</h4>
                     <h4>Leaving date: {leavingDateString}</h4>
                     <h4>Signatures: {messageCount}</h4>
                     <h4>eCard Ordered: {eCardOrderd}</h4>
                     <h4>Printed Card Ordered: {physicalCardOrdered}</h4>
+                    <h4>Enabled: {cardEnabled}</h4>
                 </div>
             </div>
         </div>

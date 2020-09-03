@@ -5,6 +5,7 @@ import { fetchTopCards} from '../actions/orders';
 import { fetchCardsForMembers } from '../actions/members';
 import axios from 'axios';
 import * as ReportingServerURLs from './ReportingServerURLs';
+import { getStartOfTodayInMillis } from '../../utils';
 
 export function* loginUser(action) {
     const user = action.payload.user;
@@ -14,7 +15,7 @@ export function* loginUser(action) {
         yield put(loginSuccess(user, password));
         yield put(fetchCardInfo());
         yield put(fetchTopCards());
-        yield put(fetchCardsForMembers());
+        yield put(fetchCardsForMembers(getStartOfTodayInMillis()));
     } catch (error) {
         yield put(loginError());
     }
