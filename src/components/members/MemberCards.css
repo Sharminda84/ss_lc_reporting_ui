@@ -23,7 +23,7 @@
     margin: 40px;
     padding: 40px;
     border-style: groove;
-    width: 800px;
+    width: 1000px;
     background-color: #5a7582;
 }
 
@@ -59,4 +59,9 @@
 .MemberCardTextInfo {
    display: block;
    margin-left: 20px;
+}
+
+.MemberCardEventsChart {
+    width: 600px;
+    height: 300px;
 }
