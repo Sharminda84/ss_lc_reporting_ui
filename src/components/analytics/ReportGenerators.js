@@ -34,7 +34,10 @@ export const customerOrdersReportCSVGenerator = (data) => {
             (dataRecord[9] !== null ? (dataRecord[9].trim() === '' ? 'eCard' : 'Printed Card') : '') + ',' +
 
             // Orders Count
-            (dataRecord[10] !== null ? dataRecord[10] : '');
+            (dataRecord[10] !== null ? dataRecord[10] : '') + ',' +
+
+            // Card type
+            (dataRecord[11] !== null ? dataRecord[11] : '');
     });
 
     return encodeURI('data:text/csv;charset=utf-8,' + csv);

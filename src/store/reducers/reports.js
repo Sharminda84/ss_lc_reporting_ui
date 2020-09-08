@@ -10,7 +10,7 @@ const initialState = {
             reportTitle: 'Orders',
             reportDescription: 'Details about customer orders. Report fields: Member ID, Card name, ' +
                 'Member create/update time, Card creation time, Card delivery date (deadline), ' +
-                'No of messages, Order ID, Transaction time, Customer email, Delivery address, Total cards ordered',
+                'No of messages, Order ID, Transaction time, Customer email, Delivery address, Total cards ordered, Card type',
             reportURL: '/reporting/analytics/orders-overview',
             reportGenerator: customerOrdersReportCSVGenerator,
         },
