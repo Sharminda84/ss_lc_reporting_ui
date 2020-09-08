@@ -1,5 +1,5 @@
 export const customerOrdersReportCSVGenerator = (data) => {
-    let csv = 'MemberId, Card name, Member create/update time, Card creation time, Card deadline, No of messages, Order ID, Transaction time, Customer email, Card Type, Orders Count';
+    let csv = 'MemberId, Card name, Member create/update time, Card creation time, Card deadline, No of messages, Order ID, Transaction time, Customer email, Printed/e-Card, Orders Count, Card Type';
 
     data.forEach((dataRecord) => {
         csv = csv + '\r\n' +
