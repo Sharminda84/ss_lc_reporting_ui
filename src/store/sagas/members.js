@@ -28,7 +28,8 @@ export function* fetchCardsForMembers(action) {
     try {
         const fetchCardsForMembersURL = encodeURI(`${ReportingServerURLs.FETCH_CARDS_FOR_MEMBERS_URL}?date=${action.payload}`);
         const cards = yield call(sendGetRequest, fetchCardsForMembersURL);
-        /*const cards = [
+        /*
+        const cards = [
             {
                 cardDetails: [
                     "Sye",
@@ -39,10 +40,10 @@ export function* fetchCardsForMembers(action) {
                     "Steven",
                     "1595324413570oAtrbjg5815c",
                     "com.leavingcard.pdfgen.carddesigns.eliza.citypeople.CityBoyWhiteCardWriter",
-                    "0",
+                    "159937661841",  // leaving date
                     "82",
-                    null,
-                    null,
+                    null, // order id
+                    null,  // deliver address
                     "1595324413572",
                     "0",
                     "1963"
@@ -280,7 +281,8 @@ export function* fetchCardsForMembers(action) {
                     ]
                 ]
             },
-        ];*/
+        ];
+        */
         yield put(loadCardsForMembers(cards, action.payload));
     } catch (error) {
         console.log(`Error while fetching cards for members: ${error}`);

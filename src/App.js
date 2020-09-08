@@ -5,6 +5,7 @@ import Navigation from './containers/navigation/Navigation';
 import AppFooter from './components/footer/Footer';
 import './App.css';
 import Home from './components/home/Home';
+import UnderConstruction from './components/home/UnderConstruction';
 import MemberSignUps from './containers/members/MemberSignUps';
 import MemberCardsStream from './containers/members/MemberCardsStream';
 import DailyOrders from './containers/orders/DailyOrders';
@@ -31,9 +32,10 @@ function App() {
           <Navigation />
           <div className='AppMainSection'>
             <Switch>
-                <Route path='/' exact component={MemberCardsStream} />
+                <Route path='/' exact component={Home} />
                 <Route path='/members/signups' exact component={MemberSignUps} />
 
+                <Route path='/orders/card-stream' exact component={MemberCardsStream} />
                 <Route path='/orders/daily' exact component={DailyOrders} />
                 <Route path='/orders/weekly' exact component={WeeklyOrders} />
                 <Route path='/orders/monthly' exact component={MonthlyOrders} />
@@ -47,9 +49,9 @@ function App() {
                 <Route path='/orders/top10/welcome' exact component={TopNewWelcomeCardsContainer} />
                 <Route path='/orders/top10/christmas' exact component={TopChristmasCardsContainer} />
 
-                <Route path='/discount/outstanding' exact component={Home} />
-                <Route path='/discount/claimed' exact component={Home} />
-                <Route path='/discount/claimed-times' exact component={Home} />
+                <Route path='/discount/outstanding' exact component={UnderConstruction} />
+                <Route path='/discount/claimed' exact component={UnderConstruction} />
+                <Route path='/discount/claimed-times' exact component={UnderConstruction} />
 
                 <Route path='/analytics/reports' exact component={ReportingContainer} />
                 <Redirect to='/' />

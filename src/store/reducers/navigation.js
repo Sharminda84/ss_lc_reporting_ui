@@ -4,7 +4,7 @@ const initialState = {
           name: 'Members',
           navigationSubItems: [
               {
-                  subItemName: 'Sign-up Report',
+                  subItemName: 'Sign-ups',
                   subItemPath: '/members/signups'
               },
           ],
@@ -13,7 +13,11 @@ const initialState = {
           name: 'Orders',
           navigationSubItems: [
               {
-                  subItemName: 'Daily Orders',
+                  subItemName: 'Order Stream',
+                  subItemPath: '/orders/card-stream'
+              },
+              {
+                  subItemName: 'Today\'s Orders',
                   subItemPath: '/orders/daily'
               },
               {

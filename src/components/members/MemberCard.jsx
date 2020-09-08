@@ -1,6 +1,6 @@
 import React from 'react';
 import './MemberCards.css';
-import { getCardName } from '../../utils';
+import { getCardName, getStartOfDayInMillis } from '../../utils';
 import SimpleChart from '../chart/SimpleChart';
 import _ from 'lodash';
 
@@ -103,9 +103,18 @@ function MemberCard(props) {
         ? ''
         : cardCreationTime.toLocaleDateString() + ' ' + cardCreationTime.toLocaleTimeString();
     const cardEnabled = props.card.cardDetails[13] === '0' ? 'Yes' : 'No';
+    let cardCSS = 'MemberCard';
+    if (orderId != null) {
+        cardCSS = 'MemberCard MemberCardSold';
+    } else if (leavingDate === '') {
+        cardCSS = 'MemberCard MemberCardUnsold';
+    } else if (leavingDate !== '' &&
+        getStartOfDayInMillis(new Date().getTime()) > getStartOfDayInMillis(leavingDate.getTime())) {
+        cardCSS = 'MemberCard MemberCardUnsold';
+    }
 
     return (
-        <div className='MemberCard'>
+        <div className={cardCSS}>
             <div>
                 <table>
                     <tbody>
@@ -124,8 +133,8 @@ function MemberCard(props) {
                 </div>
                 <div className='MemberCardTextInfo'>
                     <h4>Card Creation Time: {cardCreationTimeString}</h4>
-                    <h4>Leaver: {leaverFirstName} {leaverLastName}</h4>
-                    <h4>Leaving date: {leavingDateString}</h4>
+                    <h4>Card Receiver: {leaverFirstName} {leaverLastName}</h4>
+                    <h4>Target Date: {leavingDateString}</h4>
                     <h4>Signatures: {messageCount}</h4>
                     <h4>eCard Ordered: {eCardOrderd}</h4>
                     <h4>Printed Card Ordered: {physicalCardOrdered}</h4>

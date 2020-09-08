@@ -27,6 +27,14 @@
     background-color: #5a7582;
 }
 
+.MemberCardSold {
+    background-color: #60a250;
+}
+
+.MemberCardUnsold {
+    background-color: #c34545;
+}
+
 .MemberCard table {
     background-color: #848B90;
     margin-bottom: 20px;
