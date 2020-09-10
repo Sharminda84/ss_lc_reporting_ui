@@ -27,8 +27,8 @@ export function* fetchMemberSignups(action) {
 export function* fetchCardsForMembers(action) {
     try {
         const fetchCardsForMembersURL = encodeURI(`${ReportingServerURLs.FETCH_CARDS_FOR_MEMBERS_URL}?date=${action.payload}`);
-        // const cards = yield call(sendGetRequest, fetchCardsForMembersURL);
-
+        const cards = yield call(sendGetRequest, fetchCardsForMembersURL);
+        /*
         const cards = [
             {
                 cardDetails: [
@@ -282,7 +282,7 @@ export function* fetchCardsForMembers(action) {
                 ]
             },
         ];
-
+        */
         yield put(loadCardsForMembers(cards, action.payload));
         document.body.classList.remove('busy-cursor');
     } catch (error) {
