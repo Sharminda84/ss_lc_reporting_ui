@@ -27,21 +27,21 @@ export function* fetchMemberSignups(action) {
 export function* fetchCardsForMembers(action) {
     try {
         const fetchCardsForMembersURL = encodeURI(`${ReportingServerURLs.FETCH_CARDS_FOR_MEMBERS_URL}?date=${action.payload}`);
-        const cards = yield call(sendGetRequest, fetchCardsForMembersURL);
-        /*
+        // const cards = yield call(sendGetRequest, fetchCardsForMembersURL);
+
         const cards = [
             {
                 cardDetails: [
                     "Sye",
                     "1335",
-                    "1595324366608",
+                    "1599746450000",
                     "sye.thevathas@cityoflondon.gov.uk",
                     "true",
                     "Steven",
                     "1595324413570oAtrbjg5815c",
                     "com.leavingcard.pdfgen.carddesigns.eliza.citypeople.CityBoyWhiteCardWriter",
-                    "159937661841",  // leaving date
-                    "82",
+                    "1599832850000",  // leaving date
+                    "3",
                     null, // order id
                     null,  // deliver address
                     "1595324413572",
@@ -282,8 +282,9 @@ export function* fetchCardsForMembers(action) {
                 ]
             },
         ];
-        */
+
         yield put(loadCardsForMembers(cards, action.payload));
+        document.body.classList.remove('busy-cursor');
     } catch (error) {
         console.log(`Error while fetching cards for members: ${error}`);
     }

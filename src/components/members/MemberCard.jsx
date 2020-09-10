@@ -1,6 +1,6 @@
 import React from 'react';
-import './MemberCards.css';
-import { getCardName, getStartOfDayInMillis } from '../../utils';
+import './MemberCardsStream.css';
+import {getCardName, getStartOfDayInMillis, getStartOfTodayInMillis} from '../../utils';
 import SimpleChart from '../chart/SimpleChart';
 import _ from 'lodash';
 
@@ -21,7 +21,6 @@ const generateChartData = (cardLifeCycleEvents) => {
         return [];
     }
 
-
     // Create a map to hold events for aggregation
     // key: event, value: map of events (key: start of the day ts, value: no of events for the day)
     const chartData = new Map();
@@ -32,7 +31,7 @@ const generateChartData = (cardLifeCycleEvents) => {
         const timestamp = Number(event[1]);
         const eventType = event[2];
         const date = new Date(timestamp);
-        date.setHours(0);
+        date.setHours(1);
         date.setMinutes(0);
         date.setSeconds(0);
         date.setMilliseconds(0);
@@ -74,6 +73,47 @@ const generateChartData = (cardLifeCycleEvents) => {
     return outputData;
 }
 
+const determineCardCSS = (leavingDate, orderId, messageCount) => {
+    let cardCSS = 'MemberCard';
+
+    // 1. If there is no leaving date, default colour
+    if (!leavingDate) {
+        cardCSS = 'MemberCard';
+    }
+
+    // 2. If card ordered, mark it green
+    else if (orderId != null) {
+        cardCSS = 'MemberCard MemberCardGreen';
+    }
+
+    // 3. If there was a leaving date, but no purchase was made by the leave date, mark it red
+    else if (leavingDate && getStartOfDayInMillis(new Date().getTime()) > getStartOfDayInMillis(leavingDate.getTime())) {
+        cardCSS = 'MemberCard MemberCardRed';
+    }
+
+    // 4. If approaching leaving date (T-2), and very few signatures, mark it amber
+    else if (!withinTimeFrame(leavingDate, 2) && Number(messageCount) < 2) {
+        cardCSS = 'MemberCard MemberCardAmber';
+    }
+
+    // 5. If approaching leave date (T-1), and not purchased, mark it amber
+    else if (!withinTimeFrame(leavingDate, 1)) {
+        cardCSS = 'MemberCard MemberCardAmber';
+    }
+
+    return cardCSS;
+}
+
+const withinTimeFrame = (refDate, timeFrameInDays) => {
+    const refDateStartOfDay = getStartOfDayInMillis(refDate.getTime())
+    const currnetDay = getStartOfTodayInMillis();
+    if (refDateStartOfDay - (currnetDay +  24*60*60*1000*timeFrameInDays) > 0) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 function MemberCard(props) {
     const cardInfo = props.cardInfo;
     const memberFirstName = props.card.cardDetails[0];
@@ -103,15 +143,8 @@ function MemberCard(props) {
         ? ''
         : cardCreationTime.toLocaleDateString() + ' ' + cardCreationTime.toLocaleTimeString();
     const cardEnabled = props.card.cardDetails[13] === '0' ? 'Yes' : 'No';
-    let cardCSS = 'MemberCard';
-    if (orderId != null) {
-        cardCSS = 'MemberCard MemberCardSold';
-    } else if (leavingDate === '') {
-        cardCSS = 'MemberCard MemberCardUnsold';
-    } else if (leavingDate !== '' &&
-        getStartOfDayInMillis(new Date().getTime()) > getStartOfDayInMillis(leavingDate.getTime())) {
-        cardCSS = 'MemberCard MemberCardUnsold';
-    }
+    const cardId = props.card.cardDetails[14];
+    let cardCSS = determineCardCSS(leavingDate, orderId, messageCount);
 
     return (
         <div className={cardCSS}>
@@ -132,6 +165,7 @@ function MemberCard(props) {
                     <img src={cardImageURL} width={191} height={270}/>
                 </div>
                 <div className='MemberCardTextInfo'>
+                    <h4>Card ID: {cardId}</h4>
                     <h4>Card Creation Time: {cardCreationTimeString}</h4>
                     <h4>Card Receiver: {leaverFirstName} {leaverLastName}</h4>
                     <h4>Target Date: {leavingDateString}</h4>
@@ -141,9 +175,12 @@ function MemberCard(props) {
                     <h4>Enabled: {cardEnabled}</h4>
                 </div>
                 <div>
-                    <SimpleChart title='Key Card Events'
-                                 type='column'
-                                 chartData={generateChartData(props.card.cardLifeCycleEvents)} />
+                    {
+                        props.card.cardLifeCycleEvents && props.card.cardLifeCycleEvents.length > 0 &&
+                        <SimpleChart title='Key Card Events'
+                                     type='column'
+                                     chartData={generateChartData(props.card.cardLifeCycleEvents)} />
+                    }
                 </div>
             </div>
         </div>

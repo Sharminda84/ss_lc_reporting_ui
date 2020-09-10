@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import MemberCard from './MemberCard';
-import './MemberCards.css';
+import './MemberCardsStream.css';
 import './MemberSignUps.css';
 import DatePicker from 'react-datepicker';
 import { getStartOfTodayInMillis, getStartOfDayInMillis } from '../../utils';
@@ -14,7 +14,10 @@ function MemberCardsStream(props) {
     const heading = memberCardsForDate ?
         `New cards [Count: ${memberCardsForDate.length}] for ${new Date(currentDate).toDateString()}` :
         `Loading the card for ${new Date(streamDate).toDateString()}`;
-    const fetchData = () => fetchCardsForMembers(getStartOfDayInMillis(streamDate));
+    const fetchData = () => {
+        document.body.classList.add('busy-cursor');
+        fetchCardsForMembers(getStartOfDayInMillis(streamDate));
+    };
 
     return (
             <div className='MemberCardsStream'>

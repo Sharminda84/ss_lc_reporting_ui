@@ -27,12 +27,16 @@
     background-color: #5a7582;
 }
 
-.MemberCardSold {
+.MemberCardGreen {
     background-color: #60a250;
 }
 
-.MemberCardUnsold {
-    background-color: #c34545;
+.MemberCardAmber {
+    background-color: #ee7430;
+}
+
+.MemberCardRed {
+    background-color: #b33232;
 }
 
 .MemberCard table {
@@ -67,6 +71,10 @@
 .MemberCardTextInfo {
    display: block;
    margin-left: 20px;
+}
+
+.MemberCardTextInfo h4 {
+    margin-block-start: 0rem;
 }
 
 .MemberCardEventsChart {
