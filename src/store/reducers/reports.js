@@ -1,25 +1,39 @@
 import {
     customerOrdersReportCSVGenerator,
-    repeatCustomersReportCSVGenerator
+    repeatCustomersReportCSVGenerator,
+    droppedCustomersReportCSVGenerator,
+    cardsWithoutTargetDate
 } from '../../components/analytics/ReportGenerators';
 
 const initialState = {
     configuredReports: [
         {
-            reportName: 'orders.csv',
-            reportTitle: 'Orders',
-            reportDescription: 'Details about customer orders. Report fields: Member ID, Card name, ' +
-                'Member create/update time, Card creation time, Card delivery date (deadline), ' +
-                'No of messages, Order ID, Transaction time, Customer email, Printed/e-Card, Total cards ordered, Card type',
+            reportName: 'all-orders.csv',
+            reportTitle: 'All Orders',
+            reportDescription: 'Details about customer orders.',
             reportURL: '/reporting/analytics/orders-overview',
             reportGenerator: customerOrdersReportCSVGenerator,
         },
         {
             reportName: 'customer-orders-count.csv',
             reportTitle: 'Customer Orders Count',
-            reportDescription: 'Gives total cards bought by each member. Report fields: Customer ID, First Name, Email, No of cards ordered.',
+            reportDescription: 'Gives total cards bought by each member.',
             reportURL: '/reporting/analytics/order-count-per-customer',
             reportGenerator: repeatCustomersReportCSVGenerator,
+        },
+        {
+            reportName: 'dropped-customers.csv',
+            reportTitle: 'Dropped Customers Report',
+            reportDescription: 'Report of all cards where leaving date was present + has passed + no order was placed.',
+            reportURL: '/reporting/analytics/dropped-customers',
+            reportGenerator: droppedCustomersReportCSVGenerator,
+        },
+        {
+            reportName: 'cards-without-target-date.csv',
+            reportTitle: 'Cards Without Target Date Report',
+            reportDescription: 'Report of all cards that do not have a target date.',
+            reportURL: '/reporting/analytics/cards-without-target-date',
+            reportGenerator: cardsWithoutTargetDate,
         },
     ],
 };
