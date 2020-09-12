@@ -58,8 +58,8 @@ export const repeatCustomersReportCSVGenerator = (data) => {
 };
 
 export const droppedCustomersReportCSVGenerator = (data) => {
-    let csv = 'Member Id, Member first name, Member last name, Member email, Marketing method, Card Id, Card creation time, Leaving date,' +
-              'Card disabled, Card type, Workflow step, Leaver first name, Leaver last name, Card URL, Card From, Message count';
+    let csv = 'Member Id, Member first name, Marketing method, Card Id, Card creation time, Leaving date,' +
+              'Card disabled, Card type, Workflow step, Leaver first name, Card URL, Card From, Message count';
 
     data.forEach((dataRecord) => {
         csv = csv + '\r\n' +
@@ -71,54 +71,54 @@ export const droppedCustomersReportCSVGenerator = (data) => {
         dataRecord[1] + ',' +
 
         // 2: Member last name
-        dataRecord[2] + ',' +
+        // dataRecord[2] + ',' +
 
         // 3: Member email
-        dataRecord[3] + ',' +
+        // dataRecord[3] + ',' +
 
         // 4: Marketing method
-        dataRecord[4] + ',' +
+        dataRecord[2] + ',' +
 
         // 5: Card Id
-        dataRecord[5] + ',' +
+        dataRecord[3] + ',' +
 
         // 6: Card creation time
-        new Date(parseInt(dataRecord[6])).toLocaleDateString() + ',' +
+        new Date(parseInt(dataRecord[4])).toLocaleDateString() + ',' +
 
         // 7: Leaving date
-        new Date(parseInt(dataRecord[7])).toLocaleDateString() + ',' +
+        new Date(parseInt(dataRecord[5])).toLocaleDateString() + ',' +
 
         // 8: Card disabled
-        dataRecord[8] + ',' +
+        dataRecord[6] + ',' +
 
         // 9: Card type
-        dataRecord[9] + ',' +
+        dataRecord[7] + ',' +
 
         // 10: Workflow step
-        dataRecord[10] + ',' +
+        dataRecord[8] + ',' +
 
         // 11: Leaver first name
-        dataRecord[11] + ',' +
+        dataRecord[9] + ',' +
 
         // 12: Leaver last name
-        dataRecord[12] + ',' +
+        // dataRecord[12] + ',' +
 
         // 13: Card URL
-        dataRecord[13] + ',' +
+        dataRecord[9] + ',' +
 
         // 14: Card From
-        dataRecord[14] + ',' +
+        dataRecord[10] + ',' +
 
         // 15: Message count
-        dataRecord[15];
+        dataRecord[11];
     });
 
     return encodeURI('data:text/csv;charset=utf-8,' + csv);
 };
 
 export const cardsWithoutTargetDate = (data) => {
-    let csv = 'Member Id, Member first name, Member last name, Member email, Marketing method, Card Id, Card creation time, ' +
-        'Card disabled, Card type, Workflow step, Leaver first name, Leaver last name, Card URL, Card From, Message count';
+    let csv = 'Member Id, Member first name, Marketing method, Card Id, Card creation time, ' +
+        'Card disabled, Card type, Workflow step, Leaver first name, Card URL, Card From, Message count';
 
     data.forEach((dataRecord) => {
         csv = csv + '\r\n' +
@@ -130,43 +130,43 @@ export const cardsWithoutTargetDate = (data) => {
             dataRecord[1] + ',' +
 
             // 2: Member last name
-            dataRecord[2] + ',' +
+            // dataRecord[2] + ',' +
 
             // 3: Member email
-            dataRecord[3] + ',' +
+            // dataRecord[3] + ',' +
 
             // 4: Marketing method
-            dataRecord[4] + ',' +
+            dataRecord[2] + ',' +
 
             // 5: Card Id
-            dataRecord[5] + ',' +
+            dataRecord[3] + ',' +
 
             // 6: Card creation time
-            new Date(parseInt(dataRecord[6])).toLocaleDateString() + ',' +
+            new Date(parseInt(dataRecord[4])).toLocaleDateString() + ',' +
 
             // 7: Card disabled
-            dataRecord[7] + ',' +
+            dataRecord[5] + ',' +
 
             // 8: Card type
-            dataRecord[8] + ',' +
+            dataRecord[6] + ',' +
 
             // 9: Workflow step
-            dataRecord[9] + ',' +
+            dataRecord[7] + ',' +
 
             // 10: Leaver first name
-            dataRecord[10] + ',' +
+            dataRecord[8] + ',' +
 
             // 11: Leaver last name
-            dataRecord[11] + ',' +
+            // dataRecord[11] + ',' +
 
             // 12: Card URL
-            dataRecord[12] + ',' +
+            dataRecord[9] + ',' +
 
             // 13: Card From
-            dataRecord[13] + ',' +
+            dataRecord[10] + ',' +
 
             // 14: Message count
-            dataRecord[14];
+            dataRecord[11];
     });
 
     return encodeURI('data:text/csv;charset=utf-8,' + csv);
