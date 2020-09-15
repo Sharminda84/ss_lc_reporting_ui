@@ -49,10 +49,6 @@ function App() {
                 <Route path='/orders/top10/welcome' exact component={TopNewWelcomeCardsContainer} />
                 <Route path='/orders/top10/christmas' exact component={TopChristmasCardsContainer} />
 
-                <Route path='/discount/outstanding' exact component={UnderConstruction} />
-                <Route path='/discount/claimed' exact component={UnderConstruction} />
-                <Route path='/discount/claimed-times' exact component={UnderConstruction} />
-
                 <Route path='/analytics/reports' exact component={ReportingContainer} />
                 <Redirect to='/' />
             </Switch>

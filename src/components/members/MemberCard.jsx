@@ -132,18 +132,18 @@ function MemberCard(props) {
     const cardImageURL = cardInfo.get(getCardName(props.card.cardDetails[7])) ? cardInfo.get(getCardName(props.card.cardDetails[7])).cardURL : '';
     const leavingDate = props.card.cardDetails[8] === '0' ? '' : new Date(parseInt(props.card.cardDetails[8]));
     const leavingDateString = leavingDate === '' ? '' : leavingDate.toLocaleDateString();
-    const messageCount = props.card.cardDetails[9];
-    const orderId = props.card.cardDetails[10];
-    const deliveryAddress = props.card.cardDetails[11];
+    const orderId = props.card.cardDetails[9];
+    const deliveryAddress = props.card.cardDetails[10];
     const eCardOrderd = orderId != null && deliveryAddress == null ? 'Y' : 'N';
     const physicalCardOrdered = orderId != null && deliveryAddress != null ? 'Y' : 'N';
-    const cardCreationTime = props.card.cardDetails[12] !== null && props.card.cardDetails[12] !== 0 ?
-        new Date(parseInt(props.card.cardDetails[12])) : '';
+    const cardCreationTime = props.card.cardDetails[11] !== null && props.card.cardDetails[11] !== 0 ?
+        new Date(parseInt(props.card.cardDetails[11])) : '';
     const cardCreationTimeString = cardCreationTime === ''
         ? ''
         : cardCreationTime.toLocaleDateString() + ' ' + cardCreationTime.toLocaleTimeString();
-    const cardEnabled = props.card.cardDetails[13] === '0' ? 'Yes' : 'No';
-    const cardId = props.card.cardDetails[14];
+    const cardEnabled = props.card.cardDetails[12] === '0' ? 'Yes' : 'No';
+    const cardId = props.card.cardDetails[13];
+    const messageCount = props.card.cardDetails[14];
     let cardCSS = determineCardCSS(leavingDate, orderId, messageCount);
 
     return (

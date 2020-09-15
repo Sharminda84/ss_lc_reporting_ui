@@ -5,9 +5,11 @@ import NavigationItem from './NavigationItem';
 
 function Navigation(props) {
 
+    const homeCSS = props.initialState ? 'navigationItem navigationItemSelected' : 'navigationItem';
+
     return (
         <div className='navigation'>
-            <div className='navigationItem'>
+            <div className={homeCSS}>
                 <Link to={"/home"}>Home</Link>
             </div>
             {
@@ -15,6 +17,7 @@ function Navigation(props) {
                     <NavigationItem key={index}
                                     name={navigationItem.name}
                                     structure={navigationItem.navigationSubItems}
+                                    navigationItemClicked={props.navigationItemClicked}
                     />)
             }
             <div className='navigationItem'>...</div>

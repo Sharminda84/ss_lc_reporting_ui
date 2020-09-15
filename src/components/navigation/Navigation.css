@@ -34,12 +34,17 @@
 }
 
 .navigationItem a:hover {
-    background-color: #173847;
+    background-color: #D435FF;
     box-sizing: border-box;
 }
 
 .navigationItem a:focus {
-    background-color: #05232f;
+    background-color: #D435FF;
+    box-sizing: border-box;
+}
+
+.navigationItemSelected {
+    background-color: #D435FF;
     box-sizing: border-box;
 }
 

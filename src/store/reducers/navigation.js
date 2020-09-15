@@ -1,36 +1,49 @@
+import {
+    NAVIGATION_ITEM_CLICKED
+} from '../actions/navigation';
+
+import _ from 'lodash';
+
 const initialState = {
+  initialState: true,
   navigationItems: [
       {
           name: 'Members',
           navigationSubItems: [
               {
                   subItemName: 'Sign-ups',
-                  subItemPath: '/members/signups'
-              },
+                  subItemPath: '/members/signups',
+                  selected: false,
+              }
           ],
       },
       {
           name: 'Orders',
           navigationSubItems: [
               {
-                  subItemName: 'Order Stream',
-                  subItemPath: '/orders/card-stream'
+                  subItemName: 'Cards Stream',
+                  subItemPath: '/orders/card-stream',
+                  selected: false,
               },
               {
                   subItemName: 'Today\'s Orders',
-                  subItemPath: '/orders/daily'
+                  subItemPath: '/orders/daily',
+                  selected: false,
               },
               {
                   subItemName: '7-Days Previous Orders',
-                  subItemPath: '/orders/weekly'
+                  subItemPath: '/orders/weekly',
+                  selected: false,
               },
               {
                   subItemName: '30-Days Previous Orders',
-                  subItemPath: '/orders/monthly'
+                  subItemPath: '/orders/monthly',
+                  selected: false,
               },
               {
                   subItemName: 'All-time Previous Orders',
-                  subItemPath: '/orders/alltime'
+                  subItemPath: '/orders/alltime',
+                  selected: false,
               }
           ],
       },
@@ -39,7 +52,8 @@ const initialState = {
           navigationSubItems: [
               {
                   subItemName: 'Reports',
-                  subItemPath: '/analytics/reports'
+                  subItemPath: '/analytics/reports',
+                  selected: false,
               }
           ]
       },
@@ -48,49 +62,39 @@ const initialState = {
           navigationSubItems: [
               {
                   subItemName: 'Leaving',
-                  subItemPath: '/orders/top10/leaving'
+                  subItemPath: '/orders/top10/leaving',
+                  selected: false,
               },
               {
                   subItemName: 'Birthday',
-                  subItemPath: '/orders/top10/birthday'
+                  subItemPath: '/orders/top10/birthday',
+                  selected: false,
               },
               {
                   subItemName: 'Maternity',
-                  subItemPath: '/orders/top10/maternity'
+                  subItemPath: '/orders/top10/maternity',
+                  selected: false,
               },
               {
                   subItemName: 'New Baby',
-                  subItemPath: '/orders/top10/new-baby'
+                  subItemPath: '/orders/top10/new-baby',
+                  selected: false,
               },
               {
                   subItemName: 'New Daddy',
-                  subItemPath: '/orders/top10/new-daddy'
+                  subItemPath: '/orders/top10/new-daddy',
+                  selected: false,
               },
               {
                   subItemName: 'Welcome',
-                  subItemPath: '/orders/top10/welcome'
+                  subItemPath: '/orders/top10/welcome',
+                  selected: false,
               },
               {
                   subItemName: 'Chistmas',
-                  subItemPath: '/orders/top10/christmas'
+                  subItemPath: '/orders/top10/christmas',
+                  selected: false,
               },
-          ]
-      },
-      {
-          name: 'Discount Codes',
-          navigationSubItems: [
-              {
-                  subItemName: 'Amount Outstanding',
-                  subItemPath: '/discount/outstanding'
-              },
-              {
-                  subItemName: 'Amount Claimed',
-                  subItemPath: '/discount/claimed'
-              },
-              {
-                  subItemName: 'Avg time from sending discount to claiming it',
-                  subItemPath: '/discount/claimed-times'
-              }
           ]
       },
   ],
@@ -98,6 +102,18 @@ const initialState = {
 
 const navigation = ( state = initialState, action ) => {
     switch ( action.type ) {
+        case NAVIGATION_ITEM_CLICKED:
+            const navigationItemsUpdated = state.navigationItems;
+            navigationItemsUpdated.forEach(navigationItem => {
+                navigationItem.navigationSubItems.forEach(navigationSubItem => {
+                    if (navigationSubItem.subItemName === action.payload) {
+                        navigationSubItem.selected = true;
+                    } else {
+                        navigationSubItem.selected = false;
+                    }
+                });
+            });
+            return {...state, initialState: false, navigationItems: _.cloneDeep(navigationItemsUpdated) };
         default: return state;
     }
 };
