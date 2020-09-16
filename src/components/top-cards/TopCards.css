@@ -1,7 +1,8 @@
 .TopCards {
-    display: inline-block;
+    display: inline-flex;
+    flex-wrap: wrap;
 }
 
 .TopCardsItem {
-    padding: 40px;
+    padding: 20px;
 }

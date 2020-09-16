@@ -11,7 +11,14 @@ function TopCards(props) {
         })
         .filter(cardArray => cardArray[0] == cardTypeId).slice(0, 10);
     const renderImages = cardsToDisplay
-        .map((card) => <img className='TopCardsItem' src={card[2]} alt={getCardName(card[1])} width='350px' height='500px' />);
+        .map((card, index) =>
+            <div className='TopCardsItem'>
+                <div>
+                    <h3>Rank #{index + 1}</h3>
+                    <img src={card[2]} alt={getCardName(card[1])} width='350px' height='500px' />
+                </div>
+            </div>
+        );
     return (
         <div className='TopCards'>
             {renderImages}
