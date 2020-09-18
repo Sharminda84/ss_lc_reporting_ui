@@ -16,6 +16,12 @@ CARD_TYPES.set(3, "Maternity Leave Card");
 CARD_TYPES.set(4, "New Baby Card");
 CARD_TYPES.set(5, "New Daddy Card");
 CARD_TYPES.set(6, "Welcome Card");
+CARD_TYPES.set(7, "Retirement Card");
+CARD_TYPES.set(8, "Get Well Soon Card");
+CARD_TYPES.set(9, "Congratulations Card");
+CARD_TYPES.set(10, "Good Luck Card");
+CARD_TYPES.set(11, "Thank You");
+CARD_TYPES.set(12, "Thank You Teacher");
 
 const round = num => Math.round((num + Number.EPSILON) * 100) / 100;
 
