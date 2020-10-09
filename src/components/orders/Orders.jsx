@@ -232,7 +232,7 @@ const generateCardDrilldownDataSeries = (orderBreakdownPieChartDrilldownData, ca
 }
 
 function Orders(props) {
-    const { fetchOrdersData, ordersTableConfig, ordersSummaryTableConfig, orders, displayChart = true, title, cardInfo, showOrderDetailsTable = false } = props;
+    const { fetchOrdersData, ordersTableConfig, ordersSummaryTableConfig, orders, displayChart = true, title, cardInfo, showOrderDetailsTable = false, showWeeklyOrdersChart = true } = props;
 
     useEffect(() => {fetchOrdersData()}, [fetchOrdersData]);
     const [cardTypeForCharts, setCardTypeForCharts] = useState(CARD_TYPE_ALL);
@@ -296,16 +296,16 @@ function Orders(props) {
                             }
                         </DropdownButton>
                     </div>
-                    <Chart
+                    showWeeklyOrdersChart && <Chart
                         chartType='area'
-                        title={`${title} (Daily Breakdown) - ${CARD_TYPES.get(cardTypeForCharts)}`}
+                        title={`${title} (Weekly Breakdown) - ${CARD_TYPES.get(cardTypeForCharts)}`}
                         subTitle='Click and drag in the plot area to zoom in'
                         xAxisType='datetime'
                         yAxisLabel='Orders'
                         chartData={convertToWeeklyChartData(orders, cardTypeForCharts)} />
                     <Chart
                         chartType='area'
-                        title={`${title} (Weekly Breakdown) - ${CARD_TYPES.get(cardTypeForCharts)}`}
+                        title={`${title} (Daily Breakdown) - ${CARD_TYPES.get(cardTypeForCharts)}`}
                         subTitle='Click and drag in the plot area to zoom in'
                         xAxisType='datetime'
                         yAxisLabel='Orders'
