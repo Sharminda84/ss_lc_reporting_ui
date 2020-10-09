@@ -8,6 +8,7 @@ const mapStateToProps = state => ({
   ordersTableConfig: _get(state, 'orders.ordersTableConfig', {}),
   displayChart: false,
   cardInfo: _get(state, 'refData.cardInfo', new Map()),
+  showOrderDetailsTable: true,
 });
 
 const mapDispatchToProps = dispatch => ({

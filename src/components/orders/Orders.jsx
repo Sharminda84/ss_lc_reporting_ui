@@ -232,7 +232,7 @@ const generateCardDrilldownDataSeries = (orderBreakdownPieChartDrilldownData, ca
 }
 
 function Orders(props) {
-    const { fetchOrdersData, ordersTableConfig, ordersSummaryTableConfig, orders, displayChart = true, title, cardInfo } = props;
+    const { fetchOrdersData, ordersTableConfig, ordersSummaryTableConfig, orders, displayChart = true, title, cardInfo, showOrderDetailsTable = false } = props;
 
     useEffect(() => {fetchOrdersData()}, [fetchOrdersData]);
     const [cardTypeForCharts, setCardTypeForCharts] = useState(CARD_TYPE_ALL);
@@ -254,7 +254,6 @@ function Orders(props) {
     const printedCardsDrillDownDataSeries = generateCardDrilldownDataSeries(printedCardOrderBreakdownPieChartDrilldownData, cardInfo);
     const eCardsDataSeries = generateCardDataSeries('eCards', eCardOrderBreakdownPieChartData);
     const eCardsDrillDownDataSeries = generateCardDrilldownDataSeries(eCardOrderBreakdownPieChartDrilldownData, cardInfo);
-    const showOrderDetailsTable = false;
 
     return (
         <div>
