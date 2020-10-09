@@ -5,7 +5,6 @@ import Navigation from './containers/navigation/Navigation';
 import AppFooter from './components/footer/Footer';
 import './App.css';
 import Home from './components/home/Home';
-import UnderConstruction from './components/home/UnderConstruction';
 import MemberSignUps from './containers/members/MemberSignUps';
 import MemberCardsStream from './containers/members/MemberCardsStream';
 import DailyOrders from './containers/orders/DailyOrders';
@@ -21,6 +20,7 @@ import TopNewBabyCardsContainer from './containers/orders/TopNewBabyCardsContain
 import TopNewDaddyCardsContainer from './containers/orders/TopNewDaddyCardsContainer';
 import TopNewWelcomeCardsContainer from './containers/orders/TopNewWelcomeCardsContainer';
 import ReportingContainer from './containers/analytics/Reporting';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (
