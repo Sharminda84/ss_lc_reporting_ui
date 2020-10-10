@@ -104,13 +104,13 @@ export const droppedCustomersReportCSVGenerator = (data) => {
         // dataRecord[12] + ',' +
 
         // 13: Card URL
-        dataRecord[9] + ',' +
-
-        // 14: Card From
         dataRecord[10] + ',' +
 
+        // 14: Card From
+        dataRecord[11] + ',' +
+
         // 15: Message count
-        dataRecord[11];
+        dataRecord[12];
     });
 
     return encodeURI('data:text/csv;charset=utf-8,' + csv);

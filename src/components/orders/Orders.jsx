@@ -296,13 +296,16 @@ function Orders(props) {
                             }
                         </DropdownButton>
                     </div>
-                    showWeeklyOrdersChart && <Chart
-                        chartType='area'
-                        title={`${title} (Weekly Breakdown) - ${CARD_TYPES.get(cardTypeForCharts)}`}
-                        subTitle='Click and drag in the plot area to zoom in'
-                        xAxisType='datetime'
-                        yAxisLabel='Orders'
-                        chartData={convertToWeeklyChartData(orders, cardTypeForCharts)} />
+                    {
+                        showWeeklyOrdersChart &&
+                        <Chart
+                            chartType='area'
+                            title={`${title} (Weekly Breakdown) - ${CARD_TYPES.get(cardTypeForCharts)}`}
+                            subTitle='Click and drag in the plot area to zoom in'
+                            xAxisType='datetime'
+                            yAxisLabel='Orders'
+                            chartData={convertToWeeklyChartData(orders, cardTypeForCharts)} />
+                    }
                     <Chart
                         chartType='area'
                         title={`${title} (Daily Breakdown) - ${CARD_TYPES.get(cardTypeForCharts)}`}
