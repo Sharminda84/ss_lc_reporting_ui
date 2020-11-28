@@ -13,7 +13,8 @@ const CARD_LIFE_CYCLE_EVENTS = [
     'CHRISTMAS_ECARD_PURCHASED',
     'ORDER_PRINTED_CARD_EMAIL_SENT',
     'ORDER_ECARD_EMAIL_SENT',
-    'THANK_YOU_EMAIL_SENT'
+    'THANK_YOU_EMAIL_SENT',
+    'USER_NOTIFIED_OF_LARGE_CARD',
 ];
 
 const generateChartData = (cardLifeCycleEvents) => {
@@ -36,11 +37,13 @@ const generateChartData = (cardLifeCycleEvents) => {
         date.setSeconds(0);
         date.setMilliseconds(0);
         const timestampStartOfDay = date.getTime();
-        if (chartData.get(eventType).has(timestampStartOfDay)) {
-            const count = chartData.get(eventType).get(timestampStartOfDay);
-            chartData.get(eventType).set(timestampStartOfDay, count + 1);
-        } else {
-            chartData.get(eventType).set(timestampStartOfDay, 1);
+        if (chartData.has(eventType)) {
+            if (chartData.get(eventType).has(timestampStartOfDay)) {
+                const count = chartData.get(eventType).get(timestampStartOfDay);
+                chartData.get(eventType).set(timestampStartOfDay, count + 1);
+            } else {
+                chartData.get(eventType).set(timestampStartOfDay, 1);
+            }
         }
     });
 
