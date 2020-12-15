@@ -31,17 +31,17 @@ const initialState = {
                   selected: false,
               },
               {
-                  subItemName: '7-Days Previous Orders',
+                  subItemName: 'Weekly Window',
                   subItemPath: '/orders/weekly',
                   selected: false,
               },
               {
-                  subItemName: '30-Days Previous Orders',
+                  subItemName: 'Monthly Window',
                   subItemPath: '/orders/monthly',
                   selected: false,
               },
               {
-                  subItemName: 'All-time Previous Orders',
+                  subItemName: 'All-time Orders',
                   subItemPath: '/orders/alltime',
                   selected: false,
               }

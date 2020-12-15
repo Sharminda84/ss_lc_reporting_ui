@@ -49,11 +49,11 @@ function MemberSignUps(props) {
                 <div>From</div>
                 <DatePicker
                     selected={startDate}
-                    onChange={(newStartDate) => console.log('new start: ' + newStartDate) || setStartDate(newStartDate.getTime())} />
+                    onChange={(newStartDate) => setStartDate(newStartDate.getTime())} />
                 <div>To</div>
                 <DatePicker
                     selected={endDate}
-                    onChange={(newEndDate) => console.log('new end: ' + newEndDate) || setEndDate(newEndDate.getTime())} />
+                    onChange={(newEndDate) => setEndDate(newEndDate.getTime())} />
                 <button onClick={() => fetchMembersData(startDate, endDate)}>Fetch</button>
             </div>
             {

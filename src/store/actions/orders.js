@@ -35,8 +35,11 @@ export const loadDailyOrdersData = (ordersData) => ({
     payload: ordersData,
 });
 
-export const fetchWeeklyOrdersData = () => ({
+export const fetchWeeklyOrdersData = (fromDate) => ({
     type: FETCH_WEEKLY_ORDERS_DATA,
+    payload: {
+        fromDate
+    }
 });
 
 export const loadWeeklyOrdersData = (ordersData) => ({
@@ -44,8 +47,11 @@ export const loadWeeklyOrdersData = (ordersData) => ({
     payload: ordersData,
 });
 
-export const fetchMonthlyOrdersData = () => ({
+export const fetchMonthlyOrdersData = (fromDate) => ({
     type: FETCH_MONTHLY_ORDERS_DATA,
+    payload: {
+        fromDate
+    }
 });
 
 export const loadMonthlyOrdersData = (ordersData) => ({

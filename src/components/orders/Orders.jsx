@@ -8,6 +8,7 @@ import _ from 'lodash';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown'
 import { dateToString, getCardName } from '../../utils';
+import DatePicker from 'react-datepicker';
 
 const CARD_TYPE_ALL = -1000;
 const CARD_TYPES = new Map();
@@ -232,10 +233,13 @@ const generateCardDrilldownDataSeries = (orderBreakdownPieChartDrilldownData, ca
 }
 
 function Orders(props) {
-    const { fetchOrdersData, ordersTableConfig, ordersSummaryTableConfig, orders, displayChart = true, title, cardInfo, showOrderDetailsTable = false, showWeeklyOrdersChart = true } = props;
+    const { fetchOrdersData, ordersTableConfig, ordersSummaryTableConfig, orders, displayChart = true,
+            title, cardInfo, showOrderDetailsTable = false, showWeeklyOrdersChart = true,
+            isAllTimeView = false } = props;
 
-    useEffect(() => {fetchOrdersData()}, [fetchOrdersData]);
     const [cardTypeForCharts, setCardTypeForCharts] = useState(CARD_TYPE_ALL);
+    const [fromDate, setFromDate] = useState(new Date().getTime());
+    useEffect(() => {fetchOrdersData(fromDate)}, [fetchOrdersData]);
 
     const ordersSummary = new Map();
     const printedCardOrderBreakdownPieChartData = new Map();
@@ -255,6 +259,10 @@ function Orders(props) {
     const eCardsDataSeries = generateCardDataSeries('eCards', eCardOrderBreakdownPieChartData);
     const eCardsDrillDownDataSeries = generateCardDrilldownDataSeries(eCardOrderBreakdownPieChartDrilldownData, cardInfo);
 
+    const triggerRefresh = (newFromDate) => {
+        fetchOrdersData(newFromDate);
+    }
+
     return (
         <div>
             {
@@ -271,6 +279,16 @@ function Orders(props) {
             {
                 displayChart && orders.length > 0 &&
                 <div className='charts'>
+                    {
+                        !isAllTimeView &&
+                        <div className='dateSelector'>
+                            <h4>Click to choose a different date</h4>
+                            <DatePicker
+                                selected={fromDate}
+                                onChange={(newFromDate) => setFromDate(newFromDate.getTime()) || triggerRefresh(newFromDate.getTime())}
+                            />
+                        </div>
+                    }
                     <div className='pieCharts'>
                         <PieChart
                             title='Printed Cards'
@@ -303,7 +321,7 @@ function Orders(props) {
                             title={`${title} (Weekly Breakdown) - ${CARD_TYPES.get(cardTypeForCharts)}`}
                             subTitle='Click and drag in the plot area to zoom in'
                             xAxisType='datetime'
-                            yAxisLabel='Orders'
+                            yAxisLabel='Weekly Orders'
                             chartData={convertToWeeklyChartData(orders, cardTypeForCharts)} />
                     }
                     <Chart

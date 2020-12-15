@@ -2,6 +2,28 @@
     background-color: ghostwhite;
 }
 
+.dateSelector {
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    color: #0f6674;
+    align-items: baseline;
+}
+
+.dateSelector h4 {
+    font-size: 17px;
+    margin-right: 20px;
+}
+
+.dateSelector button {
+    margin-right: 30px;
+    color: ghostwhite;
+    background-color: #007bff;
+    border-color: #007bff;
+    border-radius: 5px;
+    padding: 6px;
+}
+
 .pieCharts {
     display: inline-block;
     text-align: center;

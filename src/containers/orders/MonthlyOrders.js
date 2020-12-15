@@ -12,7 +12,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchOrdersData: () => dispatch(orderActions.fetchMonthlyOrdersData()),
+  fetchOrdersData: (fromDate) => dispatch(orderActions.fetchMonthlyOrdersData(fromDate)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Orders);

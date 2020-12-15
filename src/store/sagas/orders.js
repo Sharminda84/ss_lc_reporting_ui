@@ -18,9 +18,9 @@ export function* fetchDailyOrders() {
     }
 }
 
-export function* fetchWeeklyOrders() {
+export function* fetchWeeklyOrders(action) {
     try {
-        const fetchMembersURL = ReportingServerURLs.FETCH_WEEKLY_ORDERS;
+        const fetchMembersURL = ReportingServerURLs.FETCH_WEEKLY_ORDERS + `?fromDate=${action.payload.fromDate}`;
         const orders = yield call(sendGetRequest, fetchMembersURL);
         const sortedOrders = _.orderBy(orders, order => order.transactionTime, 'desc');
         yield put(loadWeeklyOrdersData(sortedOrders));
@@ -29,9 +29,9 @@ export function* fetchWeeklyOrders() {
     }
 }
 
-export function* fetchMonthlyOrders() {
+export function* fetchMonthlyOrders(action) {
     try {
-        const fetchMembersURL = ReportingServerURLs.FETCH_MONTHLY_ORDERS;
+        const fetchMembersURL = ReportingServerURLs.FETCH_MONTHLY_ORDERS + `?fromDate=${action.payload.fromDate}`;
         const orders = yield call(sendGetRequest, fetchMembersURL);
         const sortedOrders = _.orderBy(orders, order => order.transactionTime, 'desc');
         yield put(loadMonthlyOrdersData(sortedOrders));
