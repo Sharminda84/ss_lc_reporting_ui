@@ -52,7 +52,7 @@ const convertToDailyChartData = (orders, cardTypeForCharts) => {
             allOrders.set(key, allOrders.get(key) + 1);
             return allOrders;
         }, new Map())
-        .forEach((count, date) => chartData.push([new Date(date).getTime() + 24*60*60*1000, count]));
+        .forEach((count, date) => chartData.push([new Date(date).getTime(), count]));
 
     return _.orderBy(chartData, data => data[0], 'asc');
 }
@@ -60,18 +60,24 @@ const convertToDailyChartData = (orders, cardTypeForCharts) => {
 // Returns start of the week for a given date
 const startOfTheWeekDate = (date) => {
     const startOfWeek = new Date(date);
-    startOfWeek.setMilliseconds(0);
+    startOfWeek.setMilliseconds(1);
     startOfWeek.setSeconds(0);
-    startOfWeek.setMinutes(1);
+    startOfWeek.setMinutes(0);
     startOfWeek.setHours(0);
-    startOfWeek.setDate(date.getDate() - date.getDay() + 1);
+    if (date.getDay() == 0) {
+        // Sunday is 0!
+        startOfWeek.setDate(date.getDate() - 6);
+    } else {
+        startOfWeek.setDate(date.getDate() - date.getDay() + 1);
+    }
+
     return startOfWeek.getFullYear() + '-' + (startOfWeek.getMonth() + 1) + '-' + startOfWeek.getDate()
 }
 
 // Process orders for generating the order chart
 const convertToWeeklyChartData = (orders, cardTypeForCharts) => {
     const chartData = [];
-    orders
+    const ordersByWeek = orders
         .filter(order => cardTypeForCharts == CARD_TYPE_ALL || (order.leavingCard && cardTypeForCharts == order.leavingCard.cardType))
         .filter(order => order.transactionTime > LEAVING_CARD_EPOCH_TIME)
         .reduce((allOrders, order) => {
@@ -84,9 +90,9 @@ const convertToWeeklyChartData = (orders, cardTypeForCharts) => {
 
             allOrders.set(key, allOrders.get(key) + 1);
             return allOrders;
-        }, new Map())
-        .forEach((count, date) => chartData.push([new Date(date).getTime() + 24*60*60*1000, count]));
+        }, new Map());
 
+    ordersByWeek.forEach((count, date) => chartData.push([new Date(date).getTime(), count]));
     return _.orderBy(chartData, data => data[0], 'asc');
 }
 
