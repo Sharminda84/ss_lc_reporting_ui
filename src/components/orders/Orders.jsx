@@ -323,7 +323,7 @@ function Orders(props) {
                     {
                         showWeeklyOrdersChart &&
                         <Chart
-                            chartType='area'
+                            chartType='column'
                             title={`${title} (Weekly Breakdown) - ${CARD_TYPES.get(cardTypeForCharts)}`}
                             subTitle='Click and drag in the plot area to zoom in'
                             xAxisType='datetime'

@@ -55,7 +55,8 @@ const getChartOptions = (chartType, title, subTitle, xAxisType, yAxisLabel, char
         series: [{
             type: chartType,
             name: yAxisLabel,
-            data: chartData
+            data: chartData,
+            maxPointWidth: 30
         }]
     }
 };
