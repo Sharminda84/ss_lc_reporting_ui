@@ -270,7 +270,7 @@ function Orders(props) {
             }
             {
                 displayChart && orders.length > 0 &&
-                <div>
+                <div className='charts'>
                     <div className='pieCharts'>
                         <PieChart
                             title='Printed Cards'

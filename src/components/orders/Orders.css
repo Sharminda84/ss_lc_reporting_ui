@@ -1,3 +1,7 @@
+.charts {
+    background-color: ghostwhite;
+}
+
 .pieCharts {
     display: inline-block;
     text-align: center;
