@@ -11,8 +11,8 @@ export function* loginUser(action) {
     const user = action.payload.user;
     const password = action.payload.password;
     try {
-        yield call(sendLogInRequest, user, password);
-        yield put(loginSuccess(user, password));
+        const loginResponse = yield call(sendLogInRequest, user, password);
+        yield put(loginSuccess(loginResponse.jwt));
         yield put(fetchCardInfo());
         yield put(fetchTopCards());
         yield put(fetchCardsForMembers(getStartOfTodayInMillis()));
@@ -22,19 +22,19 @@ export function* loginUser(action) {
 }
 
 const sendLogInRequest = (user, password) => {
-    const config = {
-        auth: {
-            username: user,
-            password: password,
-        },
+    const payload = {
+        username: user,
+        password: password,
     };
 
     return axios
-        .get(ReportingServerURLs.PING_URL, config)
+        .post(ReportingServerURLs.LOGIN_URL, payload)
         .then(response => {
             if (response.status !== 200) {
                 throw new Error('Login not successfull');
             }
-            return 'Login Success';
+            return {
+                jwt: response.data.token,
+            };
         });
 };

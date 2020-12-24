@@ -11,11 +11,10 @@ export const triggerLogin = (user, password) => ({
     }
 });
 
-export const loginSuccess = (user, password) => ({
+export const loginSuccess = (jwt) => ({
     type: LOGIN_USER,
     payload: {
-        user,
-        password
+        jwt
     }
 });
 
