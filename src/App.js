@@ -20,6 +20,7 @@ import TopNewBabyCardsContainer from './containers/orders/TopNewBabyCardsContain
 import TopNewDaddyCardsContainer from './containers/orders/TopNewDaddyCardsContainer';
 import TopNewWelcomeCardsContainer from './containers/orders/TopNewWelcomeCardsContainer';
 import ReportingContainer from './containers/analytics/Reporting';
+import DesignerReport from './containers/card-designer/DesignerReport';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
@@ -48,6 +49,8 @@ function App() {
                 <Route path='/orders/top10/new-daddy' exact component={TopNewDaddyCardsContainer} />
                 <Route path='/orders/top10/welcome' exact component={TopNewWelcomeCardsContainer} />
                 <Route path='/orders/top10/christmas' exact component={TopChristmasCardsContainer} />
+
+                <Route path='/card-designer/report' exact component={DesignerReport} />
 
                 <Route path='/analytics/reports' exact component={ReportingContainer} />
                 <Redirect to='/' />

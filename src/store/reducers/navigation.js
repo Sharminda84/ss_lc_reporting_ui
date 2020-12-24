@@ -3,7 +3,7 @@ import {
 } from '../actions/navigation';
 
 import _ from 'lodash';
-import { ROLE_ADMIN } from '../../ReportingUIConstants';
+import {ROLE_ADMIN, ROLE_DESIGNER} from '../../ReportingUIConstants';
 
 const initialState = {
   initialState: true,
@@ -57,6 +57,17 @@ const initialState = {
               {
                   subItemName: 'Reports',
                   subItemPath: '/analytics/reports',
+                  selected: false,
+              }
+          ]
+      },
+      {
+          name: 'Card Designer',
+          allowedRoles: [ ROLE_ADMIN, ROLE_DESIGNER ],
+          navigationSubItems: [
+              {
+                  subItemName: 'My Cards',
+                  subItemPath: '/card-designer/report',
                   selected: false,
               }
           ]
