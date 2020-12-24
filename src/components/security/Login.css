@@ -1,70 +1,48 @@
-.login {
+.LoginPanel {
+    width: 400px;
+    height: 270px;
+
     position: absolute;
-    height: 30%;
-    width: 30%;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     background: #87bde0;
-
-    display: grid;
-    grid-template-columns: 15% 25% 45% 15%;
-    grid-template-rows: 15% 20% 20% 20% 25%;
+    z-index: 1000;
 }
 
-.title {
-    grid-column-start: 1;
-    grid-column-end: 5;
-    grid-row: 1;
+.LoginPanelTitle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     background: #31708E;
-    font-size: 20px;
-    font-weight: bold;
-    text-align: center;
-    padding-top: 2%;
-}
-
-.user {
-    margin-top: 30%;
-    grid-column-start: 2;
-    grid-column-end: 3;
-    grid-row: 2;
-    font-size: 17px;
-}
-
-.userInput {
-    margin-top: 15%;
-    grid-column-start: 3;
-    grid-column-end: 4;
-    grid-row: 2;
-    font-size: 17px;
-}
-
-.password {
-    margin-top: 30%;
-    grid-column-start: 2;
-    grid-column-end: 3;
-    grid-row: 3;
-    font-size: 17px;
-}
-
-.passwordInput {
-    margin-top: 15%;
-    grid-column-end: 4;
-    grid-row: 3;
-    font-size: 17px;
-}
-
-.loginErrorMessage {
-    margin-top: 5%;
-    grid-column: 3;
-    grid-row: 4;
-    color: darkred;
-    font-size: 15px;
+    width: 100%;
+    height: 30px;
+    padding-top: 3px;
     font-weight: bold;
 }
 
-.loginButton {
-    grid-column: 3;
-    grid-row: 5;
-    margin: 17px 35% 17px 0;
-    font-size: 15px;
-    button-radius: 35px;
-    background: #31708E;
+.LoginPanelError {
+    width: 90%;
+    height: 30px;
+    color: #31708E;
+}
+
+.LoginPanelInput {
+    width: 90%;
+    margin-top: 20px;
+    padding: 5px;
+}
+
+.LoginPanelButton {
+    background-color: #31708E;
+    color: black;
+    padding: 0.4em;
+    border: 2px solid #31708E;
+    border-radius: 8px;
+    width: 120px;
+    margin-top: 25px;
 }
