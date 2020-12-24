@@ -3,12 +3,14 @@ import {
 } from '../actions/navigation';
 
 import _ from 'lodash';
+import { ROLE_ADMIN } from '../../ReportingUIConstants';
 
 const initialState = {
   initialState: true,
   navigationItems: [
       {
           name: 'Members',
+          allowedRoles: [ ROLE_ADMIN ],
           navigationSubItems: [
               {
                   subItemName: 'Sign-ups',
@@ -19,6 +21,7 @@ const initialState = {
       },
       {
           name: 'Orders',
+          allowedRoles: [ ROLE_ADMIN ],
           navigationSubItems: [
               {
                   subItemName: 'Cards Stream',
@@ -49,6 +52,7 @@ const initialState = {
       },
       {
           name: 'Analytics',
+          allowedRoles: [ ROLE_ADMIN ],
           navigationSubItems: [
               {
                   subItemName: 'Reports',
@@ -59,6 +63,7 @@ const initialState = {
       },
       {
           name: 'Top Card Designs by Sales',
+          allowedRoles: [ ROLE_ADMIN ],
           navigationSubItems: [
               {
                   subItemName: 'Leaving',

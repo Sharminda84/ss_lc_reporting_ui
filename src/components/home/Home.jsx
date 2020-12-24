@@ -7,7 +7,7 @@ function Home() {
     return (
         <div className='Home'>
             <h2>
-                Analytics UI for Together Cards Group companies.
+                Reporting Site for Together Cards Group of Companies.
             </h2>
         </div>
     );

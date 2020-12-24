@@ -6,6 +6,7 @@ import * as navigationActions from '../../store/actions/navigation';
 const mapStateToProps = state => ({
   initialState: _get(state, 'navigation.initialState', true),
   navigationItems: _get(state, 'navigation.navigationItems', {}),
+  userRoles: _get(state, 'security.userRoles', []),
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -6,6 +6,12 @@ import NavigationItem from './NavigationItem';
 function Navigation(props) {
 
     const homeCSS = props.initialState ? 'navigationItem navigationItemSelected' : 'navigationItem';
+    const { userRoles, navigationItems, navigationItemClicked } = props;
+
+    const containsCommonElements = (array1, array2) => {
+        const intersection = array1.filter(x => array2.includes(x));
+        return intersection && intersection.length > 0;
+    };
 
     return (
         <div className='navigation'>
@@ -13,12 +19,15 @@ function Navigation(props) {
                 <Link to={"/home"}>Home</Link>
             </div>
             {
-                props.navigationItems.map((navigationItem, index) =>
-                    <NavigationItem key={index}
+                navigationItems
+                    .filter(navigationItem => containsCommonElements(navigationItem.allowedRoles, userRoles))
+                    .map((navigationItem, index) =>
+                        <NavigationItem key={index}
                                     name={navigationItem.name}
                                     structure={navigationItem.navigationSubItems}
-                                    navigationItemClicked={props.navigationItemClicked}
-                    />)
+                                    navigationItemClicked={navigationItemClicked}
+                        />
+                    )
             }
             <div className='navigationItem'>...</div>
         </div>

@@ -12,7 +12,7 @@ export function* loginUser(action) {
     const password = action.payload.password;
     try {
         const loginResponse = yield call(sendLogInRequest, user, password);
-        yield put(loginSuccess(loginResponse.jwt));
+        yield put(loginSuccess(loginResponse.jwt, loginResponse.userRoles));
         yield put(fetchCardInfo());
         yield put(fetchTopCards());
         yield put(fetchCardsForMembers(getStartOfTodayInMillis()));
@@ -35,6 +35,7 @@ const sendLogInRequest = (user, password) => {
             }
             return {
                 jwt: response.data.token,
+                userRoles: response.data.roles,
             };
         });
 };
