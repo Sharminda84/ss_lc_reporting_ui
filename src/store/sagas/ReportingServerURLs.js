@@ -1,10 +1,11 @@
-// export const REPORTING_SERVER_URL = 'http://lcreportingapplication-dev.eba-mtgham92.eu-west-2.elasticbeanstalk.com';
-export const REPORTING_SERVER_URL = 'http://localhost:5000';
+export const REPORTING_SERVER_URL = 'http://lcreportingapplication-dev.eba-mtgham92.eu-west-2.elasticbeanstalk.com';
+// export const REPORTING_SERVER_URL = 'http://localhost:5000';
 export const URL_PREFIX = REPORTING_SERVER_URL + '/v1/lc/reporting';
 export const LOGIN_URL = URL_PREFIX + '/user/login';
 export const FETCH_ALL_MEMBERS_URL = URL_PREFIX + '/members/range';
 export const FETCH_CARDS_FOR_MEMBERS_URL = URL_PREFIX + '/members/latest/cards';
 export const FETCH_ALL_ORDERS = URL_PREFIX + '/orders/all';
+export const FETCH_DAILY_ORDERS = URL_PREFIX + '/orders/daily';
 export const FETCH_TODAYS_ORDERS = URL_PREFIX + '/orders/today';
 export const FETCH_WEEKLY_ORDERS = URL_PREFIX + '/orders/week';
 export const FETCH_MONTHLY_ORDERS = URL_PREFIX + '/orders/month';

@@ -1,6 +1,8 @@
+import _ from 'lodash';
 import {
     LOAD_ORDERS_DATA,
     LOAD_DAILY_ORDERS_DATA,
+    LOAD_TODAYS_ORDERS_DATA,
     LOAD_WEEKLY_ORDERS_DATA,
     LOAD_MONTHLY_ORDERS_DATA,
     LOAD_TOP_CARDS,
@@ -8,7 +10,8 @@ import {
 
 const initialState = {
     orders: [],
-    dailyOrders: [],
+    dailyOrders: new Map(),
+    todaysOrders: [],
     weeklyOrders: [],
     monthlyOrders: [],
     ordersTableConfig: [
@@ -81,7 +84,12 @@ const orders = (state = initialState, action) => {
         case LOAD_ORDERS_DATA:
             return {...state, orders: action.payload};
         case LOAD_DAILY_ORDERS_DATA:
-            return {...state, dailyOrders: action.payload};
+            const date = new Date(action.payload.date).toISOString().split('T')[0];
+            const dailyOrdersClone = _.cloneDeep(state.dailyOrders);
+            dailyOrdersClone.set(date, action.payload.ordersData);
+            return {...state, dailyOrders: dailyOrdersClone};
+        case LOAD_TODAYS_ORDERS_DATA:
+            return {...state, todaysOrders: action.payload};
         case LOAD_WEEKLY_ORDERS_DATA:
             return {...state, weeklyOrders: action.payload};
         case LOAD_MONTHLY_ORDERS_DATA:

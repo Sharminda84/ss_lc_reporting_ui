@@ -1,18 +1,16 @@
 import { connect } from 'react-redux';
 import _get from 'lodash.get';
-import Orders from '../../components/orders/Orders';
+import DailyOrders from '../../components/orders/DailyOrders';
 import * as orderActions from '../../store/actions/orders';
 
 const mapStateToProps = state => ({
-  orders: _get(state, 'orders.dailyOrders', {}),
+  dailyOrders: _get(state, 'orders.dailyOrders', {}),
   ordersTableConfig: _get(state, 'orders.ordersTableConfig', {}),
-  displayChart: false,
-  cardInfo: _get(state, 'refData.cardInfo', new Map()),
-  showOrderDetailsTable: true,
+  ordersSummaryTableConfig: _get(state, 'orders.ordersSummaryTableConfig', {}),
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchOrdersData: () => dispatch(orderActions.fetchDailyOrdersData()),
+  fetchOrdersData: (date) => dispatch(orderActions.fetchDailyOrdersData(date)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Orders);
+export default connect(mapStateToProps, mapDispatchToProps)(DailyOrders);

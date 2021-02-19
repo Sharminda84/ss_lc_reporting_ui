@@ -2,7 +2,8 @@ import {
     customerOrdersReportCSVGenerator,
     repeatCustomersReportCSVGenerator,
     droppedCustomersReportCSVGenerator,
-    cardsWithoutTargetDate
+    cardsWithoutTargetDate,
+    cardDesignSales,
 } from '../../components/analytics/ReportGenerators';
 
 const initialState = {
@@ -11,29 +12,36 @@ const initialState = {
             reportName: 'all-orders.csv',
             reportTitle: 'All Orders',
             reportDescription: 'Details about customer orders.',
-            reportURL: '/reporting/analytics/orders-overview',
+            reportURL: '/v1/lc/reporting/analytics/orders-overview',
             reportGenerator: customerOrdersReportCSVGenerator,
         },
         {
             reportName: 'customer-orders-count.csv',
             reportTitle: 'Customer Orders Count',
             reportDescription: 'Gives total cards bought by each member.',
-            reportURL: '/reporting/analytics/order-count-per-customer',
+            reportURL: '/v1/lc/reporting/analytics/order-count-per-customer',
             reportGenerator: repeatCustomersReportCSVGenerator,
         },
         {
             reportName: 'dropped-customers.csv',
             reportTitle: 'Dropped Customers Report',
             reportDescription: 'Report of all cards where leaving date was present + has passed + no order was placed.',
-            reportURL: '/reporting/analytics/dropped-customers',
+            reportURL: '/v1/lc/reporting/analytics/dropped-customers',
             reportGenerator: droppedCustomersReportCSVGenerator,
         },
         {
             reportName: 'cards-without-target-date.csv',
             reportTitle: 'Cards Without Target Date Report',
             reportDescription: 'Report of all cards that do not have a target date.',
-            reportURL: '/reporting/analytics/cards-without-target-date',
+            reportURL: '/v1/lc/reporting/analytics/cards-without-target-date',
             reportGenerator: cardsWithoutTargetDate,
+        },
+        {
+            reportName: 'cards-sales.csv',
+            reportTitle: 'Cards Sales Report',
+            reportDescription: 'Sales figures for all cards.',
+            reportURL: '/v1/lc/reporting/cards/top',
+            reportGenerator: cardDesignSales,
         },
     ],
 };

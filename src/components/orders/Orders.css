@@ -44,3 +44,22 @@
     padding: 15px;
     margin-bottom: 20px;
 }
+
+.dailyOrdersDateSelector {
+    display: flex;
+    flex-direction: row;
+    color: ghostwhite;
+    align-items: baseline;
+}
+
+.dailyOrdersDateSelector h6 {
+    margin-right: 20px;
+}
+
+.dailyOrdersDateSelector button {
+    background-color: #66b3e0;
+    margin-left: 20px;
+    border-radius: 5px;
+    padding: 1px 20px 1px 20px;
+    font-size: 15px;
+}

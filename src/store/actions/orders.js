@@ -4,6 +4,9 @@ export const LOAD_ORDERS_DATA = 'orders/LOAD_ORDERS_DATA';
 export const FETCH_DAILY_ORDERS_DATA = 'orders/FETCH_DAILY_ORDERS_DATA';
 export const LOAD_DAILY_ORDERS_DATA = 'orders/LOAD_DAILY_ORDERS_DATA';
 
+export const FETCH_TODAYS_ORDERS_DATA = 'orders/FETCH_TODAYS_ORDERS_DATA';
+export const LOAD_TODAYS_ORDERS_DATA = 'orders/LOAD_TODAYS_ORDERS_DATA';
+
 export const FETCH_WEEKLY_ORDERS_DATA = 'orders/FETCH_WEEKLY_ORDERS_DATA';
 export const LOAD_WEEKLY_ORDERS_DATA = 'orders/LOAD_WEEKLY_ORDERS_DATA';
 
@@ -26,12 +29,25 @@ export const loadOrdersData = (ordersData) => ({
     payload: ordersData,
 });
 
-export const fetchDailyOrdersData = () => ({
+export const fetchDailyOrdersData = (date) => ({
     type: FETCH_DAILY_ORDERS_DATA,
+    payload: date,
 });
 
-export const loadDailyOrdersData = (ordersData) => ({
+export const loadDailyOrdersData = (date, ordersData) => console.log('daily orders being fired...') || ({
     type: LOAD_DAILY_ORDERS_DATA,
+    payload: {
+        date,
+        ordersData,
+    },
+});
+
+export const fetchTodaysOrdersData = () => ({
+    type: FETCH_TODAYS_ORDERS_DATA,
+});
+
+export const loadTodaysOrdersData = (ordersData) => ({
+    type: LOAD_TODAYS_ORDERS_DATA,
     payload: ordersData,
 });
 

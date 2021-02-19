@@ -29,8 +29,13 @@ const initialState = {
                   selected: false,
               },
               {
-                  subItemName: 'Today\'s Orders',
+                  subItemName: 'Daily Window',
                   subItemPath: '/orders/daily',
+                  selected: false,
+              },
+              {
+                  subItemName: 'Today\'s Orders',
+                  subItemPath: '/orders/todays',
                   selected: false,
               },
               {

@@ -8,6 +8,7 @@ import Home from './components/home/Home';
 import MemberSignUps from './containers/members/MemberSignUps';
 import MemberCardsStream from './containers/members/MemberCardsStream';
 import DailyOrders from './containers/orders/DailyOrders';
+import TodaysOrders from './containers/orders/TodaysOrders';
 import WeeklyOrders from './containers/orders/WeeklyOrders';
 import MonthlyOrders from './containers/orders/MonthlyOrders';
 import AllOrders from './containers/orders/AllOrders';
@@ -38,6 +39,7 @@ function App() {
 
                 <Route path='/orders/card-stream' exact component={MemberCardsStream} />
                 <Route path='/orders/daily' exact component={DailyOrders} />
+                <Route path='/orders/todays' exact component={TodaysOrders} />
                 <Route path='/orders/weekly' exact component={WeeklyOrders} />
                 <Route path='/orders/monthly' exact component={MonthlyOrders} />
                 <Route path='/orders/alltime' exact component={AllOrders} />

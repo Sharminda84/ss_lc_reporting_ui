@@ -1,10 +1,13 @@
 import { takeEvery } from 'redux-saga/effects';
 import { FETCH_MEMBERS_DATA, FETCH_CARDS_FOR_MEMBERS } from '../actions/members';
-import { FETCH_DAILY_ORDERS_DATA, FETCH_WEEKLY_ORDERS_DATA, FETCH_MONTHLY_ORDERS_DATA, FETCH_ORDERS_DATA, FETCH_TOP_CARDS } from '../actions/orders';
+import {
+    FETCH_TODAYS_ORDERS_DATA, FETCH_DAILY_ORDERS_DATA, FETCH_WEEKLY_ORDERS_DATA, FETCH_MONTHLY_ORDERS_DATA,
+    FETCH_ORDERS_DATA, FETCH_TOP_CARDS
+} from '../actions/orders';
 import { TRIGGER_LOGIN } from '../actions/security';
 import { FETCH_CARD_INFO } from '../actions/refData';
 import { fetchMemberSignups, fetchCardsForMembers } from './members';
-import { fetchDailyOrders, fetchWeeklyOrders, fetchMonthlyOrders, fetchAllOrders, fetchTopCards } from './orders';
+import { fetchDailyOrders, fetchTodaysOrders, fetchWeeklyOrders, fetchMonthlyOrders, fetchAllOrders, fetchTopCards } from './orders';
 import { loginUser } from './security';
 import { fetchCardInfo } from './refData';
 
@@ -14,6 +17,10 @@ export function* watchMembersActions() {
 
 export function* watchCardsForMemberActions() {
     yield takeEvery(FETCH_CARDS_FOR_MEMBERS, fetchCardsForMembers);
+}
+
+export function* watchTodaysOrdersAction() {
+    yield takeEvery(FETCH_TODAYS_ORDERS_DATA, fetchTodaysOrders);
 }
 
 export function* watchDailyOrdersAction() {

@@ -1,18 +1,32 @@
 import { call, put } from 'redux-saga/effects';
 import {
-    loadDailyOrdersData, loadWeeklyOrdersData, loadMonthlyOrdersData,
+    loadDailyOrdersData, loadTodaysOrdersData, loadWeeklyOrdersData, loadMonthlyOrdersData,
     loadOrdersData, loadTopCards }
 from '../actions/orders';
 import _ from 'lodash';
-import { sendGetRequest } from '../networkUtils';
+import { sendGetRequest, sendPostRequest } from '../networkUtils';
 import * as ReportingServerURLs from "./ReportingServerURLs";
 
-export function* fetchDailyOrders() {
+export function* fetchDailyOrders(action) {
+    try {
+        const fetchMembersURL = ReportingServerURLs.FETCH_DAILY_ORDERS;
+        const payload = {
+            date: action.payload,
+        }
+        const orders = yield call(sendPostRequest, fetchMembersURL, payload);
+        const sortedOrders = _.orderBy(orders, order => order.transactionTime, 'desc');
+        yield put(loadDailyOrdersData(action.payload, sortedOrders));
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export function* fetchTodaysOrders() {
     try {
         const fetchMembersURL = ReportingServerURLs.FETCH_TODAYS_ORDERS;
         const orders = yield call(sendGetRequest, fetchMembersURL);
         const sortedOrders = _.orderBy(orders, order => order.transactionTime, 'desc');
-        yield put(loadDailyOrdersData(sortedOrders));
+        yield put(loadTodaysOrdersData(sortedOrders));
     } catch (error) {
         console.log(error);
     }

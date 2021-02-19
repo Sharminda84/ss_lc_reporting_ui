@@ -10,8 +10,8 @@ import Dropdown from 'react-bootstrap/Dropdown'
 import { dateToString, getCardName } from '../../utils';
 import DatePicker from 'react-datepicker';
 
-const CARD_TYPE_ALL = -1000;
-const CARD_TYPES = new Map();
+export const CARD_TYPE_ALL = -1000;
+export const CARD_TYPES = new Map();
 CARD_TYPES.set(CARD_TYPE_ALL, "All");
 CARD_TYPES.set(-1, "Unknown");
 CARD_TYPES.set(0, "Leaving Cards");
@@ -31,14 +31,14 @@ CARD_TYPES.set(12, "Thank You Teacher Cards");
 const LEAVING_CARD_EPOCH = new Date(2020, 3, 13, 0, 0, 0, 0);
 const LEAVING_CARD_EPOCH_TIME = LEAVING_CARD_EPOCH.getTime();
 
-const round = num => Math.round((num + Number.EPSILON) * 100) / 100;
+export const round = num => Math.round((num + Number.EPSILON) * 100) / 100;
 
 // Process orders for generating the order chart
 const convertToDailyChartData = (orders, cardTypeForCharts) => {
     const chartData = [];
     orders
         .filter(order => order.transactionTime > LEAVING_CARD_EPOCH_TIME)
-        .filter(order => cardTypeForCharts == CARD_TYPE_ALL || (order.leavingCard && cardTypeForCharts == order.leavingCard.cardType))
+        .filter(order => cardTypeForCharts === CARD_TYPE_ALL || (order.leavingCard && cardTypeForCharts == order.leavingCard.cardType))
         .reduce((allOrders, order) => {
             const transactionDate = new Date(order.transactionTime);
             const key = transactionDate.getFullYear() + '-' +
@@ -64,7 +64,7 @@ const startOfTheWeekDate = (date) => {
     startOfWeek.setSeconds(0);
     startOfWeek.setMinutes(0);
     startOfWeek.setHours(0);
-    if (date.getDay() == 0) {
+    if (date.getDay() === 0) {
         // Sunday is 0!
         startOfWeek.setDate(date.getDate() - 6);
     } else {
@@ -78,7 +78,7 @@ const startOfTheWeekDate = (date) => {
 const convertToWeeklyChartData = (orders, cardTypeForCharts) => {
     const chartData = [];
     const ordersByWeek = orders
-        .filter(order => cardTypeForCharts == CARD_TYPE_ALL || (order.leavingCard && cardTypeForCharts == order.leavingCard.cardType))
+        .filter(order => cardTypeForCharts === CARD_TYPE_ALL || (order.leavingCard && cardTypeForCharts == order.leavingCard.cardType))
         .filter(order => order.transactionTime > LEAVING_CARD_EPOCH_TIME)
         .reduce((allOrders, order) => {
             const transactionDate = new Date(order.transactionTime);
@@ -180,7 +180,7 @@ const buildOrderSummariesMaps = (orders,
     });
 }
 
-const generateOrdersSummaryArray = ordersSummary => {
+export const generateOrdersSummaryArray = ordersSummary => {
     const ordersSummaryArray = [];
     ordersSummary.forEach((summary, orderType) => {
         summary.eCardRevenue = `£${round(summary.eCardRevenue)}`
@@ -315,7 +315,7 @@ function Orders(props) {
                         <DropdownButton title='Card Type' onSelect={(cardType) => setCardTypeForCharts(Number(cardType))}>
                             {
                                 [...CARD_TYPES.keys()]
-                                    .filter(key => key != -1)
+                                    .filter(key => key !== -1)
                                     .map(key => <Dropdown.Item eventKey={`${key}`}>{CARD_TYPES.get(key)}</Dropdown.Item>)
                             }
                         </DropdownButton>

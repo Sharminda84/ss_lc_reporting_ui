@@ -171,3 +171,25 @@ export const cardsWithoutTargetDate = (data) => {
 
     return encodeURI('data:text/csv;charset=utf-8,' + csv);
 };
+
+export const cardDesignSales = (data) => {
+    let csv = 'Card Type, PDF Generation Class, Card Thumb Nail, Total';
+
+    data.forEach((dataRecord) => {
+        csv = csv + '\r\n' +
+
+            // 0: Card type
+            dataRecord[0] + ',' +
+
+            // 1: PDF Generation Class
+            dataRecord[1] + ',' +
+
+            // 2: Card Thumb Nail
+            dataRecord[2] + ',' +
+
+            // 3: Total
+            dataRecord[3];
+    });
+
+    return encodeURI('data:text/csv;charset=utf-8,' + csv);
+};
