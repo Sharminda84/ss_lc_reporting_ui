@@ -128,7 +128,7 @@ function DataTable(props) {
         []
     );
 
-    const { tableHeaders, tableData, showGlobalFilter = true } = props;
+    const { tableHeaders, tableData, showGlobalFilter = true, showFilters = false } = props;
     const columns = tableHeaders;
     const data = tableData;
 
@@ -159,7 +159,9 @@ function DataTable(props) {
                                             column.isSortedDesc ? ' 🔽' : ' 🔼'
                                             : ''}
                                     </span>
-                                    <div>{column.canFilter ? column.render('Filter') : null}</div>
+                                    {
+                                        showFilters && <div>{column.canFilter ? column.render('Filter') : null}</div>
+                                    }
                                 </th>
                             ))}
                         </tr>
