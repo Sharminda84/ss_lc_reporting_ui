@@ -130,13 +130,14 @@ const buildOrderSummariesMaps = (orders,
         orderSummary.totalRevenue = orderSummary.totalRevenue + order.transactionAmount;
 
         const productType = _.get(order, 'orderItem.productId', 0);
+        const commission = _.get(order, 'cardDesignCommission.commissionPence', 0);
 
         if (productType === 1) {
             // E-card
             orderSummary.eCardSales = orderSummary.eCardSales + 1;
             orderSummary.eCardRevenue = orderSummary.eCardRevenue + order.transactionAmount;
             orderSummary.primeGroupCosts = orderSummary.primeGroupCosts + 0;
-            orderSummary.designerCommission = orderSummary.designerCommission + 0;  // TODO
+            orderSummary.designerCommission = orderSummary.designerCommission + (commission/100);
             orderSummary.stripeFee = orderSummary.stripeFee + 0.23;
 
         } else if (productType === 2) {
@@ -146,7 +147,7 @@ const buildOrderSummariesMaps = (orders,
             orderSummary.primeGroupCosts = orderSummary.primeGroupCosts +
                 0.85 /* Shipping */ +
                 0.90 /* Printing */;
-            orderSummary.designerCommission = orderSummary.designerCommission + 0; // TODO
+            orderSummary.designerCommission = orderSummary.designerCommission + (commission/100);
             orderSummary.stripeFee = orderSummary.stripeFee + 0.27;
 
         } else if (productType === 5) {
@@ -156,7 +157,7 @@ const buildOrderSummariesMaps = (orders,
             orderSummary.primeGroupCosts = orderSummary.primeGroupCosts +
                 1.41 /* Shipping */ +
                 1.15 /* Printing */;
-            orderSummary.designerCommission = orderSummary.designerCommission + 0; // TODO
+            orderSummary.designerCommission = orderSummary.designerCommission + (commission/100);
             orderSummary.stripeFee = orderSummary.stripeFee + 0.32;
         }
 
@@ -211,13 +212,16 @@ const buildOrderSummariesMaps = (orders,
         }
     });
 
-    // For each card type, Update the ad spend + P&L
     // orderSummary.adSpend = orderSummary.adSpend + 0.0;
-    // orderSummary.profit = orderSummary.totalRevenue -
-    //                       orderSummary.adSpend -
-    //                       orderSummary.primeGroupCosts -
-    //                       orderSummary.designerCommission -
-    //                       orderSummary.stripeFee;
+    ordersSummary.forEach((orderSummary, cardType) => {
+        // TODO: Google ad spend
+        orderSummary.adSpend = 0;
+        orderSummary.profit = orderSummary.totalRevenue -
+                              orderSummary.adSpend -
+                              orderSummary.primeGroupCosts -
+                              orderSummary.designerCommission -
+                              orderSummary.stripeFee;
+    });
 }
 
 export const generateOrdersSummaryArray = ordersSummary => {

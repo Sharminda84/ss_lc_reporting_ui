@@ -6,6 +6,7 @@ import '../../App.css';
 import './Orders.css';
 
 import { CARD_TYPES, generateOrdersSummaryArray, round } from './Orders';
+import _ from "lodash";
 
 const calculateTotalOrdersValue = (date, dailyOrders) => {
     const orders = dailyOrders.get(date.toISOString().split('T')[0]);
@@ -28,24 +29,68 @@ const buildOrderSummariesMaps = (date, dailyOrders, ordersSummary) => {
             ordersSummary.set(cardType, {
                 cardType,
                 eCardSales: 0,
+                a4Sales: 0,
+                a5Sales: 0,
                 eCardRevenue: 0,
-                printedSales: 0,
-                printedRevenue: 0,
+                a4Revenue: 0,
+                a5Revenue: 0,
                 totalSales: 0,
-                totalRevenue: 0
+                totalRevenue: 0,
+                primeGroupCosts: 0,
+                adSpend: 0,
+                designerCommission: 0,
+                stripeFee: 0,
+                profit: 0,
             });
         }
         const orderSummary = ordersSummary.get(cardType);
-        if (order.deliveryAddress === '') {
-            orderSummary.eCardSales = orderSummary.eCardSales + 1;
-            orderSummary.eCardRevenue = orderSummary.eCardRevenue + order.transactionAmount;
-        } else {
-            orderSummary.printedSales = orderSummary.printedSales + 1;
-            orderSummary.printedRevenue = orderSummary.printedRevenue + order.transactionAmount;
-        }
         orderSummary.totalSales = orderSummary.totalSales + 1;
         orderSummary.totalRevenue = orderSummary.totalRevenue + order.transactionAmount;
+
+        const productType = _.get(order, 'orderItem.productId', 0);
+        const commission = _.get(order, 'cardDesignCommission.commissionPence', 0);
+
+        if (productType === 1) {
+            // E-card
+            orderSummary.eCardSales = orderSummary.eCardSales + 1;
+            orderSummary.eCardRevenue = orderSummary.eCardRevenue + order.transactionAmount;
+            orderSummary.primeGroupCosts = orderSummary.primeGroupCosts + 0;
+            orderSummary.designerCommission = orderSummary.designerCommission + (commission/100);
+            orderSummary.stripeFee = orderSummary.stripeFee + 0.23;
+
+        } else if (productType === 2) {
+            // A5
+            orderSummary.a5Sales = orderSummary.a5Sales + 1;
+            orderSummary.a5Revenue = orderSummary.a5Revenue + order.transactionAmount;
+            orderSummary.primeGroupCosts = orderSummary.primeGroupCosts +
+                0.85 /* Shipping */ +
+                0.90 /* Printing */;
+            orderSummary.designerCommission = orderSummary.designerCommission + (commission/100);
+            orderSummary.stripeFee = orderSummary.stripeFee + 0.27;
+
+        } else if (productType === 5) {
+            // A4
+            orderSummary.a4Sales = orderSummary.a4Sales + 1;
+            orderSummary.a4Revenue = orderSummary.a4Revenue + order.transactionAmount;
+            orderSummary.primeGroupCosts = orderSummary.primeGroupCosts +
+                1.41 /* Shipping */ +
+                1.15 /* Printing */;
+            orderSummary.designerCommission = orderSummary.designerCommission + (commission/100);
+            orderSummary.stripeFee = orderSummary.stripeFee + 0.32;
+        }
+
         ordersSummary.set(cardType, orderSummary);
+    });
+
+    // orderSummary.adSpend = orderSummary.adSpend + 0.0;
+    ordersSummary.forEach((cardType, orderSummary) => {
+        // TODO: Google ad spend
+        orderSummary.adSpend = 0;
+        orderSummary.profit = orderSummary.totalRevenue -
+                              orderSummary.adSpend -
+                              orderSummary.primeGroupCosts -
+                              orderSummary.designerCommission -
+                              orderSummary.stripeFee;
     });
 }
 
