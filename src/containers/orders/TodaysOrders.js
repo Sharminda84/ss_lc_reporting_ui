@@ -5,6 +5,8 @@ import * as orderActions from '../../store/actions/orders';
 
 const mapStateToProps = state => ({
   orders: _get(state, 'orders.todaysOrders', {}),
+  adCampaignsData: _get(state, 'orders.todaysAdCampaignsData', {}),
+  campaignToCardTypeMappings: _get(state, 'state.campaignToCardTypeMappings'),
   ordersTableConfig: _get(state, 'orders.ordersTableConfig', {}),
   displayChart: false,
   cardInfo: _get(state, 'refData.cardInfo', new Map()),

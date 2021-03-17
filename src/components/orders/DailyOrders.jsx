@@ -83,7 +83,7 @@ const buildOrderSummariesMaps = (date, dailyOrders, ordersSummary) => {
     });
 
     // orderSummary.adSpend = orderSummary.adSpend + 0.0;
-    ordersSummary.forEach((cardType, orderSummary) => {
+    ordersSummary.forEach((orderSummary, cardType) => {
         // TODO: Google ad spend
         orderSummary.adSpend = 0;
         orderSummary.profit = orderSummary.totalRevenue -
@@ -96,7 +96,7 @@ const buildOrderSummariesMaps = (date, dailyOrders, ordersSummary) => {
 
 function DailyOrders(props) {
     const [ordersDate, setOrdersDate] = useState(new Date());
-    const { fetchOrdersData, ordersSummaryTableConfig, dailyOrders } = props;
+    const { fetchOrdersData, fetchAdCampaignsData, campaignToCardTypeMappings, ordersSummaryTableConfig, dailyOrders } = props;
     const ordersSummary = new Map();
     buildOrderSummariesMaps(ordersDate, dailyOrders, ordersSummary);
     const ordersSummaryArray = generateOrdersSummaryArray(ordersSummary);

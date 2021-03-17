@@ -7,6 +7,15 @@ import _ from 'lodash';
 import { sendGetRequest, sendPostRequest } from '../networkUtils';
 import * as ReportingServerURLs from "./ReportingServerURLs";
 
+const calculateStartOfDay = timestamp => {
+    const startOfDayDate = new Date(timestamp);
+    startOfDayDate.setHours(1);
+    startOfDayDate.setMinutes(0);
+    startOfDayDate.setSeconds(0);
+    startOfDayDate.setMilliseconds(0);
+    return startOfDayDate.getTime();
+}
+
 export function* fetchDailyOrders(action) {
     try {
         const fetchMembersURL = ReportingServerURLs.FETCH_DAILY_ORDERS;
@@ -15,7 +24,13 @@ export function* fetchDailyOrders(action) {
         }
         const orders = yield call(sendPostRequest, fetchMembersURL, payload);
         const sortedOrders = _.orderBy(orders, order => order.transactionTime, 'desc');
-        yield put(loadDailyOrdersData(action.payload, sortedOrders));
+
+        const startOfDay = calculateStartOfDay(action.payload);
+        const fetchAdsCampaignDataURL = ReportingServerURLs.FETCH_AD_CAMPAIGNS_DATA + `?fromDate=${startOfDay}&toDate=${action.payload}`;
+        const adCampaignsData = yield call(sendGetRequest, fetchAdsCampaignDataURL);
+
+        yield put(loadDailyOrdersData(action.payload, sortedOrders, adCampaignsData));
+
     } catch (error) {
         console.log(error);
     }
@@ -26,7 +41,13 @@ export function* fetchTodaysOrders() {
         const fetchMembersURL = ReportingServerURLs.FETCH_TODAYS_ORDERS;
         const orders = yield call(sendGetRequest, fetchMembersURL);
         const sortedOrders = _.orderBy(orders, order => order.transactionTime, 'desc');
-        yield put(loadTodaysOrdersData(sortedOrders));
+
+        const currentTime = new Date().getTime();
+        const startOfDay = calculateStartOfDay(currentTime);
+        const fetchAdsCampaignDataURL = ReportingServerURLs.FETCH_AD_CAMPAIGNS_DATA + `?fromDate=${startOfDay}&toDate=${currentTime}`;
+        const adCampaignsData = yield call(sendGetRequest, fetchAdsCampaignDataURL);
+
+        yield put(loadTodaysOrdersData(sortedOrders, adCampaignsData));
     } catch (error) {
         console.log(error);
     }
@@ -37,7 +58,12 @@ export function* fetchWeeklyOrders(action) {
         const fetchMembersURL = ReportingServerURLs.FETCH_WEEKLY_ORDERS + `?fromDate=${action.payload.fromDate}`;
         const orders = yield call(sendGetRequest, fetchMembersURL);
         const sortedOrders = _.orderBy(orders, order => order.transactionTime, 'desc');
-        yield put(loadWeeklyOrdersData(sortedOrders));
+
+        const start = calculateStartOfDay(action.payload.fromDate) - 7 * 24 * 60 * 60 * 1000;
+        const fetchAdsCampaignDataURL = ReportingServerURLs.FETCH_AD_CAMPAIGNS_DATA + `?fromDate=${start}&toDate=${action.payload.fromDate}`;
+        const adCampaignsData = yield call(sendGetRequest, fetchAdsCampaignDataURL);
+
+        yield put(loadWeeklyOrdersData(sortedOrders, adCampaignsData));
     } catch (error) {
         console.log(error);
     }
@@ -48,7 +74,12 @@ export function* fetchMonthlyOrders(action) {
         const fetchMembersURL = ReportingServerURLs.FETCH_MONTHLY_ORDERS + `?fromDate=${action.payload.fromDate}`;
         const orders = yield call(sendGetRequest, fetchMembersURL);
         const sortedOrders = _.orderBy(orders, order => order.transactionTime, 'desc');
-        yield put(loadMonthlyOrdersData(sortedOrders));
+
+        const start = calculateStartOfDay(action.payload.fromDate) - 30 * 24 * 60 * 60 * 1000;
+        const fetchAdsCampaignDataURL = ReportingServerURLs.FETCH_AD_CAMPAIGNS_DATA + `?fromDate=${start}&toDate=${action.payload.fromDate}`;
+        const adCampaignsData = yield call(sendGetRequest, fetchAdsCampaignDataURL);
+
+        yield put(loadMonthlyOrdersData(sortedOrders, adCampaignsData));
     } catch (error) {
         console.log(error);
     }
@@ -59,7 +90,12 @@ export function* fetchAllOrders() {
         const fetchMembersURL = ReportingServerURLs.FETCH_ALL_ORDERS;
         const orders = yield call(sendGetRequest, fetchMembersURL);
         const sortedOrders = _.orderBy(orders, order => order.transactionTime, 'desc');
-        yield put(loadOrdersData(sortedOrders));
+
+        const start = 1514764800000;
+        const fetchAdsCampaignDataURL = ReportingServerURLs.FETCH_AD_CAMPAIGNS_DATA + `?fromDate=${start}&toDate=${new Date().getTime()}`;
+        const adCampaignsData = yield call(sendGetRequest, fetchAdsCampaignDataURL);
+
+        yield put(loadOrdersData(sortedOrders, adCampaignsData));
     } catch (error) {
         console.log(error);
     }

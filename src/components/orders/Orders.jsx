@@ -103,7 +103,8 @@ const convertToWeeklyChartData = (orders, cardTypeForCharts) => {
 const buildOrderSummariesMaps = (orders, 
                                  ordersSummary,
                                  printedCardOrderBreakdownPieChartData, printedCardOrderBreakdownPieChartDrilldownData,
-                                 eCardOrderBreakdownPieChartData, eCardOrderBreakdownPieChartDrilldownData) => {
+                                 eCardOrderBreakdownPieChartData, eCardOrderBreakdownPieChartDrilldownData,
+                                 adCampaignsData, campaignToCardTypeMappings) => {
     orders.forEach(order => {
         // 1. Order summary
         const cardType = CARD_TYPES.get(order.leavingCard ? order.leavingCard.cardType : -1);
@@ -212,9 +213,8 @@ const buildOrderSummariesMaps = (orders,
         }
     });
 
-    // orderSummary.adSpend = orderSummary.adSpend + 0.0;
+    // adCampaignsData, campaignToCardTypeMappings
     ordersSummary.forEach((orderSummary, cardType) => {
-        // TODO: Google ad spend
         orderSummary.adSpend = 0;
         orderSummary.profit = orderSummary.totalRevenue -
                               orderSummary.adSpend -
@@ -289,9 +289,9 @@ const generateCardDrilldownDataSeries = (orderBreakdownPieChartDrilldownData, ca
 }
 
 function Orders(props) {
-    const { fetchOrdersData, ordersTableConfig, ordersSummaryTableConfig, orders, displayChart = true,
-            title, cardInfo, showOrderDetailsTable = false, showWeeklyOrdersChart = true,
-            isAllTimeView = false } = props;
+    const { fetchOrdersData, ordersTableConfig, ordersSummaryTableConfig, orders, adCampaignsData,
+            campaignToCardTypeMappings, displayChart = true, title, cardInfo, showOrderDetailsTable = false,
+            showWeeklyOrdersChart = true, isAllTimeView = false } = props;
 
     const [cardTypeForCharts, setCardTypeForCharts] = useState(CARD_TYPE_ALL);
     const [fromDate, setFromDate] = useState(new Date().getTime());
@@ -304,7 +304,8 @@ function Orders(props) {
     const eCardOrderBreakdownPieChartDrilldownData = new Map();
     buildOrderSummariesMaps(orders, ordersSummary, 
         printedCardOrderBreakdownPieChartData, printedCardOrderBreakdownPieChartDrilldownData, 
-        eCardOrderBreakdownPieChartData, eCardOrderBreakdownPieChartDrilldownData);
+        eCardOrderBreakdownPieChartData, eCardOrderBreakdownPieChartDrilldownData,
+        adCampaignsData, campaignToCardTypeMappings);
     
     // Generate data structures for presentation
     const totalOrdersValue = orders.reduce((total, order) => total + order.transactionAmount, 0.0);

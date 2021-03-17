@@ -10,10 +10,20 @@ import {
 
 const initialState = {
     orders: [],
+    adCampaignsData: [],
+
     dailyOrders: new Map(),
+    dailyAdCampaignsData: new Map(),
+
     todaysOrders: [],
+    todaysAdCampaignsData: [],
+
     weeklyOrders: [],
+    weeklyAdCampaignsData: [],
+
     monthlyOrders: [],
+    monthlyAdCampaignsData: [],
+
     ordersTableConfig: [
         {
             Header: 'Order Date',
@@ -105,25 +115,69 @@ const initialState = {
         },
     ],
     topCards: [],
+
+    // Ad campaigns and card type aggregation mappings
+    campaignToCardTypeMappings: {
+        'FT Search - Thank You Card - BMM': 'Thank You Cards',
+        'FT Search - Thank You Card - Exact': 'Thank You Cards',
+
+        'FT Search - Maternity Cards - BMM': 'Maternity Leave Cards',
+        'FT Search - Maternity Cards - Exact': 'Maternity Leave Cards',
+
+        'FT Search - Retirement Card - Exact': 'Retirement Cards',
+
+        'FT Search - Birthday Card - Exact': 'Birthday Cards',
+
+        'FT Search - Cards Types - DSA': '',
+
+        'FT Search - Leaving Card - Exact': 'Leaving Cards',
+        'FT Search - Leaving Card - BMM': 'Leaving Cards',
+
+        'FT Search - Good Luck Card - BMM': 'Good Luck Cards',
+        'FT Search - Good Luck Card - Exact': 'Good Luck Cards',
+
+        'FT Search - Get Well Soon Card - Exact': 'Get Well Soon Cards',
+        'FT Search - Get Well Soon Card - BMM': 'Get Well Soon Cards',
+
+        'FT Search - Congratulations Card - BMM': 'Congratulations Cards',
+        'FT Search - Congratulations Card - Exact': 'Congratulations Cards',
+
+        'FT Search - New Baby Cards - BMM': 'New Baby Cards',
+        'FT Search - New Baby Cards - Exact': 'New Baby Cards',
+
+        'FT Search - New Daddy Cards - BMM': 'New Daddy Cards',
+        'FT Search - New Daddy Cards - Exact': 'New Daddy Cards',
+    },
 };
 
 const orders = (state = initialState, action) => {
     switch (action.type) {
         case LOAD_ORDERS_DATA:
-            return {...state, orders: action.payload};
+            return {...state, orders: action.payload.ordersData, adCampaignsData: action.payload.adCampaignsData};
+
         case LOAD_DAILY_ORDERS_DATA:
             const date = new Date(action.payload.date).toISOString().split('T')[0];
+
             const dailyOrdersClone = _.cloneDeep(state.dailyOrders);
             dailyOrdersClone.set(date, action.payload.ordersData);
-            return {...state, dailyOrders: dailyOrdersClone};
+
+            const dailyAdCampaignsDataClone = _.cloneDeep(state.dailyAdCampaignsData);
+            dailyAdCampaignsDataClone.set(date, action.payload.dailyAdCampaignsData);
+
+            return {...state, dailyOrders: dailyOrdersClone, dailyAdCampaignsData: dailyAdCampaignsDataClone};
+
         case LOAD_TODAYS_ORDERS_DATA:
-            return {...state, todaysOrders: action.payload};
+            return {...state, todaysOrders: action.payload.ordersData, todaysAdCampaignsData: action.payload.adCampaignsData};
+
         case LOAD_WEEKLY_ORDERS_DATA:
-            return {...state, weeklyOrders: action.payload};
+            return {...state, weeklyOrders: action.payload.ordersData, weeklyAdCampaignsData: action.payload.adCampaignsData};
+
         case LOAD_MONTHLY_ORDERS_DATA:
-            return {...state, monthlyOrders: action.payload};
+            return {...state, monthlyOrders: action.payload.ordersData, monthlyAdCampaignsData: action.payload.adCampaignsData};
+
         case LOAD_TOP_CARDS:
             return {...state, topCards: action.payload};
+
         default: return state;
     }
 };

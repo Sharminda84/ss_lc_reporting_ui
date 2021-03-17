@@ -24,9 +24,12 @@ export const fetchOrdersData = (startDate, endDate) => ({
     }
 });
 
-export const loadOrdersData = (ordersData) => ({
+export const loadOrdersData = (ordersData, adCampaignsData) => ({
     type: LOAD_ORDERS_DATA,
-    payload: ordersData,
+    payload: {
+        ordersData,
+        adCampaignsData
+    },
 });
 
 export const fetchDailyOrdersData = (date) => ({
@@ -34,11 +37,12 @@ export const fetchDailyOrdersData = (date) => ({
     payload: date,
 });
 
-export const loadDailyOrdersData = (date, ordersData) => console.log('daily orders being fired...') || ({
+export const loadDailyOrdersData = (date, ordersData, adCampaignsData) => ({
     type: LOAD_DAILY_ORDERS_DATA,
     payload: {
         date,
         ordersData,
+        adCampaignsData,
     },
 });
 
@@ -46,9 +50,12 @@ export const fetchTodaysOrdersData = () => ({
     type: FETCH_TODAYS_ORDERS_DATA,
 });
 
-export const loadTodaysOrdersData = (ordersData) => ({
+export const loadTodaysOrdersData = (ordersData, adCampaignsData) => ({
     type: LOAD_TODAYS_ORDERS_DATA,
-    payload: ordersData,
+    payload: {
+        ordersData,
+        adCampaignsData
+    },
 });
 
 export const fetchWeeklyOrdersData = (fromDate) => ({
@@ -58,9 +65,12 @@ export const fetchWeeklyOrdersData = (fromDate) => ({
     }
 });
 
-export const loadWeeklyOrdersData = (ordersData) => ({
+export const loadWeeklyOrdersData = (ordersData, adCampaignsData) => ({
     type: LOAD_WEEKLY_ORDERS_DATA,
-    payload: ordersData,
+    payload: {
+        ordersData,
+        adCampaignsData
+    },
 });
 
 export const fetchMonthlyOrdersData = (fromDate) => ({
@@ -70,9 +80,12 @@ export const fetchMonthlyOrdersData = (fromDate) => ({
     }
 });
 
-export const loadMonthlyOrdersData = (ordersData) => ({
+export const loadMonthlyOrdersData = (ordersData, adCampaignsData) => ({
     type: LOAD_MONTHLY_ORDERS_DATA,
-    payload: ordersData,
+    payload: {
+        ordersData,
+        adCampaignsData
+    },
 });
 
 export const fetchTopCards = () => ({
