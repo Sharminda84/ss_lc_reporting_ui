@@ -17,7 +17,7 @@ const calculateTotalOrdersValue = (date, dailyOrders) => {
     return orders.reduce((total, order) => total + order.transactionAmount, 0.0);
 }
 
-const buildOrderSummariesMaps = (date, dailyOrders, ordersSummary) => {
+const buildOrderSummariesMaps = (date, dailyOrders, ordersSummary, dailyAdCampaignsData, campaignToCardTypeMappings) => {
     const orders = dailyOrders.get(date.toISOString().split('T')[0]);
     if (orders === undefined) {
         return;
@@ -82,10 +82,20 @@ const buildOrderSummariesMaps = (date, dailyOrders, ordersSummary) => {
         ordersSummary.set(cardType, orderSummary);
     });
 
-    // orderSummary.adSpend = orderSummary.adSpend + 0.0;
+    const adSpend = new Map();
+    dailyAdCampaignsData.forEach(adCampaign => {
+        const cardType = campaignToCardTypeMappings[adCampaign.campaignName];
+        if (adSpend.has(cardType)) {
+            const updatedAdSpend = adSpend.get(cardType) + adCampaign.cost;
+            adSpend.set(cardType, updatedAdSpend);
+        } else {
+            adSpend.set(cardType, adCampaign.cost);
+        }
+    });
+
+
     ordersSummary.forEach((orderSummary, cardType) => {
-        // TODO: Google ad spend
-        orderSummary.adSpend = 0;
+        orderSummary.adSpend = adSpend.has(cardType) ? adSpend.get(cardType) : 0;
         orderSummary.profit = orderSummary.totalRevenue -
                               orderSummary.adSpend -
                               orderSummary.primeGroupCosts -
@@ -96,9 +106,9 @@ const buildOrderSummariesMaps = (date, dailyOrders, ordersSummary) => {
 
 function DailyOrders(props) {
     const [ordersDate, setOrdersDate] = useState(new Date());
-    const { fetchOrdersData, fetchAdCampaignsData, campaignToCardTypeMappings, ordersSummaryTableConfig, dailyOrders } = props;
+    const { fetchOrdersData, dailyAdCampaignsData, campaignToCardTypeMappings, ordersSummaryTableConfig, dailyOrders } = props;
     const ordersSummary = new Map();
-    buildOrderSummariesMaps(ordersDate, dailyOrders, ordersSummary);
+    buildOrderSummariesMaps(ordersDate, dailyOrders, ordersSummary, dailyAdCampaignsData, campaignToCardTypeMappings);
     const ordersSummaryArray = generateOrdersSummaryArray(ordersSummary);
     const totalOrdersValue = calculateTotalOrdersValue(ordersDate, dailyOrders);
 

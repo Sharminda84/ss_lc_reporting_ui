@@ -213,9 +213,19 @@ const buildOrderSummariesMaps = (orders,
         }
     });
 
-    // adCampaignsData, campaignToCardTypeMappings
+    const adSpend = new Map();
+    adCampaignsData.forEach(adCampaign => {
+        const cardType = campaignToCardTypeMappings[adCampaign.campaignName];
+        if (adSpend.has(cardType)) {
+            const updatedAdSpend = adSpend.get(cardType) + adCampaign.cost;
+            adSpend.set(cardType, updatedAdSpend);
+        } else {
+            adSpend.set(cardType, adCampaign.cost);
+        }
+    });
+
     ordersSummary.forEach((orderSummary, cardType) => {
-        orderSummary.adSpend = 0;
+        orderSummary.adSpend = adSpend.has(cardType) ? adSpend.get(cardType) : 0;
         orderSummary.profit = orderSummary.totalRevenue -
                               orderSummary.adSpend -
                               orderSummary.primeGroupCosts -
