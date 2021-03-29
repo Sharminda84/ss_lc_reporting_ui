@@ -1,5 +1,5 @@
 import { call, put } from 'redux-saga/effects';
-import { loadCardInfo } from '../actions/refData';
+import { loadCardInfo, laodCardDesignCounts } from '../actions/refData';
 import { sendGetRequest } from '../networkUtils';
 import * as ReportingServerURLs from './ReportingServerURLs';
 import { getCardName } from '../../utils';
@@ -11,6 +11,17 @@ export function* fetchCardInfo() {
         yield put(loadCardInfo(processData(cardInfo)));
     } catch (error) {
         console.log(`Error fetching card info [${error}}]`);
+    }
+}
+
+export function* fetchCardDesignCounts() {
+    try {
+        const cardDesignCounts = yield call(sendGetRequest, ReportingServerURLs.FETCH_CARD_DESIGNS_COUNT)
+        const cardDesignCountsMap = new Map();
+        cardDesignCounts.forEach(row => cardDesignCountsMap.set(row[0], row[1]));
+        yield put(laodCardDesignCounts(cardDesignCountsMap));
+    } catch (error) {
+        console.log(`Error fetching card design counts [${error}}]`);
     }
 }
 

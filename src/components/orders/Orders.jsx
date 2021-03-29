@@ -28,6 +28,23 @@ CARD_TYPES.set(10, "Good Luck Cards");
 CARD_TYPES.set(11, "Thank You Cards");
 CARD_TYPES.set(12, "Thank You Teacher Cards");
 
+export const CARD_NAMES_TO_TYPES = new Map();
+CARD_NAMES_TO_TYPES.set("Leaving Cards", "LEAVING_CARD");
+CARD_NAMES_TO_TYPES.set("Birthday Cards", "BIRTHDAY_CARD");
+CARD_NAMES_TO_TYPES.set("Maternity Leave Cards", "MATERNITY_LEAVE_CARD");
+CARD_NAMES_TO_TYPES.set("New Baby Cards", "NEW_BABY_CARD");
+CARD_NAMES_TO_TYPES.set("New Daddy Cards", "FATHERHOOD_CARD");
+CARD_NAMES_TO_TYPES.set("Welcome Cards", "WELCOME_CARD");
+CARD_NAMES_TO_TYPES.set("Retirement Cards", "RETIREMENT_CARD");
+CARD_NAMES_TO_TYPES.set("Get Well Soon Cards", "GET_WELL_SOON_CARD");
+CARD_NAMES_TO_TYPES.set("Congratulations Cards", "CONGRATULATIONS_CARD");
+CARD_NAMES_TO_TYPES.set("Good Luck Cards", "GOOD_LUCK_CARD");
+CARD_NAMES_TO_TYPES.set("Thank You Cards", "THANK_YOU_CARD");
+CARD_NAMES_TO_TYPES.set("Thank You Teacher Cards", "THANK_YOU_TEACHER_CARD");
+CARD_NAMES_TO_TYPES.set("Christmas Cards", "CHRISTMAS_CARD");
+//THINKING_OF_YOU
+//WELCOME_CARD
+
 const LEAVING_CARD_EPOCH = new Date(2020, 3, 13, 0, 0, 0, 0);
 const LEAVING_CARD_EPOCH_TIME = LEAVING_CARD_EPOCH.getTime();
 
@@ -55,7 +72,7 @@ const convertToDailyChartData = (orders, cardTypeForCharts) => {
         .forEach((count, date) => chartData.push([new Date(date).getTime(), count]));
 
     return _.orderBy(chartData, data => data[0], 'asc');
-}
+};
 
 // Returns start of the week for a given date
 const startOfTheWeekDate = (date) => {
@@ -72,7 +89,7 @@ const startOfTheWeekDate = (date) => {
     }
 
     return startOfWeek.getFullYear() + '-' + (startOfWeek.getMonth() + 1) + '-' + startOfWeek.getDate()
-}
+};
 
 // Process orders for generating the order chart
 const convertToWeeklyChartData = (orders, cardTypeForCharts) => {
@@ -94,7 +111,7 @@ const convertToWeeklyChartData = (orders, cardTypeForCharts) => {
 
     ordersByWeek.forEach((count, date) => chartData.push([new Date(date).getTime(), count]));
     return _.orderBy(chartData, data => data[0], 'asc');
-}
+};
 
 // Process orders to generate the orders summary
 // 1. Orders summary
@@ -232,11 +249,12 @@ const buildOrderSummariesMaps = (orders,
                               orderSummary.designerCommission -
                               orderSummary.stripeFee;
     });
-}
+};
 
-export const generateOrdersSummaryArray = ordersSummary => {
+export const generateOrdersSummaryArray = (ordersSummary, cardDesignCounts) => {
+    const ordersSummaryClone = _.cloneDeep(ordersSummary);
     const ordersSummaryArray = [];
-    ordersSummary.forEach((summary, orderType) => {
+    ordersSummaryClone.forEach((summary, orderType) => {
         summary.eCardRevenue = `£${round(summary.eCardRevenue)}`
         summary.a4Revenue = `£${round(summary.a4Revenue)}`
         summary.a5Revenue = `£${round(summary.a5Revenue)}`
@@ -246,10 +264,20 @@ export const generateOrdersSummaryArray = ordersSummary => {
         summary.designerCommission = `£${round(summary.designerCommission)}`
         summary.stripeFee = `£${round(summary.stripeFee)}`
         summary.profit = `£${round(summary.profit)}`
+        summary.cardCount = cardDesignCounts.get(CARD_NAMES_TO_TYPES.get(summary.cardType));
         ordersSummaryArray.push(summary);
     });
+
     return ordersSummaryArray;
-}
+};
+
+export const calculateTotalProfitAndLoss = ordersSummary => {
+    let totalProfitAndLoss = 0.0;
+    ordersSummary.forEach((summary, orderType) => {
+        totalProfitAndLoss = totalProfitAndLoss + summary.profit;
+    });
+    return totalProfitAndLoss;
+};
 
 const generateOrdersForTable = orders => orders.map(order => {
     const clonedOrder = _.cloneDeep(order);
@@ -301,7 +329,7 @@ const generateCardDrilldownDataSeries = (orderBreakdownPieChartDrilldownData, ca
 function Orders(props) {
     const { fetchOrdersData, ordersTableConfig, ordersSummaryTableConfig, orders, adCampaignsData,
             campaignToCardTypeMappings, displayChart = true, title, cardInfo, showOrderDetailsTable = false,
-            showWeeklyOrdersChart = true, isAllTimeView = false } = props;
+            showWeeklyOrdersChart = true, isAllTimeView = false, cardDesignCounts } = props;
 
     const [cardTypeForCharts, setCardTypeForCharts] = useState(CARD_TYPE_ALL);
     const [fromDate, setFromDate] = useState(new Date().getTime());
@@ -319,12 +347,13 @@ function Orders(props) {
     
     // Generate data structures for presentation
     const totalOrdersValue = orders.reduce((total, order) => total + order.transactionAmount, 0.0);
-    const ordersSummaryArray = generateOrdersSummaryArray(ordersSummary);
+    const ordersSummaryArray = generateOrdersSummaryArray(ordersSummary, cardDesignCounts);
     const ordersForTable = generateOrdersForTable(orders);
     const printedCardsDataSeries = generateCardDataSeries('PrintedCards', printedCardOrderBreakdownPieChartData);
     const printedCardsDrillDownDataSeries = generateCardDrilldownDataSeries(printedCardOrderBreakdownPieChartDrilldownData, cardInfo);
     const eCardsDataSeries = generateCardDataSeries('eCards', eCardOrderBreakdownPieChartData);
     const eCardsDrillDownDataSeries = generateCardDrilldownDataSeries(eCardOrderBreakdownPieChartDrilldownData, cardInfo);
+    const totalProfitAndLoss = calculateTotalProfitAndLoss(ordersSummary);
 
     const triggerRefresh = (newFromDate) => {
         fetchOrdersData(newFromDate);
@@ -340,7 +369,7 @@ function Orders(props) {
             {
                 orders.length > 0 &&
                 <div className='orderTotal'>
-                    Total Sales: £{round(totalOrdersValue)}
+                    Total Sales: £{round(totalOrdersValue)} &nbsp; &nbsp; P&L: £{round(totalProfitAndLoss)}
                 </div>
             }
             {

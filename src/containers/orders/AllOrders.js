@@ -12,6 +12,7 @@ const mapStateToProps = state => ({
   title: 'Orders',
   cardInfo: _get(state, 'refData.cardInfo', new Map()),
   isAllTimeView: true,
+  cardDesignCounts: _get(state, 'refData.cardDesignCounts'),
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({

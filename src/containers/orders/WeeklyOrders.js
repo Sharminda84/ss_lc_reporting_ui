@@ -5,13 +5,14 @@ import * as orderActions from '../../store/actions/orders';
 
 const mapStateToProps = state => ({
   orders: _get(state, 'orders.weeklyOrders', {}),
-  adCampaignsData: _get(state, 'orders.monthlyAdCampaignsData', {}),
+  adCampaignsData: _get(state, 'orders.weeklyAdCampaignsData', {}),
   campaignToCardTypeMappings: _get(state, 'orders.campaignToCardTypeMappings'),
   ordersTableConfig: _get(state, 'orders.ordersTableConfig', {}),
   ordersSummaryTableConfig: _get(state, 'orders.ordersSummaryTableConfig', {}),
   title: 'Weekly Orders',
   cardInfo: _get(state, 'refData.cardInfo', new Map()),
-  showWeeklyOrdersChart: false
+  showWeeklyOrdersChart: false,
+  cardDesignCounts: _get(state, 'refData.cardDesignCounts'),
 });
 
 const mapDispatchToProps = dispatch => ({

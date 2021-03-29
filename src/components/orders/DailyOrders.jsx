@@ -106,10 +106,11 @@ const buildOrderSummariesMaps = (date, dailyOrders, ordersSummary, dailyAdCampai
 
 function DailyOrders(props) {
     const [ordersDate, setOrdersDate] = useState(new Date());
-    const { fetchOrdersData, dailyAdCampaignsData, campaignToCardTypeMappings, ordersSummaryTableConfig, dailyOrders } = props;
+    const { fetchOrdersData, dailyAdCampaignsData, campaignToCardTypeMappings, ordersSummaryTableConfig, dailyOrders,
+            cardDesignCounts } = props;
     const ordersSummary = new Map();
     buildOrderSummariesMaps(ordersDate, dailyOrders, ordersSummary, dailyAdCampaignsData, campaignToCardTypeMappings);
-    const ordersSummaryArray = generateOrdersSummaryArray(ordersSummary);
+    const ordersSummaryArray = generateOrdersSummaryArray(ordersSummary, cardDesignCounts);
     const totalOrdersValue = calculateTotalOrdersValue(ordersDate, dailyOrders);
 
     return (

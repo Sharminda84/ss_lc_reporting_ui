@@ -5,11 +5,11 @@ import {
     FETCH_ORDERS_DATA, FETCH_TOP_CARDS
 } from '../actions/orders';
 import { TRIGGER_LOGIN } from '../actions/security';
-import { FETCH_CARD_INFO } from '../actions/refData';
+import { FETCH_CARD_INFO, FETCH_CARD_DESIGN_COUNTS } from '../actions/refData';
 import { fetchMemberSignups, fetchCardsForMembers } from './members';
 import { fetchDailyOrders, fetchTodaysOrders, fetchWeeklyOrders, fetchMonthlyOrders, fetchAllOrders, fetchTopCards } from './orders';
 import { loginUser } from './security';
-import { fetchCardInfo } from './refData';
+import { fetchCardInfo, fetchCardDesignCounts } from './refData';
 
 export function* watchMembersActions() {
     yield takeEvery(FETCH_MEMBERS_DATA, fetchMemberSignups);
@@ -49,4 +49,8 @@ export function* watchFetchCardInfoAction() {
 
 export function* watchFetchTopCardsAction() {
     yield takeEvery(FETCH_TOP_CARDS, fetchTopCards);
+}
+
+export function* watchFetchCardDesignCountsAction() {
+    yield takeEvery(FETCH_CARD_DESIGN_COUNTS, fetchCardDesignCounts);
 }

@@ -23,11 +23,12 @@ const initialState = {
           name: 'Orders',
           allowedRoles: [ ROLE_ADMIN ],
           navigationSubItems: [
+              /*
               {
                   subItemName: 'Cards Stream',
                   subItemPath: '/orders/card-stream',
                   selected: false,
-              },
+              },*/
               {
                   subItemName: 'Daily Window',
                   subItemPath: '/orders/daily',

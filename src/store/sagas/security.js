@@ -1,6 +1,6 @@
 import { put, call } from 'redux-saga/effects';
 import { loginSuccess, loginError } from '../actions/security';
-import { fetchCardInfo } from '../actions/refData';
+import { fetchCardInfo, fetchCardDesignCounts } from '../actions/refData';
 import { fetchTopCards} from '../actions/orders';
 import { fetchCardsForMembers } from '../actions/members';
 import axios from 'axios';
@@ -16,6 +16,7 @@ export function* loginUser(action) {
         yield put(fetchCardInfo());
         yield put(fetchTopCards());
         yield put(fetchCardsForMembers(getStartOfTodayInMillis()));
+        yield put(fetchCardDesignCounts());
     } catch (error) {
         yield put(loginError());
     }
