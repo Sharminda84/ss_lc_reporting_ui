@@ -11,6 +11,7 @@ const mapStateToProps = state => ({
   displayChart: false,
   cardInfo: _get(state, 'refData.cardInfo', new Map()),
   showOrderDetailsTable: true,
+  cardDesignCounts: _get(state, 'refData.cardDesignCounts'),
 });
 
 const mapDispatchToProps = dispatch => ({
