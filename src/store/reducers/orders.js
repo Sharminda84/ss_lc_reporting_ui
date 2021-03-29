@@ -118,6 +118,48 @@ const initialState = {
             accessor: 'profit',
         },
     ],
+    dailyOrdersSummaryTableConfig: [
+        {
+            Header: 'Card Type',
+            accessor: 'cardType',
+        },
+        {
+            Header: 'Cards Count ',
+            accessor: 'cardCount',
+        },
+        {
+            Header: 'eCard Sales',
+            accessor: 'eCardSales',
+        },
+        {
+            Header: 'eCard Revenue',
+            accessor: 'eCardRevenue',
+        },
+        {
+            Header: 'A4 Sales',
+            accessor: 'a4Sales',
+        },
+        {
+            Header: 'A4 Revenue',
+            accessor: 'a4Revenue',
+        },
+        {
+            Header: 'A5 Sales',
+            accessor: 'a5Sales',
+        },
+        {
+            Header: 'A5 Revenue',
+            accessor: 'a5Revenue',
+        },
+        {
+            Header: 'Total Sales',
+            accessor: 'totalSales',
+        },
+        {
+            Header: 'Total Revenue',
+            accessor: 'totalRevenue',
+        },
+    ],
     topCards: [],
 
     // Ad campaigns and card type aggregation mappings
