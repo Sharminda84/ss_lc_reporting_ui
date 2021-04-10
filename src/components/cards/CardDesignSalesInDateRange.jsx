@@ -60,7 +60,7 @@ const CardDesignSalesInDateRange = ( props ) => {
                     onChange={(newToDate) => setToDate(newToDate.getTime())}
                 />
 
-                <button onClick={() => fetchCardDesignsSales()}>Fetch</button>
+                <button className='CardDesignSalesInDateRangeSearchOptionsButton' onClick={() => fetchCardDesignsSales()}>Fetch</button>
             </div>
 
             <div>
