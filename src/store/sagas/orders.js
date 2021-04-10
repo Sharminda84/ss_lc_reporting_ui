@@ -1,8 +1,9 @@
 import { call, put } from 'redux-saga/effects';
 import {
     loadDailyOrdersData, loadTodaysOrdersData, loadWeeklyOrdersData, loadMonthlyOrdersData,
-    loadOrdersData, loadTopCards }
-from '../actions/orders';
+    loadOrdersData, loadTopCards, loadCardDesignsSalesInDateRange
+}
+    from '../actions/orders';
 import _ from 'lodash';
 import { sendGetRequest, sendPostRequest } from '../networkUtils';
 import * as ReportingServerURLs from "./ReportingServerURLs";
@@ -106,6 +107,16 @@ export function* fetchTopCards() {
         const fetchTopCardsURL = ReportingServerURLs.FETCH_TOP_CARDS;
         const topCards = yield call(sendGetRequest, fetchTopCardsURL);
         yield put(loadTopCards(topCards));
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export function* fetchTopCardsInDateRange(action) {
+    try {
+        const fetchTopCardsURL = ReportingServerURLs.FETCH_CARD_DESIGNS_SALES_IN_DATE_RANGE + `?fromDate=${action.payload.fromDate}&toDate=${action.payload.toDate}`;
+        const topCards = yield call(sendGetRequest, fetchTopCardsURL);
+        yield put(loadCardDesignsSalesInDateRange(topCards));
     } catch (error) {
         console.log(error);
     }

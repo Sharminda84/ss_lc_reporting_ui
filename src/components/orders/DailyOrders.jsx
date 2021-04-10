@@ -6,7 +6,7 @@ import '../../App.css';
 import './Orders.css';
 
 import { CARD_TYPES, generateOrdersSummaryArray, round } from './Orders';
-import _ from "lodash";
+import _ from 'lodash';
 
 const calculateTotalOrdersValue = (date, dailyOrders) => {
     const orders = dailyOrders.get(date.toISOString().split('T')[0]);

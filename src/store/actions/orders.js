@@ -16,6 +16,9 @@ export const LOAD_MONTHLY_ORDERS_DATA = 'orders/LOAD_MONTHLY_ORDERS_DATA';
 export const FETCH_TOP_CARDS = 'orders/FETCH_TOP_CARDS';
 export const LOAD_TOP_CARDS = 'orders/LOAD_TOP_CARDS';
 
+export const FETCH_CARD_DESIGNS_SALES_IN_DATE_RANGE = 'orders/FETCH_CARD_DESIGNS_SALES_IN_DATE_RANGE';
+export const LOAD_CARD_DESIGNS_SALES_IN_DATE_RANGE = 'orders/LOAD_CARD_DESIGNS_SALES_IN_DATE_RANGE';
+
 export const fetchOrdersData = (startDate, endDate) => ({
     type: FETCH_ORDERS_DATA,
     payload: {
@@ -95,4 +98,17 @@ export const fetchTopCards = () => ({
 export const loadTopCards = (topCards) => ({
     type: LOAD_TOP_CARDS,
     payload: topCards,
+});
+
+export const fetchCardDesignsSalesInDateRange = (fromDate, toDate) => ({
+    type: FETCH_CARD_DESIGNS_SALES_IN_DATE_RANGE,
+    payload: {
+        fromDate,
+        toDate
+    }
+});
+
+export const loadCardDesignsSalesInDateRange = (cardDesignsSales) => ({
+    type: LOAD_CARD_DESIGNS_SALES_IN_DATE_RANGE,
+    payload: cardDesignsSales,
 });

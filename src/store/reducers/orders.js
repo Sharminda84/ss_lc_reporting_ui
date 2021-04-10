@@ -5,7 +5,7 @@ import {
     LOAD_TODAYS_ORDERS_DATA,
     LOAD_WEEKLY_ORDERS_DATA,
     LOAD_MONTHLY_ORDERS_DATA,
-    LOAD_TOP_CARDS,
+    LOAD_TOP_CARDS, LOAD_CARD_DESIGNS_SALES_IN_DATE_RANGE,
 } from '../actions/orders';
 
 const initialState = {
@@ -160,7 +160,24 @@ const initialState = {
             accessor: 'totalRevenue',
         },
     ],
+
     topCards: [],
+
+    cardDesignSalesInDateRange: [],
+    cardDesignSalesInDateRangeTableConfig: [
+        {
+            Header: 'Card',
+            accessor: 'cardImage',
+        },
+        {
+            Header: 'Card Sales',
+            accessor: 'cardSales',
+        },
+        {
+            Header: 'Card Sequence',
+            accessor: 'cardSequence',
+        },
+    ],
 
     // Ad campaigns and card type aggregation mappings
     campaignToCardTypeMappings: {
@@ -223,6 +240,9 @@ const orders = (state = initialState, action) => {
 
         case LOAD_TOP_CARDS:
             return {...state, topCards: action.payload};
+
+        case LOAD_CARD_DESIGNS_SALES_IN_DATE_RANGE:
+            return {...state, cardDesignSalesInDateRange: action.payload};
 
         default: return state;
     }

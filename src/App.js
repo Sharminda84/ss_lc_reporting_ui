@@ -13,6 +13,7 @@ import WeeklyOrders from './containers/orders/WeeklyOrders';
 import MonthlyOrders from './containers/orders/MonthlyOrders';
 import AllOrders from './containers/orders/AllOrders';
 import Login from './containers/security/Login';
+import CardDesignSalesInDateRange from './containers/cards/CardDesignSalesInDateRange';
 import TopBirthdayCardsContainer from './containers/orders/TopBirthdayCardsContainer';
 import TopChristmasCardsContainer from './containers/orders/TopChristmasCardsContainer';
 import TopLeavingCardsContainer from './containers/orders/TopLeavingCardsContainer';
@@ -44,6 +45,7 @@ function App() {
                 <Route path='/orders/monthly' exact component={MonthlyOrders} />
                 <Route path='/orders/alltime' exact component={AllOrders} />
 
+                <Route path='/cards/sales' exact component={CardDesignSalesInDateRange} />
                 <Route path='/orders/top10/leaving' exact component={TopLeavingCardsContainer} />
                 <Route path='/orders/top10/birthday' exact component={TopBirthdayCardsContainer} />
                 <Route path='/orders/top10/maternity' exact component={TopMaternityCardsContainer} />

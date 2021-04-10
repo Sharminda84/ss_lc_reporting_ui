@@ -10,6 +10,7 @@ export const FETCH_TODAYS_ORDERS = URL_PREFIX + '/orders/today';
 export const FETCH_WEEKLY_ORDERS = URL_PREFIX + '/orders/week';
 export const FETCH_MONTHLY_ORDERS = URL_PREFIX + '/orders/month';
 export const FETCH_TOP_CARDS = URL_PREFIX + '/orders/cards/top';
+export const FETCH_CARD_DESIGNS_SALES_IN_DATE_RANGE = URL_PREFIX + '/orders/cards/sales/date-range';
 export const FETCH_CARD_INFO = URL_PREFIX + '/cardinfo/all';
 export const FETCH_AD_CAMPAIGNS_DATA = URL_PREFIX + '/google-ads/campaigns';
 export const FETCH_CARD_DESIGNS_COUNT = URL_PREFIX + '/cardinfo/card-design-counts';

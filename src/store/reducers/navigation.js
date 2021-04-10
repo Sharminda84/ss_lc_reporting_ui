@@ -79,41 +79,46 @@ const initialState = {
           ]
       },
       {
-          name: 'Top Card Designs by Sales',
+          name: 'Card Designs',
           allowedRoles: [ ROLE_ADMIN ],
           navigationSubItems: [
               {
-                  subItemName: 'Leaving',
+                  subItemName: 'Card Sales',
+                  subItemPath: '/cards/sales',
+                  selected: false,
+              },
+              {
+                  subItemName: 'Leaving - All Time Top 10',
                   subItemPath: '/orders/top10/leaving',
                   selected: false,
               },
               {
-                  subItemName: 'Birthday',
+                  subItemName: 'Birthday - All Time Top 10',
                   subItemPath: '/orders/top10/birthday',
                   selected: false,
               },
               {
-                  subItemName: 'Maternity',
+                  subItemName: 'Maternity - All Time Top 10',
                   subItemPath: '/orders/top10/maternity',
                   selected: false,
               },
               {
-                  subItemName: 'New Baby',
+                  subItemName: 'New Baby - All Time Top 10',
                   subItemPath: '/orders/top10/new-baby',
                   selected: false,
               },
               {
-                  subItemName: 'New Daddy',
+                  subItemName: 'New Daddy - All Time Top 10',
                   subItemPath: '/orders/top10/new-daddy',
                   selected: false,
               },
               {
-                  subItemName: 'Welcome',
+                  subItemName: 'Welcome - All Time Top 10',
                   subItemPath: '/orders/top10/welcome',
                   selected: false,
               },
               {
-                  subItemName: 'Chistmas',
+                  subItemName: 'Chistmas - All Time Top 10',
                   subItemPath: '/orders/top10/christmas',
                   selected: false,
               },
