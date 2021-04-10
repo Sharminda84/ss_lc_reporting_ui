@@ -9,7 +9,7 @@ import DataTable from '../table/DataTable';
 
 const CardDesignSalesInDateRange = ( props ) => {
 
-    const { cardDesignSalesInDateRange, cardDesignSalesInDateRangeTableConfig,
+    const { cardDesignSalesInDateRange, cardDesignViewCounts, cardDesignSalesInDateRangeTableConfig,
             fetchCardDesignsSalesInDateRange } = props;
 
     const [selectedCardType, setSelectedCardType] = useState(0);
@@ -23,8 +23,10 @@ const CardDesignSalesInDateRange = ( props ) => {
     }
 
     const generateTableData = () => {
-        const cardDesignsSales = [];
+        const cardDesignViewCountsMap = new Map();
+        cardDesignViewCounts.forEach(record => cardDesignViewCountsMap.set(record[0], Number(record[1])));
 
+        const cardDesignsSales = [];
         cardDesignSalesInDateRange.
             filter(cardDesignsSalesRecord => cardDesignsSalesRecord[0] == selectedCardType).
             forEach(cardDesignsSalesRecord => {
@@ -32,6 +34,7 @@ const CardDesignSalesInDateRange = ( props ) => {
                     cardImage: <img src={cardDesignsSalesRecord[2]} alt={cardDesignsSalesRecord[1]} width='65px' height='92px' />,
                     cardSales: '£' + round(Number(cardDesignsSalesRecord[4])),
                     cardSequence: cardDesignsSalesRecord[5],
+                    cardViews: cardDesignViewCountsMap.get(cardDesignsSalesRecord[1]),
                 });
             });
 

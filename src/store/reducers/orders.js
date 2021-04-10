@@ -164,6 +164,7 @@ const initialState = {
     topCards: [],
 
     cardDesignSalesInDateRange: [],
+    cardDesignViewCounts: [],
     cardDesignSalesInDateRangeTableConfig: [
         {
             Header: 'Card',
@@ -176,6 +177,10 @@ const initialState = {
         {
             Header: 'Card Sequence',
             accessor: 'cardSequence',
+        },
+        {
+            Header: 'Card Views',
+            accessor: 'cardViews',
         },
     ],
 
@@ -242,7 +247,11 @@ const orders = (state = initialState, action) => {
             return {...state, topCards: action.payload};
 
         case LOAD_CARD_DESIGNS_SALES_IN_DATE_RANGE:
-            return {...state, cardDesignSalesInDateRange: action.payload};
+            return {
+                ...state,
+                cardDesignSalesInDateRange: action.payload.cardSales,
+                cardDesignViewCounts: action.payload.cardViews
+            };
 
         default: return state;
     }

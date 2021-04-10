@@ -108,7 +108,10 @@ export const fetchCardDesignsSalesInDateRange = (fromDate, toDate) => ({
     }
 });
 
-export const loadCardDesignsSalesInDateRange = (cardDesignsSales) => ({
+export const loadCardDesignsSalesInDateRange = (cardSales, cardViews) => ({
     type: LOAD_CARD_DESIGNS_SALES_IN_DATE_RANGE,
-    payload: cardDesignsSales,
+    payload: {
+        cardSales,
+        cardViews
+    },
 });

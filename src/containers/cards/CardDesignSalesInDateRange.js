@@ -5,6 +5,7 @@ import * as orderActions from '../../store/actions/orders';
 
 const mapStateToProps = state => ({
   cardDesignSalesInDateRange: _get(state, 'orders.cardDesignSalesInDateRange', []),
+  cardDesignViewCounts: _get(state, 'orders.cardDesignViewCounts', []),
   cardDesignSalesInDateRangeTableConfig: _get(state, 'orders.cardDesignSalesInDateRangeTableConfig', []),
 });
 
