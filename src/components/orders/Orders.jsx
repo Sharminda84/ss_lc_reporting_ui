@@ -402,17 +402,17 @@ function Orders(props) {
                     <div className='pieCharts'>
                         <PieChart
                             title='Printed Cards'
-                            subTitle='Click on each slice to see breakdown'
+                            // subTitle='Click on each slice to see breakdown'
                             series={printedCardsDataSeries}
-                            drilldown={printedCardsDrillDownDataSeries}
+                            // drilldown={printedCardsDrillDownDataSeries}
                         />
                     </div>
                     <div className='pieCharts'>
                         <PieChart
                             title='ECards'
-                            subTitle='Click on each slice to see breakdown'
+                            // subTitle='Click on each slice to see breakdown'
                             series={eCardsDataSeries}
-                            drilldown={eCardsDrillDownDataSeries}
+                            // drilldown={eCardsDrillDownDataSeries}
                         />
                     </div>
                     <div className='chartDropDown'>

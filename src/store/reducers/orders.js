@@ -104,6 +104,10 @@ const initialState = {
             accessor: 'stripeFee',
         },
         {
+            Header: 'VAT',
+            accessor: 'vat',
+        },
+        {
             Header: 'P&L',
             accessor: 'profit',
         },

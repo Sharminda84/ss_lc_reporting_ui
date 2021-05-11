@@ -36,7 +36,8 @@ const getChartOptions = (title, subTitle, series, drilldown) => {
         tooltip: {
             useHTML: true,
             headerFormat: '<span style="font-size:11px"><b>{series.name}</b></span><br/><br/>',
-            pointFormat: '<img alt="" width="100" height="100" src="{point.imageSource}" /><br/><br/><span style="color:{point.color}">{point.name}</span>: <b>£{point.y:.2f}</b>'
+            // pointFormat: '<img alt="" width="100" height="100" src="{point.imageSource}" /><br/><br/><span style="color:{point.color}">{point.name}</span>: <b>£{point.y:.2f}</b>'
+            pointFormat: '<br/><span style="color:{point.color}">{point.name}</span>: <b>£{point.y:.2f}</b>'
         },
         series,
         drilldown
@@ -46,7 +47,7 @@ const getChartOptions = (title, subTitle, series, drilldown) => {
 };
 
 function Chart(props) {
-    const { title, subTitle, series, drilldown } = props;
+    const { title, subTitle = "", series, drilldown = {} } = props;
     const chartOptions = getChartOptions(title, subTitle, series, drilldown);
 
     return (
