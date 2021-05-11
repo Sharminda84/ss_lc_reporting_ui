@@ -3,10 +3,10 @@
 }
 
 .dateSelector {
-    padding: 20px;
+    padding: 5px;
     display: flex;
     flex-direction: row;
-    color: #0f6674;
+    color: ghostwhite;
     align-items: baseline;
 }
 

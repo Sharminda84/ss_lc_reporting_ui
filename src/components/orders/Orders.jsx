@@ -364,14 +364,24 @@ function Orders(props) {
     return (
         <div>
             {
-                orders.length === 0 && <div>
-                    No Orders...
+                orders.length === 0 &&
+                <div>
                 </div>
             }
             {
                 orders.length > 0 &&
                 <div className='orderTotal'>
                     Total Sales: £{round(totalOrdersValue)} &nbsp; &nbsp; P&L: £{round(totalProfitAndLoss)}
+                </div>
+            }
+            {
+                !isAllTimeView &&
+                <div className='dateSelector'>
+                    <h4>Click to choose a different date</h4>
+                    <DatePicker
+                        selected={fromDate}
+                        onChange={(newFromDate) => setFromDate(newFromDate.getTime()) || triggerRefresh(newFromDate.getTime())}
+                    />
                 </div>
             }
             {
@@ -389,16 +399,6 @@ function Orders(props) {
             {
                 displayChart && orders.length > 0 &&
                 <div className='charts'>
-                    {
-                        !isAllTimeView &&
-                        <div className='dateSelector'>
-                            <h4>Click to choose a different date</h4>
-                            <DatePicker
-                                selected={fromDate}
-                                onChange={(newFromDate) => setFromDate(newFromDate.getTime()) || triggerRefresh(newFromDate.getTime())}
-                            />
-                        </div>
-                    }
                     <div className='pieCharts'>
                         <PieChart
                             title='Printed Cards'

@@ -30,27 +30,27 @@ const initialState = {
                   selected: false,
               },*/
               {
-                  subItemName: 'Daily Summary Window',
-                  subItemPath: '/orders/daily',
-                  selected: false,
-              },
-              {
                   subItemName: 'Today\'s Orders',
                   subItemPath: '/orders/todays',
                   selected: false,
               },
               {
-                  subItemName: 'Weekly Summary Window',
+                  subItemName: 'Daily Summary Window',
+                  subItemPath: '/orders/daily',
+                  selected: false,
+              },
+              {
+                  subItemName: '7-Day Summary Window',
                   subItemPath: '/orders/weekly',
                   selected: false,
               },
               {
-                  subItemName: 'Monthly Summary Window',
+                  subItemName: '30-Day Summary Window',
                   subItemPath: '/orders/monthly',
                   selected: false,
               },
               {
-                  subItemName: 'All-time Orders',
+                  subItemName: 'All-time Summary Window',
                   subItemPath: '/orders/alltime',
                   selected: false,
               }
