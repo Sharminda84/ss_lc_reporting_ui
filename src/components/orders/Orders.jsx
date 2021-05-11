@@ -47,6 +47,7 @@ CARD_NAMES_TO_TYPES.set("Christmas Cards", "CHRISTMAS_CARD");
 
 const LEAVING_CARD_EPOCH = new Date(2020, 3, 13, 0, 0, 0, 0);
 const LEAVING_CARD_EPOCH_TIME = LEAVING_CARD_EPOCH.getTime();
+const VAT_EPOCH = new Date(2021, 1, 1, 0, 0, 0, 0).getTime();
 
 export const round = num => Math.round((num + Number.EPSILON) * 100) / 100;
 
@@ -140,6 +141,7 @@ const buildOrderSummariesMaps = (orders,
                 adSpend: 0,
                 designerCommission: 0,
                 stripeFee: 0,
+                vat: 0,
                 profit: 0,
             });
         }
@@ -157,7 +159,6 @@ const buildOrderSummariesMaps = (orders,
             orderSummary.primeGroupCosts = orderSummary.primeGroupCosts + 0;
             orderSummary.designerCommission = orderSummary.designerCommission + (commission/100);
             orderSummary.stripeFee = orderSummary.stripeFee + 0.23;
-
         } else if (productType === 2) {
             // A5
             orderSummary.a5Sales = orderSummary.a5Sales + 1;
@@ -177,6 +178,10 @@ const buildOrderSummariesMaps = (orders,
                 1.15 /* Printing */;
             orderSummary.designerCommission = orderSummary.designerCommission + (commission/100);
             orderSummary.stripeFee = orderSummary.stripeFee + 0.32;
+        }
+
+        if (order.tranTime >= VAT_EPOCH) {
+            orderSummary.vat = orderSummary.vat + (order.tranAmount/6.0);
         }
 
         ordersSummary.set(cardType, orderSummary);
@@ -247,7 +252,8 @@ const buildOrderSummariesMaps = (orders,
                               orderSummary.adSpend -
                               orderSummary.primeGroupCosts -
                               orderSummary.designerCommission -
-                              orderSummary.stripeFee;
+                              orderSummary.stripeFee -
+                              orderSummary.vat;
     });
 };
 
@@ -263,6 +269,7 @@ export const generateOrdersSummaryArray = (ordersSummary, cardDesignCounts) => {
         summary.adSpend = `£${round(summary.adSpend)}`
         summary.designerCommission = `£${round(summary.designerCommission)}`
         summary.stripeFee = `£${round(summary.stripeFee)}`
+        summary.vat = `£${round(summary.vat)}`
         summary.profit = `£${round(summary.profit)}`
         summary.cardCount = cardDesignCounts.get(CARD_NAMES_TO_TYPES.get(summary.cardType));
         ordersSummaryArray.push(summary);
@@ -366,6 +373,7 @@ function Orders(props) {
             {
                 orders.length === 0 &&
                 <div>
+                    Loading...
                 </div>
             }
             {
