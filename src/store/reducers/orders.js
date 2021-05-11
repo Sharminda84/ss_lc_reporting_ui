@@ -26,23 +26,13 @@ const initialState = {
 
     ordersTableConfig: [
         {
-            Header: 'Order Date',
-            accessor: 'transactionTime',
-            filter: 'fuzzyText',
-        },
-        {
-            Header: 'Customer',
-            accessor: 'customerName',
-            filter: 'fuzzyText',
-        },
-        {
             Header: 'Customer\'s Email',
             accessor: 'customerEmail',
             filter: 'fuzzyText',
         },
         {
             Header: 'Order Amount',
-            accessor: 'transactionAmount',
+            accessor: 'tranAmount',
             filter: 'fuzzyText',
         },
         {

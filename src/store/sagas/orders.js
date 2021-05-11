@@ -24,7 +24,7 @@ export function* fetchDailyOrders(action) {
             date: action.payload,
         }
         const orders = yield call(sendPostRequest, fetchMembersURL, payload);
-        const sortedOrders = _.orderBy(orders, order => order.transactionTime, 'desc');
+        const sortedOrders = _.orderBy(orders, order => order.tranTime, 'desc');
 
         const startOfDay = calculateStartOfDay(action.payload);
         const fetchAdsCampaignDataURL = ReportingServerURLs.FETCH_AD_CAMPAIGNS_DATA + `?fromDate=${startOfDay}&toDate=${action.payload}`;
@@ -41,7 +41,7 @@ export function* fetchTodaysOrders() {
     try {
         const fetchMembersURL = ReportingServerURLs.FETCH_TODAYS_ORDERS;
         const orders = yield call(sendGetRequest, fetchMembersURL);
-        const sortedOrders = _.orderBy(orders, order => order.transactionTime, 'desc');
+        const sortedOrders = _.orderBy(orders, order => order.tranTime, 'desc');
 
         const currentTime = new Date().getTime();
         const startOfDay = calculateStartOfDay(currentTime);
@@ -58,7 +58,7 @@ export function* fetchWeeklyOrders(action) {
     try {
         const fetchMembersURL = ReportingServerURLs.FETCH_WEEKLY_ORDERS + `?fromDate=${action.payload.fromDate}`;
         const orders = yield call(sendGetRequest, fetchMembersURL);
-        const sortedOrders = _.orderBy(orders, order => order.transactionTime, 'desc');
+        const sortedOrders = _.orderBy(orders, order => order.tranTime, 'desc');
 
         const start = calculateStartOfDay(action.payload.fromDate) - 7 * 24 * 60 * 60 * 1000;
         const fetchAdsCampaignDataURL = ReportingServerURLs.FETCH_AD_CAMPAIGNS_DATA + `?fromDate=${start}&toDate=${action.payload.fromDate}`;
@@ -74,7 +74,7 @@ export function* fetchMonthlyOrders(action) {
     try {
         const fetchMembersURL = ReportingServerURLs.FETCH_MONTHLY_ORDERS + `?fromDate=${action.payload.fromDate}`;
         const orders = yield call(sendGetRequest, fetchMembersURL);
-        const sortedOrders = _.orderBy(orders, order => order.transactionTime, 'desc');
+        const sortedOrders = _.orderBy(orders, order => order.tranTime, 'desc');
 
         const start = calculateStartOfDay(action.payload.fromDate) - 30 * 24 * 60 * 60 * 1000;
         const fetchAdsCampaignDataURL = ReportingServerURLs.FETCH_AD_CAMPAIGNS_DATA + `?fromDate=${start}&toDate=${action.payload.fromDate}`;
@@ -90,7 +90,7 @@ export function* fetchAllOrders() {
     try {
         const fetchMembersURL = ReportingServerURLs.FETCH_ALL_ORDERS;
         const orders = yield call(sendGetRequest, fetchMembersURL);
-        const sortedOrders = _.orderBy(orders, order => order.transactionTime, 'desc');
+        const sortedOrders = _.orderBy(orders, order => order.tranTime, 'desc');
 
         const start = 1514764800000;
         const fetchAdsCampaignDataURL = ReportingServerURLs.FETCH_AD_CAMPAIGNS_DATA + `?fromDate=${start}&toDate=${new Date().getTime()}`;

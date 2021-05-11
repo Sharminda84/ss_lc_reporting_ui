@@ -54,10 +54,10 @@ export const round = num => Math.round((num + Number.EPSILON) * 100) / 100;
 const convertToDailyChartData = (orders, cardTypeForCharts) => {
     const chartData = [];
     orders
-        .filter(order => order.transactionTime > LEAVING_CARD_EPOCH_TIME)
+        .filter(order => order.tranTime > LEAVING_CARD_EPOCH_TIME)
         .filter(order => cardTypeForCharts === CARD_TYPE_ALL || (order.leavingCard && cardTypeForCharts == order.leavingCard.cardType))
         .reduce((allOrders, order) => {
-            const transactionDate = new Date(order.transactionTime);
+            const transactionDate = new Date(order.tranTime);
             const key = transactionDate.getFullYear() + '-' +
                 (transactionDate.getMonth() + 1) + '-' +
                 transactionDate.getDate()
@@ -96,9 +96,9 @@ const convertToWeeklyChartData = (orders, cardTypeForCharts) => {
     const chartData = [];
     const ordersByWeek = orders
         .filter(order => cardTypeForCharts === CARD_TYPE_ALL || (order.leavingCard && cardTypeForCharts == order.leavingCard.cardType))
-        .filter(order => order.transactionTime > LEAVING_CARD_EPOCH_TIME)
+        .filter(order => order.tranTime > LEAVING_CARD_EPOCH_TIME)
         .reduce((allOrders, order) => {
-            const transactionDate = new Date(order.transactionTime);
+            const transactionDate = new Date(order.tranTime);
             const key = startOfTheWeekDate(transactionDate);
 
             if (!allOrders.has(key)) {
@@ -145,7 +145,7 @@ const buildOrderSummariesMaps = (orders,
         }
         const orderSummary = ordersSummary.get(cardType);
         orderSummary.totalSales = orderSummary.totalSales + 1;
-        orderSummary.totalRevenue = orderSummary.totalRevenue + order.transactionAmount;
+        orderSummary.totalRevenue = orderSummary.totalRevenue + order.tranAmount;
 
         const productType = _.get(order, 'orderItem.productId', 0);
         const commission = _.get(order, 'cardDesignCommission.commissionPence', 0);
@@ -153,7 +153,7 @@ const buildOrderSummariesMaps = (orders,
         if (productType === 1) {
             // E-card
             orderSummary.eCardSales = orderSummary.eCardSales + 1;
-            orderSummary.eCardRevenue = orderSummary.eCardRevenue + order.transactionAmount;
+            orderSummary.eCardRevenue = orderSummary.eCardRevenue + order.tranAmount;
             orderSummary.primeGroupCosts = orderSummary.primeGroupCosts + 0;
             orderSummary.designerCommission = orderSummary.designerCommission + (commission/100);
             orderSummary.stripeFee = orderSummary.stripeFee + 0.23;
@@ -161,7 +161,7 @@ const buildOrderSummariesMaps = (orders,
         } else if (productType === 2) {
             // A5
             orderSummary.a5Sales = orderSummary.a5Sales + 1;
-            orderSummary.a5Revenue = orderSummary.a5Revenue + order.transactionAmount;
+            orderSummary.a5Revenue = orderSummary.a5Revenue + order.tranAmount;
             orderSummary.primeGroupCosts = orderSummary.primeGroupCosts +
                 0.85 /* Shipping */ +
                 0.90 /* Printing */;
@@ -171,7 +171,7 @@ const buildOrderSummariesMaps = (orders,
         } else if (productType === 5) {
             // A4
             orderSummary.a4Sales = orderSummary.a4Sales + 1;
-            orderSummary.a4Revenue = orderSummary.a4Revenue + order.transactionAmount;
+            orderSummary.a4Revenue = orderSummary.a4Revenue + order.tranAmount;
             orderSummary.primeGroupCosts = orderSummary.primeGroupCosts +
                 1.41 /* Shipping */ +
                 1.15 /* Printing */;
@@ -191,7 +191,7 @@ const buildOrderSummariesMaps = (orders,
                 });
             }
             const cardTypeData = printedCardOrderBreakdownPieChartData.get(cardType);
-            cardTypeData.y = cardTypeData.y + order.transactionAmount;
+            cardTypeData.y = cardTypeData.y + order.tranAmount;
 
 
             if (!printedCardOrderBreakdownPieChartDrilldownData.has(cardType)) {
@@ -202,7 +202,7 @@ const buildOrderSummariesMaps = (orders,
             if (!cardTypeMap.has(cardName)) {
                 cardTypeMap.set(cardName, 0);
             }
-            cardTypeMap.set(cardName, cardTypeMap.get(cardName) + order.transactionAmount);
+            cardTypeMap.set(cardName, cardTypeMap.get(cardName) + order.tranAmount);
         }
 
         // 3. ECards break-down
@@ -215,7 +215,7 @@ const buildOrderSummariesMaps = (orders,
                 });
             }
             const cardTypeData = eCardOrderBreakdownPieChartData.get(cardType);
-            cardTypeData.y = cardTypeData.y + order.transactionAmount;
+            cardTypeData.y = cardTypeData.y + order.tranAmount;
 
 
             if (!eCardOrderBreakdownPieChartDrilldownData.has(cardType)) {
@@ -226,7 +226,7 @@ const buildOrderSummariesMaps = (orders,
             if (!cardTypeMap.has(cardName)) {
                 cardTypeMap.set(cardName, 0);
             }
-            cardTypeMap.set(cardName, cardTypeMap.get(cardName) + order.transactionAmount);
+            cardTypeMap.set(cardName, cardTypeMap.get(cardName) + order.tranAmount);
         }
     });
 
@@ -281,9 +281,9 @@ export const calculateTotalProfitAndLoss = ordersSummary => {
 
 const generateOrdersForTable = orders => orders.map(order => {
     const clonedOrder = _.cloneDeep(order);
-    clonedOrder.transactionTime = dateToString(new Date(clonedOrder.transactionTime));
+    clonedOrder.tranTime = dateToString(new Date(clonedOrder.tranTime));
     clonedOrder.orderType = clonedOrder.deliveryAddress !== '' ? 'Physical Card' : 'E-Card';
-    clonedOrder.transactionAmount = `£${clonedOrder.transactionAmount}`
+    clonedOrder.tranAmount = `£${clonedOrder.tranAmount}`
     return clonedOrder;
 });
 
@@ -311,12 +311,14 @@ const generateCardDrilldownDataSeries = (orderBreakdownPieChartDrilldownData, ca
         };
         cardTypeDetails.forEach((cardNameDetails, cardName) => {
             const cardNameShort = getCardName(cardName);
-            let cardURL = cardInfo.get(cardNameShort).cardURL;
-            cardTypeRecord.data.push({
-                name: cardNameShort,
-                y: cardNameDetails,
-                imageSource: cardURL
-            });
+            if (cardInfo.get(cardNameShort) != null) {
+                let cardURL = cardInfo.get(cardNameShort).cardURL;
+                cardTypeRecord.data.push({
+                    name: cardNameShort,
+                    y: cardNameDetails,
+                    imageSource: cardURL
+                });
+            }
         });
         printedCardsDrillDownData.push(cardTypeRecord);
     });
@@ -346,7 +348,7 @@ function Orders(props) {
         adCampaignsData, campaignToCardTypeMappings);
     
     // Generate data structures for presentation
-    const totalOrdersValue = orders.reduce((total, order) => total + order.transactionAmount, 0.0);
+    const totalOrdersValue = orders.reduce((total, order) => total + order.tranAmount, 0.0);
     const ordersSummaryArray = generateOrdersSummaryArray(ordersSummary, cardDesignCounts);
     const ordersForTable = generateOrdersForTable(orders);
     const printedCardsDataSeries = generateCardDataSeries('PrintedCards', printedCardOrderBreakdownPieChartData);
@@ -370,6 +372,18 @@ function Orders(props) {
                 orders.length > 0 &&
                 <div className='orderTotal'>
                     Total Sales: £{round(totalOrdersValue)} &nbsp; &nbsp; P&L: £{round(totalProfitAndLoss)}
+                </div>
+            }
+            {
+                orders.length > 0 && ordersSummaryTableConfig &&
+                <div className='OrdersSummaryTable'>
+                    <DataTable tableHeaders={ordersSummaryTableConfig} tableData={ordersSummaryArray} showGlobalFilter={false} />
+                </div>
+            }
+            {
+                orders.length > 0 && showOrderDetailsTable &&
+                <div>
+                    <DataTable tableHeaders={ordersTableConfig} tableData={ordersForTable} />
                 </div>
             }
             {
@@ -427,18 +441,6 @@ function Orders(props) {
                         xAxisType='datetime'
                         yAxisLabel='Orders'
                         chartData={convertToDailyChartData(orders, cardTypeForCharts)} />
-                </div>
-            }
-            {
-                orders.length > 0 && ordersSummaryTableConfig &&
-                <div>
-                    <DataTable tableHeaders={ordersSummaryTableConfig} tableData={ordersSummaryArray} showGlobalFilter={false} />
-                </div>
-            }
-            {
-                orders.length > 0 && showOrderDetailsTable &&
-                <div>
-                    <DataTable tableHeaders={ordersTableConfig} tableData={ordersForTable} />
                 </div>
             }
         </div>

@@ -30,7 +30,7 @@ const initialState = {
                   selected: false,
               },*/
               {
-                  subItemName: 'Daily Window',
+                  subItemName: 'Daily Summary Window',
                   subItemPath: '/orders/daily',
                   selected: false,
               },
@@ -40,12 +40,12 @@ const initialState = {
                   selected: false,
               },
               {
-                  subItemName: 'Weekly Window',
+                  subItemName: 'Weekly Summary Window',
                   subItemPath: '/orders/weekly',
                   selected: false,
               },
               {
-                  subItemName: 'Monthly Window',
+                  subItemName: 'Monthly Summary Window',
                   subItemPath: '/orders/monthly',
                   selected: false,
               },
@@ -56,6 +56,7 @@ const initialState = {
               }
           ],
       },
+      /*
       {
           name: 'Analytics',
           allowedRoles: [ ROLE_ADMIN ],
@@ -66,7 +67,7 @@ const initialState = {
                   selected: false,
               }
           ]
-      },
+      },*/
       {
           name: 'Card Designer',
           allowedRoles: [ ROLE_ADMIN, ROLE_DESIGNER ],

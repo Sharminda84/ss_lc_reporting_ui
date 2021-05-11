@@ -14,7 +14,7 @@ const calculateTotalOrdersValue = (date, dailyOrders) => {
         return 0;
     }
 
-    return orders.reduce((total, order) => total + order.transactionAmount, 0.0);
+    return orders.reduce((total, order) => total + order.tranAmount, 0.0);
 }
 
 const buildOrderSummariesMaps = (date, dailyOrders, ordersSummary) => {
@@ -45,7 +45,7 @@ const buildOrderSummariesMaps = (date, dailyOrders, ordersSummary) => {
         }
         const orderSummary = ordersSummary.get(cardType);
         orderSummary.totalSales = orderSummary.totalSales + 1;
-        orderSummary.totalRevenue = orderSummary.totalRevenue + order.transactionAmount;
+        orderSummary.totalRevenue = orderSummary.totalRevenue + order.tranAmount;
 
         const productType = _.get(order, 'orderItem.productId', 0);
         const commission = _.get(order, 'cardDesignCommission.commissionPence', 0);
@@ -53,7 +53,7 @@ const buildOrderSummariesMaps = (date, dailyOrders, ordersSummary) => {
         if (productType === 1) {
             // E-card
             orderSummary.eCardSales = orderSummary.eCardSales + 1;
-            orderSummary.eCardRevenue = orderSummary.eCardRevenue + order.transactionAmount;
+            orderSummary.eCardRevenue = orderSummary.eCardRevenue + order.tranAmount;
             orderSummary.primeGroupCosts = orderSummary.primeGroupCosts + 0;
             orderSummary.designerCommission = orderSummary.designerCommission + (commission/100);
             orderSummary.stripeFee = orderSummary.stripeFee + 0.23;
@@ -61,7 +61,7 @@ const buildOrderSummariesMaps = (date, dailyOrders, ordersSummary) => {
         } else if (productType === 2) {
             // A5
             orderSummary.a5Sales = orderSummary.a5Sales + 1;
-            orderSummary.a5Revenue = orderSummary.a5Revenue + order.transactionAmount;
+            orderSummary.a5Revenue = orderSummary.a5Revenue + order.tranAmount;
             orderSummary.primeGroupCosts = orderSummary.primeGroupCosts +
                 0.85 /* Shipping */ +
                 0.90 /* Printing */;
@@ -71,7 +71,7 @@ const buildOrderSummariesMaps = (date, dailyOrders, ordersSummary) => {
         } else if (productType === 5) {
             // A4
             orderSummary.a4Sales = orderSummary.a4Sales + 1;
-            orderSummary.a4Revenue = orderSummary.a4Revenue + order.transactionAmount;
+            orderSummary.a4Revenue = orderSummary.a4Revenue + order.tranAmount;
             orderSummary.primeGroupCosts = orderSummary.primeGroupCosts +
                 1.41 /* Shipping */ +
                 1.15 /* Printing */;

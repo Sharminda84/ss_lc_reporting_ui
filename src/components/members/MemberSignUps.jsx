@@ -15,8 +15,7 @@ function MemberSignUps(props) {
     useEffect(() => {fetchMembersData(startDate, endDate)}, [fetchMembersData]);
 
     const memberSignUpsForTable = memberSignUps.map(member => {
-       // member.joined = dateToString(new Date(member.joined));
-       member.joined = new Date(member.joined).toDateString();
+       member.memberCreateUpdateTime = new Date(member.memberCreateUpdateTime).toDateString();
        member.emailValidated = member.emailValidated ? 'yes' : 'no';
        return member;
     });
@@ -25,7 +24,7 @@ function MemberSignUps(props) {
         const chartData = [];
         memberSignUps
             .reduce((members, member) => {
-                const joinedDate = new Date(member.joined);
+                const joinedDate = new Date(member.memberCreateUpdateTime);
                 joinedDate.setHours(0, 0, 0, 0);
                 const key = joinedDate.getTime() + 24*60*60*1000;
                 if (!members.has(key)) {

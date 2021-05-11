@@ -25,7 +25,7 @@ const initialState = {
         },
         {
             Header: 'Date Joined',
-            accessor: 'joined',
+            accessor: 'memberCreateUpdateTime',
             filter: 'fuzzyText',
         },
         {
