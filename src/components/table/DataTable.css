@@ -11,6 +11,14 @@
     border-bottom: 0;
 }
 
+.DataTable tr {
+    background-color: #3C3F41;
+}
+
+.DataTable tr:hover {
+    background-color: #D435FF;
+}
+
 .DataTable th, td {
     margin: 0;
     padding: 0.5rem;
@@ -24,7 +32,6 @@
 }
 
 .DataTable td {
-    background-color: #3C3F41;
     color: ghostwhite;
 }
 
