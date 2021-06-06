@@ -27,6 +27,9 @@ CARD_TYPES.set(9, "Congratulations Cards");
 CARD_TYPES.set(10, "Good Luck Cards");
 CARD_TYPES.set(11, "Thank You Cards");
 CARD_TYPES.set(12, "Thank You Teacher Cards");
+CARD_TYPES.set(13, "Thinking of You Cards");
+CARD_TYPES.set(14, "Sympathy Cards");
+
 
 export const CARD_NAMES_TO_TYPES = new Map();
 CARD_NAMES_TO_TYPES.set("Leaving Cards", "LEAVING_CARD");
@@ -42,6 +45,8 @@ CARD_NAMES_TO_TYPES.set("Good Luck Cards", "GOOD_LUCK_CARD");
 CARD_NAMES_TO_TYPES.set("Thank You Cards", "THANK_YOU_CARD");
 CARD_NAMES_TO_TYPES.set("Thank You Teacher Cards", "THANK_YOU_TEACHER_CARD");
 CARD_NAMES_TO_TYPES.set("Christmas Cards", "CHRISTMAS_CARD");
+CARD_NAMES_TO_TYPES.set("Thinking of You Cards", "THINKING_OF_YOU");
+CARD_NAMES_TO_TYPES.set("Sympathy Cards", "SYMPATHY");
 
 const LEAVING_CARD_EPOCH = new Date(2020, 3, 13, 0, 0, 0, 0);
 const LEAVING_CARD_EPOCH_TIME = LEAVING_CARD_EPOCH.getTime();
@@ -124,6 +129,11 @@ const buildOrderSummariesMaps = (orders,
     orders.forEach(order => {
         // 1. Order summary
         const cardType = CARD_TYPES.get(order.leavingCard ? order.leavingCard.cardType : -1);
+
+        if (cardType == undefined) {
+            console.log("UNDEFINED...");
+        }
+
         if (!ordersSummary.has(cardType)) {
             ordersSummary.set(cardType, {
                 cardType,
