@@ -130,10 +130,6 @@ const buildOrderSummariesMaps = (orders,
         // 1. Order summary
         const cardType = CARD_TYPES.get(order.leavingCard ? order.leavingCard.cardType : -1);
 
-        if (cardType == undefined) {
-            console.log("UNDEFINED...");
-        }
-
         if (!ordersSummary.has(cardType)) {
             ordersSummary.set(cardType, {
                 cardType,
@@ -268,22 +264,24 @@ const buildOrderSummariesMaps = (orders,
 export const generateOrdersSummaryArray = (ordersSummary, cardDesignCounts) => {
     const ordersSummaryClone = _.cloneDeep(ordersSummary);
     const ordersSummaryArray = [];
-    ordersSummaryClone.forEach((summary, orderType) => {
-        summary.eCardRevenue = `£${round(summary.eCardRevenue)}`
-        summary.a4Revenue = `£${round(summary.a4Revenue)}`
-        summary.a5Revenue = `£${round(summary.a5Revenue)}`
-        summary.totalRevenue = `£${round(summary.totalRevenue)}`
-        summary.primeGroupCosts = `£${round(summary.primeGroupCosts)}`
-        summary.adSpend = `£${round(summary.adSpend)}`
-        summary.designerCommission = `£${round(summary.designerCommission)}`
-        summary.stripeFee = `£${round(summary.stripeFee)}`
-        summary.vat = `£${round(summary.vat)}`
-        summary.profit = `£${round(summary.profit)}`
-        summary.cardCount = cardDesignCounts.get(CARD_NAMES_TO_TYPES.get(summary.cardType));
-        ordersSummaryArray.push(summary);
-    });
+    ordersSummaryClone
+        .forEach((summary, orderType) => {
+            summary.eCardRevenue = `£${round(summary.eCardRevenue)}`
+            summary.a4Revenue = `£${round(summary.a4Revenue)}`
+            summary.a5Revenue = `£${round(summary.a5Revenue)}`
+            summary.totalRevenue = `£${round(summary.totalRevenue)}`
+            summary.primeGroupCosts = `£${round(summary.primeGroupCosts)}`
+            summary.adSpend = `£${round(summary.adSpend)}`
+            summary.designerCommission = `£${round(summary.designerCommission)}`
+            summary.stripeFee = `£${round(summary.stripeFee)}`
+            summary.vat = `£${round(summary.vat)}`
+            summary.profit = `£${round(summary.profit)}`
+            summary.cardCount = cardDesignCounts.get(CARD_NAMES_TO_TYPES.get(summary.cardType));
+            ordersSummaryArray.push(summary);
+        });
 
-    return ordersSummaryArray;
+    return ordersSummaryArray.sort((summary1, summary2) =>
+        Number(summary2.profit.substring(1)) - Number(summary1.profit.substring(1)));
 };
 
 export const calculateTotalProfitAndLoss = ordersSummary => {
