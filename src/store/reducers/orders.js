@@ -46,6 +46,36 @@ const initialState = {
             filter: 'fuzzyText',
         },
     ],
+    statsTableConfig: [
+        {
+            Header: 'Card Type',
+            accessor: 'cardType',
+        },
+        {
+            Header: 'Total Revenue',
+            accessor: 'totalRevenue',
+        },
+        {
+            Header: 'Revenue/Ad Spend',
+            accessor: 'revenueAdSpendRatio',
+        },
+        {
+            Header: 'E-cards Share',
+            accessor: 'eCardShare',
+        },
+        {
+            Header: 'A4-cards Share',
+            accessor: 'a4SalesShare',
+        },
+        {
+            Header: 'A5-cards Share',
+            accessor: 'a5SalesShare',
+        },
+        {
+            Header: 'P&L',
+            accessor: 'percentageProfit',
+        },
+    ],
     ordersSummaryTableConfig: [
         {
             Header: 'Card Type',

@@ -8,6 +8,7 @@ const mapStateToProps = state => ({
   adCampaignsData: _get(state, 'orders.monthlyAdCampaignsData', {}),
   campaignToCardTypeMappings: _get(state, 'orders.campaignToCardTypeMappings'),
   ordersTableConfig: _get(state, 'orders.ordersTableConfig', {}),
+  statsTableConfig: _get(state, 'orders.statsTableConfig', {}),
   ordersSummaryTableConfig: _get(state, 'orders.ordersSummaryTableConfig', {}),
   title: '30-Days Orders',
   cardInfo: _get(state, 'refData.cardInfo', new Map()),

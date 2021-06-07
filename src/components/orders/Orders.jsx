@@ -261,6 +261,25 @@ const buildOrderSummariesMaps = (orders,
     });
 };
 
+export const generateStatsSummaryArray = (ordersSummary) => {
+    const ordersSummaryClone = _.cloneDeep(ordersSummary);
+    const ordersStatsArray = [];
+    ordersSummaryClone
+        .forEach((summary, orderType) => {
+            summary.revenueAdSpendRatio = `${summary.adSpend == 0 ? 'N/A' : (summary.totalRevenue / summary.adSpend).toFixed(2)}`
+            summary.eCardShare = `${summary.totalSales == 0 ? 'N/A' : ((summary.eCardSales / summary.totalSales)*100).toFixed(2)}%`
+            summary.a4SalesShare = `${summary.totalSales == 0 ? 'N/A' : ((summary.a4Sales / summary.totalSales)*100).toFixed(2)}%`
+            summary.a5SalesShare = `${summary.totalSales == 0 ? 'N/A' : ((summary.a5Sales / summary.totalSales)*100).toFixed(2)}%`
+            summary.percentageProfit = `${summary.totalRevenue == 0 ? 'N/A' : ((summary.profit / summary.totalRevenue)*100).toFixed(2)}%`
+            summary.totalRevenue = `£${round(summary.totalRevenue)}`
+            ordersStatsArray.push(summary);
+        });
+
+    return ordersStatsArray.sort((summary1, summary2) =>
+        Number(summary2.totalRevenue.substring(1)) - Number(summary1.totalRevenue.substring(1)));
+
+};
+
 export const generateOrdersSummaryArray = (ordersSummary, cardDesignCounts) => {
     const ordersSummaryClone = _.cloneDeep(ordersSummary);
     const ordersSummaryArray = [];
@@ -342,7 +361,8 @@ const generateCardDrilldownDataSeries = (orderBreakdownPieChartDrilldownData, ca
 }
 
 function Orders(props) {
-    const { fetchOrdersData, ordersTableConfig, ordersSummaryTableConfig, orders, adCampaignsData,
+    const { fetchOrdersData, ordersTableConfig, ordersSummaryTableConfig, statsTableConfig,
+            orders, adCampaignsData,
             campaignToCardTypeMappings, displayChart = true, title, cardInfo, showOrderDetailsTable = false,
             showWeeklyOrdersChart = true, isAllTimeView = false, cardDesignCounts } = props;
 
@@ -362,6 +382,7 @@ function Orders(props) {
     
     // Generate data structures for presentation
     const totalOrdersValue = orders.reduce((total, order) => total + order.tranAmount, 0.0);
+    const statsSummaryArray = generateStatsSummaryArray(ordersSummary);
     const ordersSummaryArray = generateOrdersSummaryArray(ordersSummary, cardDesignCounts);
     const ordersForTable = generateOrdersForTable(orders);
     const printedCardsDataSeries = generateCardDataSeries('PrintedCards', printedCardOrderBreakdownPieChartData);
@@ -396,6 +417,12 @@ function Orders(props) {
                         selected={fromDate}
                         onChange={(newFromDate) => setFromDate(newFromDate.getTime()) || triggerRefresh(newFromDate.getTime())}
                     />
+                </div>
+            }
+            {
+                orders.length > 0 && ordersSummaryTableConfig &&
+                <div className='OrdersSummaryTable'>
+                    <DataTable tableHeaders={statsTableConfig} tableData={statsSummaryArray} showGlobalFilter={false} />
                 </div>
             }
             {
