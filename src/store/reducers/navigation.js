@@ -20,7 +20,7 @@ const initialState = {
           ],
       },
       {
-          name: 'Orders',
+          name: 'Business Overview',
           allowedRoles: [ ROLE_ADMIN ],
           navigationSubItems: [
               /*
@@ -30,12 +30,17 @@ const initialState = {
                   selected: false,
               },*/
               {
+                  subItemName: 'Sales',
+                  subItemPath: '/orders/sales',
+                  selected: false,
+              },
+              {
                   subItemName: 'Today\'s Orders',
                   subItemPath: '/orders/todays',
                   selected: false,
               },
               {
-                  subItemName: 'Daily Summary Window',
+                  subItemName: '1-Day Summary Window',
                   subItemPath: '/orders/daily',
                   selected: false,
               },

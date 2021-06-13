@@ -1,12 +1,11 @@
 import { call, put } from 'redux-saga/effects';
 import {
     loadDailyOrdersData, loadTodaysOrdersData, loadWeeklyOrdersData, loadMonthlyOrdersData,
-    loadOrdersData, loadTopCards, loadCardDesignsSalesInDateRange
-}
-    from '../actions/orders';
+    loadOrdersData, loadTopCards, loadCardDesignsSalesInDateRange, loadSalesReport,
+} from '../actions/orders';
 import _ from 'lodash';
 import { sendGetRequest, sendPostRequest } from '../networkUtils';
-import * as ReportingServerURLs from "./ReportingServerURLs";
+import * as ReportingServerURLs from './ReportingServerURLs';
 
 const calculateStartOfDay = timestamp => {
     const startOfDayDate = new Date(timestamp);
@@ -119,6 +118,15 @@ export function* fetchTopCardsInDateRange(action) {
         const fetchCardViewsURL = ReportingServerURLs.FETCH_CARD_VIEWS_IN_DATE_RANGE + `?fromDate=${action.payload.fromDate}&toDate=${action.payload.toDate}`;
         const cardViews = yield call(sendGetRequest, fetchCardViewsURL);
         yield put(loadCardDesignsSalesInDateRange(cardSales, cardViews));
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export function* fetchSalesReport() {
+    try {
+        const salesReport = yield call(sendGetRequest, ReportingServerURLs.FETCH_SALES_REPORT);
+        yield put(loadSalesReport(salesReport));
     } catch (error) {
         console.log(error);
     }

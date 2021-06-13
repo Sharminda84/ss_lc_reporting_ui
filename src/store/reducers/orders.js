@@ -5,7 +5,9 @@ import {
     LOAD_TODAYS_ORDERS_DATA,
     LOAD_WEEKLY_ORDERS_DATA,
     LOAD_MONTHLY_ORDERS_DATA,
-    LOAD_TOP_CARDS, LOAD_CARD_DESIGNS_SALES_IN_DATE_RANGE,
+    LOAD_TOP_CARDS,
+    LOAD_CARD_DESIGNS_SALES_IN_DATE_RANGE,
+    LAOD_SALES_REPORT,
 } from '../actions/orders';
 
 const initialState = {
@@ -23,6 +25,8 @@ const initialState = {
 
     monthlyOrders: [],
     monthlyAdCampaignsData: [],
+
+    salesReport: null,
 
     ordersTableConfig: [
         {
@@ -335,6 +339,12 @@ const orders = (state = initialState, action) => {
                 ...state,
                 cardDesignSalesInDateRange: action.payload.cardSales,
                 cardDesignViewCounts: action.payload.cardViews
+            };
+
+        case LAOD_SALES_REPORT:
+            return {
+                ...state,
+                salesReport: action.payload.salesReport,
             };
 
         default: return state;
