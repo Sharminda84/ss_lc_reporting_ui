@@ -8,7 +8,9 @@ import {
     LOAD_TOP_CARDS,
     LOAD_CARD_DESIGNS_SALES_IN_DATE_RANGE,
     LAOD_SALES_REPORT,
+    LAOD_SALES_FUNNELS,
 } from '../actions/orders';
+import {round} from "../../components/orders/SalesReport";
 
 const initialState = {
     orders: [],
@@ -27,6 +29,8 @@ const initialState = {
     monthlyAdCampaignsData: [],
 
     salesReport: null,
+
+    salesFunnels: new Map(),
 
     ordersTableConfig: [
         {
@@ -346,6 +350,13 @@ const orders = (state = initialState, action) => {
                 ...state,
                 salesReport: action.payload.salesReport,
             };
+
+        case LAOD_SALES_FUNNELS:
+            const salesFunnelDataMap = new Map();
+            for (const [cardType, salesFunnels] of Object.entries(action.payload.salesFunnels)) {
+                salesFunnelDataMap.set(cardType, salesFunnels);
+            }
+            return {...state, salesFunnels: salesFunnelDataMap};
 
         default: return state;
     }

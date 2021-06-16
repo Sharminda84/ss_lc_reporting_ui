@@ -466,7 +466,7 @@ function Orders(props) {
                         </DropdownButton>
                     </div>
                     {
-                        showWeeklyOrdersChart &&
+                        false && showWeeklyOrdersChart &&
                         <Chart
                             chartType='column'
                             title={`${title} (Weekly Breakdown) - ${CARD_TYPES.get(cardTypeForCharts)}`}

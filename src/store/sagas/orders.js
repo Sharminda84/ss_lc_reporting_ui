@@ -1,7 +1,7 @@
 import { call, put } from 'redux-saga/effects';
 import {
     loadDailyOrdersData, loadTodaysOrdersData, loadWeeklyOrdersData, loadMonthlyOrdersData,
-    loadOrdersData, loadTopCards, loadCardDesignsSalesInDateRange, loadSalesReport,
+    loadOrdersData, loadTopCards, loadCardDesignsSalesInDateRange, loadSalesReport, loadSalesFunnels,
 } from '../actions/orders';
 import _ from 'lodash';
 import { sendGetRequest, sendPostRequest } from '../networkUtils';
@@ -127,6 +127,17 @@ export function* fetchSalesReport() {
     try {
         const salesReport = yield call(sendGetRequest, ReportingServerURLs.FETCH_SALES_REPORT);
         yield put(loadSalesReport(salesReport));
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export function* fetchSalesFunnels(action) {
+    try {
+        const from = calculateStartOfDay(action.payload.fromDate);
+        const to = calculateStartOfDay(action.payload.toDate);
+        const salesReport = yield call(sendGetRequest, ReportingServerURLs.FETCH_SALES_FUNNELS +`?fromDate=${from}&toDate=${to}`);
+        yield put(loadSalesFunnels(salesReport));
     } catch (error) {
         console.log(error);
     }

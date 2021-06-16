@@ -22,6 +22,9 @@ export const LOAD_CARD_DESIGNS_SALES_IN_DATE_RANGE = 'orders/LOAD_CARD_DESIGNS_S
 export const FETCH_SALES_REPORT = 'orders/FETCH_SALES_REPORT';
 export const LAOD_SALES_REPORT = 'orders/LAOD_SALES_REPORT';
 
+export const FETCH_SALES_FUNNELS = 'orders/FETCH_SALES_FUNNELS';
+export const LAOD_SALES_FUNNELS = 'orders/LAOD_SALES_FUNNELS';
+
 export const fetchOrdersData = (startDate, endDate) => ({
     type: FETCH_ORDERS_DATA,
     payload: {
@@ -127,5 +130,20 @@ export const loadSalesReport = (salesReport) => ({
     type: LAOD_SALES_REPORT,
     payload: {
         salesReport
+    }
+});
+
+export const fetchSalesFunnels = (fromDate, toDate) => ({
+    type: FETCH_SALES_FUNNELS,
+    payload: {
+        fromDate,
+        toDate
+    }
+});
+
+export const loadSalesFunnels = (salesFunnels) => ({
+    type: LAOD_SALES_FUNNELS,
+    payload: {
+        salesFunnels
     }
 });

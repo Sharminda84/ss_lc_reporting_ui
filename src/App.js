@@ -25,6 +25,7 @@ import TopNewWelcomeCardsContainer from './containers/orders/TopNewWelcomeCardsC
 import ReportingContainer from './containers/analytics/Reporting';
 import DesignerReport from './containers/card-designer/DesignerReport';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import FunnelAnalysis from './containers/orders/FunnelAnalysis';
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
 
                 <Route path='/orders/card-stream' exact component={MemberCardsStream} />
                 <Route path='/orders/sales' exact component={SalesReport} />
+                <Route path='/orders/funnel-analysis' exact component={FunnelAnalysis} />
                 <Route path='/orders/daily' exact component={DailyOrders} />
                 <Route path='/orders/todays' exact component={TodaysOrders} />
                 <Route path='/orders/weekly' exact component={WeeklyOrders} />

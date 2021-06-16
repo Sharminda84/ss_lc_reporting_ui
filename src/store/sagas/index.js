@@ -2,14 +2,14 @@ import { takeEvery } from 'redux-saga/effects';
 import { FETCH_MEMBERS_DATA, FETCH_CARDS_FOR_MEMBERS } from '../actions/members';
 import {
     FETCH_TODAYS_ORDERS_DATA, FETCH_DAILY_ORDERS_DATA, FETCH_WEEKLY_ORDERS_DATA, FETCH_MONTHLY_ORDERS_DATA,
-    FETCH_ORDERS_DATA, FETCH_TOP_CARDS, FETCH_CARD_DESIGNS_SALES_IN_DATE_RANGE, FETCH_SALES_REPORT
+    FETCH_ORDERS_DATA, FETCH_TOP_CARDS, FETCH_CARD_DESIGNS_SALES_IN_DATE_RANGE, FETCH_SALES_REPORT, FETCH_SALES_FUNNELS,
 } from '../actions/orders';
 import { TRIGGER_LOGIN } from '../actions/security';
 import { FETCH_CARD_INFO, FETCH_CARD_DESIGN_COUNTS } from '../actions/refData';
 import { fetchMemberSignups, fetchCardsForMembers } from './members';
 import {
     fetchDailyOrders, fetchTodaysOrders, fetchWeeklyOrders, fetchMonthlyOrders, fetchAllOrders,
-    fetchTopCards, fetchTopCardsInDateRange, fetchSalesReport,
+    fetchTopCards, fetchTopCardsInDateRange, fetchSalesReport, fetchSalesFunnels,
 } from './orders';
 import { loginUser } from './security';
 import { fetchCardInfo, fetchCardDesignCounts } from './refData';
@@ -64,4 +64,8 @@ export function* watchFetchCardDesignCountsAction() {
 
 export function* watchFetchSalesReportAction() {
     yield takeEvery(FETCH_SALES_REPORT, fetchSalesReport);
+}
+
+export function* watchFetchSalesFunnelsAction() {
+    yield takeEvery(FETCH_SALES_FUNNELS, fetchSalesFunnels);
 }

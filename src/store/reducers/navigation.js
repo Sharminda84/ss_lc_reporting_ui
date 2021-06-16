@@ -30,8 +30,13 @@ const initialState = {
                   selected: false,
               },*/
               {
-                  subItemName: 'Sales',
+                  subItemName: 'Sales Overview',
                   subItemPath: '/orders/sales',
+                  selected: false,
+              },
+              {
+                  subItemName: 'Funnel Analysis',
+                  subItemPath: '/orders/funnel-analysis',
                   selected: false,
               },
               {
@@ -40,22 +45,22 @@ const initialState = {
                   selected: false,
               },
               {
-                  subItemName: '1-Day Summary Window',
+                  subItemName: '1-Day Breakdown',
                   subItemPath: '/orders/daily',
                   selected: false,
               },
               {
-                  subItemName: '7-Day Summary Window',
+                  subItemName: '7-Day Breakdown',
                   subItemPath: '/orders/weekly',
                   selected: false,
               },
               {
-                  subItemName: '30-Day Summary Window',
+                  subItemName: '30-Day Breakdown',
                   subItemPath: '/orders/monthly',
                   selected: false,
               },
               {
-                  subItemName: 'All-time Summary Window',
+                  subItemName: 'All-time Breakdown',
                   subItemPath: '/orders/alltime',
                   selected: false,
               }
