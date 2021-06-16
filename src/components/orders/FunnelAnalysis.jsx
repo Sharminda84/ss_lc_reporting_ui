@@ -4,7 +4,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import '../../App.css';
 import './Orders.css';
 import '../members/MemberSignUps.css';
-import Chart from "../chart/Chart";
+import MultiColumnChart from '../chart/MultiColumnChart';
 
 function FunnelAnalysis(props) {
     const { salesFunnels, fetchSalesFunnels } = props;
@@ -13,10 +13,45 @@ function FunnelAnalysis(props) {
 
     const generateChartDataForCardType = (cardType) => {
         // const salesFunnelsForCardType = salesFunnels.get(cardType);
-        const chartData = [];
-        chartData.push([new Date().getTime(), 10, 11, 12]);
-        chartData.push([new Date().getTime(), 20, 21, 22]);
-        chartData.push([new Date().getTime(), 30, 31, 32]);
+        const chartData = [
+            {
+                name: 'Members Created',
+                data: [
+                    ['Monday', 3],
+                    ['Tuesday', 3],
+                    ['Wednesday', 3],
+                    ['Thursday', 3],
+                    ['Friday', 3],
+                    ['Saturday', 3],
+                    ['Sunday', 3]
+                ]
+            },
+            {
+                name: 'Cards Created',
+                data: [
+                    ['Monday', 3],
+                    ['Tuesday', 3],
+                    ['Wednesday', 3],
+                    ['Thursday', 3],
+                    ['Friday', 3],
+                    ['Saturday', 3],
+                    ['Sunday', 3]
+                ]
+            },
+            {
+                name: 'Cards Sold',
+                data: [
+                    ['Monday', 3],
+                    ['Tuesday', 3],
+                    ['Wednesday', 3],
+                    ['Thursday', 3],
+                    ['Friday', 3],
+                    ['Saturday', 3],
+                    ['Sunday', 3]
+                ]
+            },
+        ];
+
         return chartData;
     };
 
@@ -37,12 +72,13 @@ function FunnelAnalysis(props) {
                 <button onClick={() => fetchSalesFunnels(fromDate, toDate)}>Fetch</button>
             </div>
             <div className='charts'>
-                <Chart
-                    chartType='column'
+                <MultiColumnChart
                     title='Leaving Card Funnel'
-                    xAxisType='datetime'
-                    yAxisLabel='Members Created/Cards Created/Sales'
                     chartData={generateChartDataForCardType("Leaving Cards")} />
+                <MultiColumnChart
+                    title='Birthday Card Funnel'
+                    chartData={generateChartDataForCardType("Birthday Cards")} />
+
             </div>
         </div>
     );
