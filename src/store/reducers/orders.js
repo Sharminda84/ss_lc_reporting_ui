@@ -307,6 +307,10 @@ const initialState = {
         'Together Cards - UK - New': 'Misc',
         'Together Cards - UK': 'Misc',
         'FT US Search - Competitors - Exact': 'Misc',
+
+        // Thank you teacher
+        'FT Search - Thank You Teacher Card - Exact': 'Thank You Teacher Cards',
+        'FT Search - Thank You Teacher Card - BMM': 'Thank You Teacher Cards',
     },
 };
 
