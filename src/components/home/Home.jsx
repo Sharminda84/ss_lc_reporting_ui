@@ -6,9 +6,6 @@ function Home() {
 
     return (
         <div className='Home'>
-            <h2>
-                Reporting Site for Together Cards Group of Companies.
-            </h2>
         </div>
     );
 }

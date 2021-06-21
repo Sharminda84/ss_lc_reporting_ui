@@ -1,3 +1,12 @@
+.downloadButton {
+    margin-left: 30px;
+    color: ghostwhite;
+    background-color: #007bff;
+    border-color: #007bff;
+    border-radius: 5px;
+    padding: 6px;
+}
+
 .charts {
     background-color: ghostwhite;
 }
@@ -6,6 +15,7 @@
     padding: 5px;
     display: flex;
     flex-direction: row;
+    align-content: baseline;
     color: ghostwhite;
     align-items: baseline;
 }
@@ -33,6 +43,8 @@
 .chartDropDown {
     background-color: ghostwhite;
     padding: 15px;
+    display: flex;
+    flex-direction: row;
 }
 
 .orderTotal {

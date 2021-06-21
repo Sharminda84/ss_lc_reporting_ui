@@ -15,12 +15,16 @@ export function* loginUser(action) {
     try {
         const loginResponse = yield call(sendLogInRequest, user, password);
         yield put(loginSuccess(loginResponse.jwt, loginResponse.userRoles));
-        yield put(globalActions.setNotification(NOTIFICATION_INFO, 'Loading Top Cards...'));
-        yield put(fetchCardInfo());
-        yield put(fetchTopCards());
-        yield put(fetchCardsForMembers(getStartOfTodayInMillis()));
-        yield put(fetchCardDesignCounts());
-        yield put(fetchSalesReport());
+        yield put(globalActions.setNotification(NOTIFICATION_INFO, 'Loading Application Data...'));
+        if (loginResponse.userRoles.length === 1 && loginResponse.userRoles[0] === 'ROLE_ADMIN') {
+            yield put(fetchCardInfo());
+            yield put(fetchTopCards());
+            yield put(fetchCardsForMembers(getStartOfTodayInMillis()));
+            yield put(fetchCardDesignCounts());
+            yield put(fetchSalesReport());
+        } else if (loginResponse.userRoles.length === 1 && loginResponse.userRoles[0] === 'ROLE_INVESTOR') {
+            yield put(fetchSalesReport());
+        }
         yield put(globalActions.clearNotification());
     } catch (error) {
         yield put(loginError());

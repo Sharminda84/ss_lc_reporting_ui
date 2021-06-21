@@ -9,7 +9,7 @@ const header = ( props ) => {
                 <img className='header--logo--image' alt="Logo" src={logo} />
             </div>
             <div className='header--text'>
-                Together Card Sites - Reporting
+                Leaving Card and Together Cards - Reporting
             </div>
         </div>
     )
