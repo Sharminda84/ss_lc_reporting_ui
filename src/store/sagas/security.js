@@ -6,6 +6,8 @@ import { fetchCardsForMembers } from '../actions/members';
 import axios from 'axios';
 import * as ReportingServerURLs from './ReportingServerURLs';
 import { getStartOfTodayInMillis } from '../../utils';
+import * as globalActions from "../actions/global";
+import {NOTIFICATION_INFO} from "../../ReportingUIConstants";
 
 export function* loginUser(action) {
     const user = action.payload.user;
@@ -13,11 +15,13 @@ export function* loginUser(action) {
     try {
         const loginResponse = yield call(sendLogInRequest, user, password);
         yield put(loginSuccess(loginResponse.jwt, loginResponse.userRoles));
+        yield put(globalActions.setNotification(NOTIFICATION_INFO, 'Loading Top Cards...'));
         yield put(fetchCardInfo());
         yield put(fetchTopCards());
         yield put(fetchCardsForMembers(getStartOfTodayInMillis()));
         yield put(fetchCardDesignCounts());
         yield put(fetchSalesReport());
+        yield put(globalActions.clearNotification());
     } catch (error) {
         yield put(loginError());
     }
@@ -37,7 +41,8 @@ const sendLogInRequest = (user, password) => {
             }
             return {
                 jwt: response.data.token,
-                userRoles: response.data.roles,
+                //userRoles: response.data.roles,
+                userRoles: ["ROLE_INVESTOR"],
             };
         });
 };

@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import AppHeader from './components/header/Header';
 import Navigation from './containers/navigation/Navigation';
+import NotificationDialog from './containers/notification/NotificationDialog';
 import AppFooter from './components/footer/Footer';
 import './App.css';
 import Home from './components/home/Home';
@@ -35,6 +36,7 @@ function App() {
         <div className='AppBody'>
           <Login />
           <Navigation />
+          <NotificationDialog />
           <div className='AppMainSection'>
             <Switch>
                 <Route path='/' exact component={Home} />

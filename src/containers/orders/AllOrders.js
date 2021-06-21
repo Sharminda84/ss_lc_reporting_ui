@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import _get from 'lodash.get';
 import Orders from '../../components/orders/Orders';
 import * as orderActions from '../../store/actions/orders';
+import * as globalActions from '../../store/actions/global';
 
 const mapStateToProps = state => ({
   orders: _get(state, 'orders.orders', {}),
@@ -18,6 +19,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   fetchOrdersData: () => dispatch(orderActions.fetchOrdersData(ownProps.startDate, ownProps.endDate)),
+  setNotification: (notificationType, notificationMessage) => dispatch(globalActions.setNotification(notificationType, notificationMessage)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Orders);

@@ -48,12 +48,6 @@ function SalesReport(props) {
     return (
         <div>
             {
-                salesReport == null &&
-                <div>
-                    Loading...
-                </div>
-            }
-            {
                 salesReport != null &&
                 <div className='charts'>
                     <div className='chartDropDown'>

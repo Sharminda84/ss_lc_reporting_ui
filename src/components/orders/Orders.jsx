@@ -398,12 +398,6 @@ function Orders(props) {
     return (
         <div>
             {
-                orders.length === 0 &&
-                <div>
-                    Loading...
-                </div>
-            }
-            {
                 orders.length > 0 &&
                 <div className='orderTotal'>
                     Total Sales: £{round(totalOrdersValue)} &nbsp; &nbsp; P&L: £{round(totalProfitAndLoss)}

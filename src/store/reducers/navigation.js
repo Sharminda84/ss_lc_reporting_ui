@@ -3,7 +3,7 @@ import {
 } from '../actions/navigation';
 
 import _ from 'lodash';
-import {ROLE_ADMIN, ROLE_DESIGNER} from '../../ReportingUIConstants';
+import { ROLE_ADMIN, ROLE_DESIGNER, ROLE_INVESTOR } from '../../ReportingUIConstants';
 
 const initialState = {
   initialState: true,
@@ -21,7 +21,7 @@ const initialState = {
       },
       {
           name: 'Business Overview',
-          allowedRoles: [ ROLE_ADMIN ],
+          allowedRoles: [ ROLE_ADMIN, ROLE_INVESTOR ],
           navigationSubItems: [
               /*
               {
