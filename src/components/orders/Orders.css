@@ -7,6 +7,15 @@
     padding: 6px;
 }
 
+.downloadButtonBreakDown {
+    color: ghostwhite;
+    background-color: #007bff;
+    border-color: #007bff;
+    border-radius: 5px;
+    padding: 6px 10px 6px 10px;
+    margin: 10px 0 10px 0;
+}
+
 .charts {
     background-color: ghostwhite;
 }

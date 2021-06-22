@@ -360,6 +360,66 @@ const generateCardDrilldownDataSeries = (orderBreakdownPieChartDrilldownData, ca
     };
 }
 
+const formatDate = ts => new Date(ts).toISOString().split("T")[0];
+
+const downloadBreakdownData = (title, date, statsSummaryData, breakdownData) => {
+    let duration = '';
+    if (!title) {
+        duration = '1-day-';
+    } else if (title === 'Weekly Orders') {
+        duration = '7-day-';
+    } else if (title === '30-Days Orders') {
+        duration = '30-day-';
+    } else if (title === 'Orders') {
+        duration = 'all-time-';
+    }
+
+    // 1. Generate the file for summary stats
+    const summaryReportTitle = duration + formatDate(date) + '-summary.csv';
+    let summaryReport = 'Card Type, Total Revenue, Revenue/Ad Spend Ratio, E-cards Share, A4-cards Share, A5-cards Share, P&L';
+    statsSummaryData.forEach(row => {
+        summaryReport = summaryReport + '\n' + row.cardType + ',' +
+                                                 row.totalRevenue + ',' +
+                                                 row.revenueAdSpendRatio + ',' +
+                                                 row.eCardShare + ',' +
+                                                 row.a4SalesShare + ',' +
+                                                 row.a5SalesShare + ',' +
+                                                 row.percentageProfit;
+    });
+    let link = document.createElement('a');
+    link.setAttribute('href', 'data:text/csv;charset=utf-8,' + summaryReport);
+    link.setAttribute('download', summaryReportTitle);
+    link.click();
+
+
+    // 2. Generate the detailed breakdown file
+    const detailedReportTitle = duration + formatDate(date) + '-detailed.csv';
+    let detaieldReport = 'Card Type, Cards Count, eCard Sales, eCard Revenue, A4 Sales, A4 Revenue, A5 Sales, A5 Revenue, ' +
+        'Total Sales, Total Revenue, Prime Group Costs, Ad Spend, Commission, Stripe Fee, VAT, P&L';
+    breakdownData.forEach(row => {
+        detaieldReport = detaieldReport + '\n' + row.cardType + ',' +
+                                                   row.cardCount + ',' +
+                                                   row.eCardSales + ',' +
+                                                   row.eCardRevenue + ',' +
+                                                   row.a4Sales + ',' +
+                                                   row.a4Revenue + ',' +
+                                                   row.a5Sales + ',' +
+                                                   row.a5Revenue + ',' +
+                                                   row.totalSales + ',' +
+                                                   row.totalRevenue + ',' +
+                                                   row.primeGroupCosts + ',' +
+                                                   row.adSpend + ',' +
+                                                   row.designerCommission + ',' +
+                                                   row.stripeFee + ',' +
+                                                   row.vat + ',' +
+                                                   row.profit;
+    });
+    link = document.createElement('a');
+    link.setAttribute('href', 'data:text/csv;charset=utf-8,' + detaieldReport);
+    link.setAttribute('download', detailedReportTitle);
+    link.click();
+}
+
 function Orders(props) {
     const { fetchOrdersData, ordersTableConfig, ordersSummaryTableConfig, statsTableConfig,
             orders, adCampaignsData,
@@ -414,6 +474,10 @@ function Orders(props) {
                 </div>
             }
             {
+                displayChart &&
+                <button className='downloadButtonBreakDown' onClick={e => downloadBreakdownData(title, fromDate, statsSummaryArray, ordersSummaryArray)}>Download Breakdown Data</button>
+            }
+            {
                 orders.length > 0 && ordersSummaryTableConfig &&
                 <div className='OrdersSummaryTable'>
                     <DataTable tableHeaders={statsTableConfig} tableData={statsSummaryArray} showGlobalFilter={false} />
@@ -455,7 +519,7 @@ function Orders(props) {
                             {
                                 [...CARD_TYPES.keys()]
                                     .filter(key => key !== -1)
-                                    .map(key => <Dropdown.Item eventKey={`${key}`}>{CARD_TYPES.get(key)}</Dropdown.Item>)
+                                    .map(key => <Dropdown.Item key={`key-${key}`} eventKey={`${key}`}>{CARD_TYPES.get(key)}</Dropdown.Item>)
                             }
                         </DropdownButton>
                     </div>
@@ -480,6 +544,6 @@ function Orders(props) {
             }
         </div>
     );
-}
+};
 
 export default Orders;

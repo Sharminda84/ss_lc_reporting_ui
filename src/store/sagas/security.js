@@ -16,13 +16,14 @@ export function* loginUser(action) {
         const loginResponse = yield call(sendLogInRequest, user, password);
         yield put(loginSuccess(loginResponse.jwt, loginResponse.userRoles));
         yield put(globalActions.setNotification(NOTIFICATION_INFO, 'Loading Application Data...'));
-        if (loginResponse.userRoles.length === 1 && loginResponse.userRoles[0] === 'ROLE_ADMIN') {
+        if (loginResponse.userRoles[0] === 'ROLE_ADMIN') {
             yield put(fetchCardInfo());
             yield put(fetchTopCards());
             yield put(fetchCardsForMembers(getStartOfTodayInMillis()));
             yield put(fetchCardDesignCounts());
             yield put(fetchSalesReport());
-        } else if (loginResponse.userRoles.length === 1 && loginResponse.userRoles[0] === 'ROLE_INVESTOR') {
+        } else if (loginResponse.userRoles[0] === 'ROLE_INVESTOR') {
+            yield put(fetchCardDesignCounts());
             yield put(fetchSalesReport());
         }
         yield put(globalActions.clearNotification());
