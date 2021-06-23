@@ -7,7 +7,7 @@ import axios from 'axios';
 import * as ReportingServerURLs from './ReportingServerURLs';
 import { getStartOfTodayInMillis } from '../../utils';
 import * as globalActions from "../actions/global";
-import {NOTIFICATION_INFO} from "../../ReportingUIConstants";
+import { NOTIFICATION_INFO, ROLE_ADMIN, ROLE_INVESTOR } from '../../ReportingUIConstants';
 
 export function* loginUser(action) {
     const user = action.payload.user;
@@ -16,13 +16,13 @@ export function* loginUser(action) {
         const loginResponse = yield call(sendLogInRequest, user, password);
         yield put(loginSuccess(loginResponse.jwt, loginResponse.userRoles));
         yield put(globalActions.setNotification(NOTIFICATION_INFO, 'Loading Application Data...'));
-        if (loginResponse.userRoles[0] === 'ROLE_ADMIN') {
+        if (loginResponse.userRoles[0] === ROLE_ADMIN) {
             yield put(fetchCardInfo());
             yield put(fetchTopCards());
             yield put(fetchCardsForMembers(getStartOfTodayInMillis()));
             yield put(fetchCardDesignCounts());
             yield put(fetchSalesReport());
-        } else if (loginResponse.userRoles[0] === 'ROLE_INVESTOR') {
+        } else if (loginResponse.userRoles[0] === ROLE_INVESTOR) {
             yield put(fetchCardDesignCounts());
             yield put(fetchSalesReport());
         }
@@ -46,8 +46,7 @@ const sendLogInRequest = (user, password) => {
             }
             return {
                 jwt: response.data.token,
-                //userRoles: response.data.roles,
-                userRoles: ["ROLE_INVESTOR"],
+                userRoles: response.data.roles,
             };
         });
 };
