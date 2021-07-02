@@ -6,6 +6,7 @@ import security from './security';
 import refData from './refData';
 import reports from './reports';
 import global from './global';
+import cardTags from './cardTags';
 
 export const rootReducer = combineReducers({
   navigation,
@@ -15,4 +16,5 @@ export const rootReducer = combineReducers({
   refData,
   reports,
   global,
+  cardTags,
 });

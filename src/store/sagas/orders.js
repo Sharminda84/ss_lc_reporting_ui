@@ -124,15 +124,17 @@ export function* fetchAllOrders() {
 
 export function* fetchTopCards() {
     try {
-        const fetchTopCardsURL = ReportingServerURLs.FETCH_TOP_CARDS;
-        const topCards = yield call(sendGetRequest, fetchTopCardsURL);
+        const toDate = new Date().getTime();
+        const fromDate = toDate - 7 * 24 * 60 * 60 * 1000;
+        const fetchCardSalesURL = ReportingServerURLs.FETCH_CARD_DESIGNS_SALES_IN_DATE_RANGE + `?fromDate=${fromDate}&toDate=${toDate}`;
+        const topCards = yield call(sendGetRequest, fetchCardSalesURL);
         yield put(loadTopCards(topCards));
     } catch (error) {
         console.log(error);
     }
 }
 
-export function* fetchTopCardsInDateRange(action) {
+export function* fetchCardSalesInDateRange(action) {
     try {
         yield put(globalActions.setNotification(NOTIFICATION_INFO, 'Loading Top Cards...'));
 

@@ -27,6 +27,7 @@ import ReportingContainer from './containers/analytics/Reporting';
 import DesignerReport from './containers/card-designer/DesignerReport';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import FunnelAnalysis from './containers/orders/FunnelAnalysis';
+import CardTagsManager from "./containers/card-tags-manager/CardTagsManager";
 
 function App() {
   return (
@@ -63,6 +64,8 @@ function App() {
                 <Route path='/card-designer/report' exact component={DesignerReport} />
 
                 <Route path='/analytics/reports' exact component={ReportingContainer} />
+
+                <Route path='/cards/tags/manager' exact component={CardTagsManager} />
                 <Redirect to='/' />
             </Switch>
           </div>

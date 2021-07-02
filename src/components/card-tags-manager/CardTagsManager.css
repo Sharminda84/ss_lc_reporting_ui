@@ -1,0 +1,62 @@
+.tagSearchPanel {
+    display: flex;
+    flex-direction: row;
+    color: ghostwhite;
+    align-items: baseline;
+    justify-content: center;
+    margin: 35px 0 10px 0;
+}
+
+.tagSearchInput {
+    width: 30vw;
+}
+
+.tagAddInput {
+    width: 30vw;
+}
+
+.addButton {
+    border-radius: 15%;
+    margin-left: 10px;
+    font-size: 16px;
+    padding: 0 10px 2px 10px;
+    background-color: green;
+}
+
+.deleteButton {
+    border-radius: 15%;
+    margin-left: 10px;
+    font-size: 16px;
+    padding: 0 10px 2px 10px;
+    background-color: indianred;
+}
+
+.tagsViewPanel {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    overflow-x: auto;
+    color: ghostwhite;
+    align-items: baseline;
+    justify-content: flex-start;
+    background-color: #3C3F41;
+    height: 35vh;
+}
+
+.tagEditPanel {
+    display: flex;
+    flex-direction: row;
+    color: ghostwhite;
+    align-items: baseline;
+    justify-content: flex-start;
+    background-color: #3C3F41;
+    height: 35vh;
+}
+
+.tagButton {
+    border-radius: 5px;
+    margin: 5px;
+    font-size: 14px;
+    background-color: #66b3e0;
+
+}

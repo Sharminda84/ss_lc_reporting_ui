@@ -90,7 +90,7 @@ const initialState = {
           ]
       },
       {
-          name: 'Card Designs',
+          name: 'Card Designs - Stats',
           allowedRoles: [ ROLE_ADMIN ],
           navigationSubItems: [
               {
@@ -99,41 +99,52 @@ const initialState = {
                   selected: false,
               },
               {
-                  subItemName: 'Leaving - All Time Top 10',
+                  subItemName: 'Leaving - Weekly Top 10',
                   subItemPath: '/orders/top10/leaving',
                   selected: false,
               },
               {
-                  subItemName: 'Birthday - All Time Top 10',
+                  subItemName: 'Birthday - Weekly Top 10',
                   subItemPath: '/orders/top10/birthday',
                   selected: false,
               },
               {
-                  subItemName: 'Maternity - All Time Top 10',
+                  subItemName: 'Maternity - Weekly Top 10',
                   subItemPath: '/orders/top10/maternity',
                   selected: false,
               },
               {
-                  subItemName: 'New Baby - All Time Top 10',
+                  subItemName: 'New Baby - Weekly Top 10',
                   subItemPath: '/orders/top10/new-baby',
                   selected: false,
               },
               {
-                  subItemName: 'New Daddy - All Time Top 10',
+                  subItemName: 'New Daddy - Weekly  10',
                   subItemPath: '/orders/top10/new-daddy',
                   selected: false,
               },
               {
-                  subItemName: 'Welcome - All Time Top 10',
+                  subItemName: 'Welcome - Weekly Top 10',
                   subItemPath: '/orders/top10/welcome',
                   selected: false,
               },
               {
-                  subItemName: 'Chistmas - All Time Top 10',
+                  subItemName: 'Chistmas - Weekly Top 10',
                   subItemPath: '/orders/top10/christmas',
                   selected: false,
               },
           ]
+      },
+      {
+          name: 'Card Tags',
+          allowedRoles: [ ROLE_ADMIN ],
+          navigationSubItems: [
+              {
+                  subItemName: 'Manage Card Tags',
+                  subItemPath: '/cards/tags/manager',
+                  selected: false,
+              },
+          ],
       },
   ],
 };

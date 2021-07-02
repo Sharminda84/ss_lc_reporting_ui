@@ -10,7 +10,6 @@ import {
     LAOD_SALES_REPORT,
     LAOD_SALES_FUNNELS,
 } from '../actions/orders';
-import {round} from "../../components/orders/SalesReport";
 
 const initialState = {
     orders: [],

@@ -6,13 +6,15 @@ import {
 } from '../actions/orders';
 import { TRIGGER_LOGIN } from '../actions/security';
 import { FETCH_CARD_INFO, FETCH_CARD_DESIGN_COUNTS } from '../actions/refData';
+import * as cardTagActoions from '../actions/cardTags';
 import { fetchMemberSignups, fetchCardsForMembers } from './members';
 import {
     fetchDailyOrders, fetchTodaysOrders, fetchWeeklyOrders, fetchMonthlyOrders, fetchAllOrders,
-    fetchTopCards, fetchTopCardsInDateRange, fetchSalesReport, fetchSalesFunnels,
+    fetchTopCards, fetchCardSalesInDateRange, fetchSalesReport, fetchSalesFunnels,
 } from './orders';
 import { loginUser } from './security';
 import { fetchCardInfo, fetchCardDesignCounts } from './refData';
+import * as cardTags from './cardTags';
 
 export function* watchMembersActions() {
     yield takeEvery(FETCH_MEMBERS_DATA, fetchMemberSignups);
@@ -55,7 +57,7 @@ export function* watchFetchTopCardsAction() {
 }
 
 export function* watchFetchTopCardsInDateRangeAction() {
-    yield takeEvery(FETCH_CARD_DESIGNS_SALES_IN_DATE_RANGE, fetchTopCardsInDateRange);
+    yield takeEvery(FETCH_CARD_DESIGNS_SALES_IN_DATE_RANGE, fetchCardSalesInDateRange);
 }
 
 export function* watchFetchCardDesignCountsAction() {
@@ -68,4 +70,8 @@ export function* watchFetchSalesReportAction() {
 
 export function* watchFetchSalesFunnelsAction() {
     yield takeEvery(FETCH_SALES_FUNNELS, fetchSalesFunnels);
+}
+
+export function* watchFetchCardTagsAction() {
+    yield takeEvery(cardTagActoions.FETCH_TAGS, cardTags.fetchTags);
 }
