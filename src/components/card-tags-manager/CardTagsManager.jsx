@@ -6,11 +6,26 @@ import './CardTagsManager.css';
 const CardTagsManager = ( props ) => {
     const { tags } = props;
     const [tagSearchText, setTagSearchText] = useState('');
+    const [currentTagButton, setCurrentTagButton] = useState('');
+
+    const tagButtonClicked = (tag) => {
+        setCurrentTagButton(tag);
+
+        // display the tag details here in the tag details panel....
+    }
+
+    const renderTagButton = (index, tag) => {
+        const cssClass = tag === currentTagButton ? 'tagButton tagButtonSelected' : 'tagButton'
+
+        return (
+            <button key={index} className={cssClass} onClick={e => tagButtonClicked(tag)}>{tag}</button>
+        );
+    }
 
     const renderMatchingTags = () => {
         const matchingTags = tags
             .filter(tag => tagSearchText.trim() === '' || tag.tag.indexOf(tagSearchText) > -1)
-            .map((tag, index) => (<button key={index} className='tagButton'>{tag.tag}</button>));
+            .map((tag, index) => renderTagButton(index, tag.tag));
         return matchingTags;
     };
 

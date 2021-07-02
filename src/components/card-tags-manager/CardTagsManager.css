@@ -58,5 +58,11 @@
     margin: 5px;
     font-size: 14px;
     background-color: #66b3e0;
+}
 
+.tagButtonSelected {
+    border-radius: 5px;
+    margin: 5px;
+    font-size: 14px;
+    background-color: seagreen;
 }
