@@ -75,3 +75,15 @@ export function* watchFetchSalesFunnelsAction() {
 export function* watchFetchCardTagsAction() {
     yield takeEvery(cardTagActoions.FETCH_TAGS, cardTags.fetchTags);
 }
+
+export function* watchCreateCardTagAction() {
+    yield takeEvery(cardTagActoions.CREATE_TAG, cardTags.createTag);
+}
+
+export function* watchUpdateCardTagAction() {
+    yield takeEvery(cardTagActoions.UPDATE_TAG, cardTags.updateTag);
+}
+
+export function* watchDeleteCardTagAction() {
+    yield takeEvery(cardTagActoions.DELETE_TAG, cardTags.deleteTag);
+}
