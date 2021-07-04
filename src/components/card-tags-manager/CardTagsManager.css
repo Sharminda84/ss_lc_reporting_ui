@@ -71,12 +71,8 @@
     margin-bottom: 10px;
 }
 
-.tagEditPanel h5 {
-    font-size: 14px;
-}
-
 .tagEditPanel textarea {
-    height: 20vh;
+    height: 18vh;
     width: 60vw;
 }
 
@@ -86,4 +82,9 @@
     padding: 5px 30px 5px 30px;
     font-size: 16px;
     background-color: #66b3e0;
+}
+
+.tagEditPanel h6 {
+    margin-bottom: 10px;
+    font-size: 16px;
 }

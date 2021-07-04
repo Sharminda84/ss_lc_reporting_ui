@@ -3,21 +3,19 @@ import '../../App.css';
 import '../../components/orders/Orders.css';
 import './CardTagsManager.css';
 
-
-// tags.filter(c => c.tag === tag)[0].cardLinks
-
-
 const CardTagsManager = ( props ) => {
-    const {tags} = props;
-    const {createTag, updateTag, deleteTag} = props;
+    const {tags, error} = props;
+    const {createTag, updateTag, deleteTag, clearError} = props;
+
     const [tagSearchText, setTagSearchText] = useState('');
-    const [tagUpdateText, setTagUpdateText] = useState('');
+    const [tagCreateText, setTagCreateText] = useState('');
 
     const [currentTag, setCurrentTag] = useState(null);
     const [currentTagText, setcurrentTagText] = useState('');
     const [currentTagLinksText, setCurrentTagLinksText] = useState('');
 
     const tagButtonClickHandler = (tagText) => {
+        clearError();
         if (currentTagText === tagText) {
             setcurrentTagText('');
             setCurrentTag(null);
@@ -25,7 +23,7 @@ const CardTagsManager = ( props ) => {
             setcurrentTagText(tagText);
             const currentTag = tags.filter(c => c.tag === tagText)[0];
             setCurrentTag(currentTag);
-            setTagUpdateText(tagText);
+            setcurrentTagText(tagText);
             const tagLinksText = currentTag
                 .cardLinks
                 .sort((link1, link2) => link1.tagDisplaySeq > link2.tagDisplaySeq ? 1 : -1)
@@ -35,21 +33,23 @@ const CardTagsManager = ( props ) => {
     }
 
     const deleteTagClickHandler = () => {
-        if (currentTagText === '') {
+        clearError();
+        if (currentTag === null) {
             return;
         }
 
-        deleteTag(currentTagText);
+        deleteTag(currentTag.tag);
         setcurrentTagText('');
         setCurrentTag(null);
     };
 
     const addTagClickHandler = () => {
-        if (tagSearchText === '') {
+        clearError();
+        if (tagCreateText === '') {
             return;
         }
 
-        createTag(tagSearchText);
+        createTag(tagCreateText);
     }
 
     const renderTagButton = (index, tag) => {
@@ -80,21 +80,22 @@ const CardTagsManager = ( props ) => {
                 {renderMatchingTags()}
             </div>
             <div className='tagSearchPanel'>
-                <input type='text' className='tagAddInput' placeholder='Create Tag...' onChange={e => setTagUpdateText(e.target.value)} maxLength={200} />
+                <input type='text' className='tagAddInput' placeholder='Create Tag...' onChange={e => setTagCreateText(e.target.value)} maxLength={200} />
                 <button className='addButton' onClick={addTagClickHandler}>+</button>
             </div>
             <div className='tagEditPanel'>
+                <h6>
+                    {error}
+                </h6>
                 <div>
-                    <h5>Tag Name</h5>
                     <input type='text'
                            className='tagAddInput'
-                           placeholder='Create Tag...'
-                           value={tagUpdateText}
-                           onChange={e => setTagUpdateText(e.target.value)}
+                           placeholder='Tag name...'
+                           value={currentTagText}
+                           onChange={e => setcurrentTagText(e.target.value)}
                            maxLength={200} />
                 </div>
                 <div>
-                    <h5>Tag Links</h5>
                     <textarea className='tagLinksTextArea'
                               placeholder='Tag links...'
                               value={currentTagLinksText}

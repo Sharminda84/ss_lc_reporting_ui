@@ -1,11 +1,13 @@
 import { call, put } from 'redux-saga/effects';
-import { loadTags } from '../actions/cardTags';
+import {loadTags, postCreateTag, postDeleteTag, setError} from '../actions/cardTags';
 import { sendGetRequest } from '../networkUtils';
 import * as ReportingServerURLs from './ReportingServerURLs';
+import * as globalActions from "../actions/global";
+import {NOTIFICATION_INFO} from "../../ReportingUIConstants";
 
 export function* fetchTags() {
     try {
-        const fetchTagsURL = encodeURI(ReportingServerURLs.FETCH_CARD_TAGS);
+        const fetchTagsURL = ReportingServerURLs.FETCH_CARD_TAGS;
         const tags = yield call(sendGetRequest, fetchTagsURL);
         yield put(loadTags(tags));
     } catch (error) {
@@ -14,10 +16,15 @@ export function* fetchTags() {
 }
 
 export function* createTag(action) {
-    console.log('GOING TO CREATE TAG: ' + action.payload.tagText);
-    // TODO
-    // 1. Send the request to the server to create the tag
-    // 2. Get the response from the server (new tag) and add it back to the state
+    try {
+        const createTagURL = encodeURI(`${ReportingServerURLs.CREATE_TAG}?tag=${action.payload.tagText}`);
+        const newTag = yield call(sendGetRequest, createTagURL);
+        yield put(postCreateTag(newTag));
+    } catch (error) {
+        console.log(`Error deleting card tag [${error}}]`);
+        yield put(setError('Tag with name [' + action.payload.tagText + '] already exists.'));
+
+    }
 }
 
 export function* updateTag(action) {
@@ -29,8 +36,11 @@ export function* updateTag(action) {
 }
 
 export function* deleteTag(action) {
-    console.log('GOING TO DELETE TAG: ' + action.payload.tagText);
-    // TODO
-    // 1. Send the request to the server to delete the tag
-    // 2. Get the response from the server and remove the tag from the local state
+    try {
+        const deleteTagURL = encodeURI(`${ReportingServerURLs.DELETE_TAG}?tag=${action.payload.tagText}`);
+        yield call(sendGetRequest, deleteTagURL);
+        yield put(postDeleteTag(action.payload.tagText));
+    } catch (error) {
+        console.log(`Error deleting card tag [${error}}]`);
+    }
 }
