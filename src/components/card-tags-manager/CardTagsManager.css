@@ -67,20 +67,23 @@
     height: 35vh;
 }
 
-.tagLinksTextArea {
+.tagEditPanel div {
+    margin-bottom: 10px;
+}
+
+.tagEditPanel h5 {
+    font-size: 14px;
+}
+
+.tagEditPanel textarea {
     height: 20vh;
     width: 60vw;
 }
 
-.tagEditPanelDiv {
-    margin-bottom: 10px;
-}
-
-.saveButton {
+.tagEditPanel button {
     border-radius: 5px;
     margin: 5px;
     padding: 5px 30px 5px 30px;
     font-size: 16px;
     background-color: #66b3e0;
 }
-
