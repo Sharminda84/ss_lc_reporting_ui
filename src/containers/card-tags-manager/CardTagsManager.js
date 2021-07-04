@@ -10,7 +10,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     createTag: (tagText) => dispatch(cardTagActions.createTag(tagText)),
-    updateTag: (tag) => dispatch(cardTagActions.updateTag(tag)),
+    updateTag: (tagId, newTagText, newTagLinks) => dispatch(cardTagActions.updateTag(tagId, newTagText, newTagLinks)),
     deleteTag: (tagText) => dispatch(cardTagActions.deleteTag(tagText)),
     clearError: () => dispatch(cardTagActions.clearError()),
 });

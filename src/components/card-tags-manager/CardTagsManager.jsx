@@ -32,6 +32,10 @@ const CardTagsManager = ( props ) => {
         }
     }
 
+    const saveTagClickHandler = () => {
+        updateTag(currentTag.id, currentTagText, currentTagLinksText);
+    }
+
     const deleteTagClickHandler = () => {
         clearError();
         if (currentTag === null) {
@@ -101,7 +105,7 @@ const CardTagsManager = ( props ) => {
                               value={currentTagLinksText}
                               onChange={e => setCurrentTagLinksText(e.target.value)} />
                 </div>
-                <button>Save</button>
+                <button onClick={saveTagClickHandler}>Save</button>
             </div>
         </div>
     )

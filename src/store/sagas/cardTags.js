@@ -2,8 +2,6 @@ import { call, put } from 'redux-saga/effects';
 import {loadTags, postCreateTag, postDeleteTag, setError} from '../actions/cardTags';
 import { sendGetRequest } from '../networkUtils';
 import * as ReportingServerURLs from './ReportingServerURLs';
-import * as globalActions from "../actions/global";
-import {NOTIFICATION_INFO} from "../../ReportingUIConstants";
 
 export function* fetchTags() {
     try {
@@ -28,7 +26,11 @@ export function* createTag(action) {
 }
 
 export function* updateTag(action) {
-    console.log('GOING TO UPDATE TAG: ' + action.payload.tag);
+    console.log('GOING TO UPDATE TAG: ' +
+        action.payload.tagId + ' - ' +
+        action.payload.newTagText + ' - ' +
+        action.payload.newTagLinks);
+
     // TODO
     // 1. Send the request to the sever to update the tag
     // 2. Get the response from the server (updated tag) and replace the current tag

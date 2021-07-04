@@ -33,10 +33,12 @@ export const postCreateTag = (newTag) => ({
     }
 });
 
-export const updateTag = (tag) => ({
+export const updateTag = (tagId, newTagText, newTagLinks) => ({
     type: UPDATE_TAG,
     payload: {
-        tag
+        tagId,
+        newTagText,
+        newTagLinks
     }
 });
 
