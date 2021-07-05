@@ -9,12 +9,10 @@ const CardTagsManager = ( props ) => {
 
     const [tagSearchText, setTagSearchText] = useState('');
     const [tagCreateText, setTagCreateText] = useState('');
-
     const [editMode, setEditMode] = useState(false);
     const [currentTagText, setCurrentTagText] = useState('');
     const [currentTagDescriptionText, setCurrentTagDescriptionText] = useState('');
     const [currentTagLinksText, setCurrentTagLinksText] = useState('');
-
 
     const renderTagLinks = () => currentTag == null ? '' :
         currentTag
@@ -29,6 +27,7 @@ const CardTagsManager = ( props ) => {
 
     const tagButtonClickHandler = (tagText) => {
         clearMessage();
+        setEditMode(false);
         if (currentTagText === tagText) {
             // If a selected tag is clicked again, 'unselect' it.
             setCurrentTag(null);
@@ -67,6 +66,8 @@ const CardTagsManager = ( props ) => {
     const addTagClickHandler = () => {
         clearMessage();
         setEditMode(false);
+        setCurrentTagDescriptionText('');
+        setCurrentTagLinksText('');
         if (tagCreateText === '') {
             return;
         }
