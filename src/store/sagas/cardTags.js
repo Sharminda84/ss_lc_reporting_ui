@@ -43,7 +43,6 @@ export function* updateTag(action) {
         const updatedTag = yield call(sendPostRequest, ReportingServerURLs.UPDATE_TAG, updateRequest);
         yield put(postUpdateTag(updatedTag));
         yield put(setMessage('Tag [' + action.payload.tag + '] updated.'));
-        console.log('tag update in the works...');
     } catch (error) {
         console.log(`Error deleting card tag [${error}}]`);
         yield put(setMessage('Error updating tag.'));

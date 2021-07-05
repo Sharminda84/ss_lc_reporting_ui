@@ -26,7 +26,7 @@ const cardTags = ( state = initialState, action ) => {
             const updatedTag = action.payload.tag;
             const updatedTagsPostUpdate = state.cardTags.filter(tag => tag.id !== updatedTag.id);
             updatedTagsPostUpdate.push(updatedTag);
-            return {...state, cardTags: updatedTagsPostUpdate, currentTag: action.payload.newTag };
+            return {...state, cardTags: updatedTagsPostUpdate, currentTag: action.payload.tag };
 
         case POST_DELETE_TAG:
             const cardTags = state.cardTags.filter(tag => tag.tag !== action.payload.tagText);
