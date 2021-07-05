@@ -11,10 +11,6 @@
     width: 60vw;
 }
 
-.tagAddInput {
-    width: 60vw;
-}
-
 .addButton {
     border-radius: 15%;
     margin-left: 10px;
@@ -76,15 +72,45 @@
     width: 60vw;
 }
 
-.tagEditPanel button {
+.tagEditPanel h6 {
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.tagEditPanelTextInputs {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.tagNameInput {
+    width: 25vw;
+}
+
+.tagDescriptionInput {
+    width: 35vw;
+}
+
+.saveButtonPanel {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: flex-start;
+}
+
+.saveButtonPanel input {
+    margin-right: 5px;
+}
+
+.saveButtonPanel label {
+    margin-right: 50px;
+}
+
+.saveButtonPanel button {
     border-radius: 5px;
     margin: 5px;
     padding: 5px 30px 5px 30px;
     font-size: 16px;
     background-color: #66b3e0;
-}
-
-.tagEditPanel h6 {
-    margin-bottom: 10px;
-    font-size: 16px;
 }

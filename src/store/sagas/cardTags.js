@@ -1,6 +1,6 @@
 import { call, put } from 'redux-saga/effects';
-import {loadTags, postCreateTag, postDeleteTag, setError} from '../actions/cardTags';
-import { sendGetRequest } from '../networkUtils';
+import {loadTags, postCreateTag, postDeleteTag, postUpdateTag, setMessage} from '../actions/cardTags';
+import {sendGetRequest, sendPostRequest} from '../networkUtils';
 import * as ReportingServerURLs from './ReportingServerURLs';
 
 export function* fetchTags() {
@@ -18,23 +18,36 @@ export function* createTag(action) {
         const createTagURL = encodeURI(`${ReportingServerURLs.CREATE_TAG}?tag=${action.payload.tagText}`);
         const newTag = yield call(sendGetRequest, createTagURL);
         yield put(postCreateTag(newTag));
+        yield put(setMessage('Tag [' + action.payload.tagText + '] created.'));
     } catch (error) {
         console.log(`Error deleting card tag [${error}}]`);
-        yield put(setError('Tag with name [' + action.payload.tagText + '] already exists.'));
+        yield put(setMessage('Tag with name [' + action.payload.tagText + '] already exists.'));
 
     }
 }
 
 export function* updateTag(action) {
-    console.log('GOING TO UPDATE TAG: ' +
-        action.payload.tagId + ' - ' +
-        action.payload.newTagText + ' - ' +
-        action.payload.newTagLinks);
+    let tagLinks = action.payload.tagLinks.split('\n')
+        .map(tagLink => tagLink.trim())
+        .filter(tagLink => tagLink !== '')
+        .reduce((aggregate, current) => aggregate + current + ',', '');
+    tagLinks = tagLinks.substring(0, tagLinks.length - 1);
 
-    // TODO
-    // 1. Send the request to the sever to update the tag
-    // 2. Get the response from the server (updated tag) and replace the current tag
-    //    in the state with the updated tag from the server
+    try {
+        const updateRequest = {
+            tagId: action.payload.id,
+            tag: action.payload.tag,
+            description: action.payload.description,
+            tagLinks
+        };
+        const updatedTag = yield call(sendPostRequest, ReportingServerURLs.UPDATE_TAG, updateRequest);
+        yield put(postUpdateTag(updatedTag));
+        yield put(setMessage('Tag [' + action.payload.tag + '] updated.'));
+        console.log('tag update in the works...');
+    } catch (error) {
+        console.log(`Error deleting card tag [${error}}]`);
+        yield put(setMessage('Error updating tag.'));
+    }
 }
 
 export function* deleteTag(action) {
@@ -44,5 +57,6 @@ export function* deleteTag(action) {
         yield put(postDeleteTag(action.payload.tagText));
     } catch (error) {
         console.log(`Error deleting card tag [${error}}]`);
+        yield put(setMessage('Error deleting tag.'));
     }
 }
