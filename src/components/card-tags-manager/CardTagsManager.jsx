@@ -25,15 +25,26 @@ const CardTagsManager = ( props ) => {
     const renderTagDescription = () => currentTag == null ? '' :
         (currentTag.description == null ? '' : currentTag.description);
 
+    const clearLocalFormData = () => {
+        setCurrentTagText('');
+        setCurrentTagDescriptionText('');
+        setCurrentTagLinksText('');
+
+    };
+
+    const setLocalFormDataFromCurrentTag = () => {
+        renderTagText();
+        renderTagDescription();
+        renderTagLinks();
+    };
+
     const tagButtonClickHandler = (tagText) => {
         clearMessage();
         setEditMode(false);
         if (currentTagText === tagText) {
             // If a selected tag is clicked again, 'unselect' it.
             setCurrentTag(null);
-            setCurrentTagText('');
-            setCurrentTagDescriptionText('');
-            setCurrentTagLinksText('');
+            clearLocalFormData();
         } else {
             const currentTag = tags.filter(c => c.tag === tagText)[0];
             setCurrentTag(currentTag);
@@ -47,6 +58,7 @@ const CardTagsManager = ( props ) => {
     }
 
     const saveTagClickHandler = () => {
+        clearLocalFormData();
         setEditMode(false);
         updateTag(currentTag.id, currentTagText, currentTagDescriptionText, currentTagLinksText);
     }
@@ -93,6 +105,17 @@ const CardTagsManager = ( props ) => {
             .filter(tag => tagSearchText.trim() === '' || tag.tag.indexOf(tagSearchText) > -1)
             .map((tag, index) => renderTagButton(index, tag.tag));
         return matchingTags;
+    };
+
+    const onEditButtonClicked = (e) => {
+        if (e.target.checked) {
+            setEditMode(true);
+            setLocalFormDataFromCurrentTag();
+
+        } else {
+            setEditMode(false);
+            setLocalFormDataFromCurrentTag();
+        }
     };
 
     return (
@@ -142,7 +165,7 @@ const CardTagsManager = ( props ) => {
                     <label>
                         <input type='checkbox'
                                checked={editMode}
-                               onChange={e => e.target.checked ? setEditMode(true) : setEditMode(false)} />
+                               onChange={onEditButtonClicked} />
                         Edit Tag
                     </label>
                     <button disabled={!editMode} onClick={saveTagClickHandler}>Save</button>
