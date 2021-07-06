@@ -29,31 +29,25 @@ const CardTagsManager = ( props ) => {
         setCurrentTagText('');
         setCurrentTagDescriptionText('');
         setCurrentTagLinksText('');
-
     };
 
     const setLocalFormDataFromCurrentTag = () => {
-        renderTagText();
-        renderTagDescription();
-        renderTagLinks();
+        setCurrentTagText(renderTagText());
+        setCurrentTagDescriptionText(renderTagDescription());
+        setCurrentTagLinksText(renderTagLinks());
     };
 
     const tagButtonClickHandler = (tagText) => {
         clearMessage();
         setEditMode(false);
-        if (currentTagText === tagText) {
+
+        if (currentTag && currentTag.tag === tagText) {
             // If a selected tag is clicked again, 'unselect' it.
             setCurrentTag(null);
             clearLocalFormData();
         } else {
             const currentTag = tags.filter(c => c.tag === tagText)[0];
             setCurrentTag(currentTag);
-            setCurrentTagText(tagText);
-            setCurrentTagDescriptionText(currentTag.description == null ? '' : currentTag.description);
-            const tagLinksText = currentTag.cardLinks
-                .sort((link1, link2) => link1.tagDisplaySeq > link2.tagDisplaySeq ? 1 : -1)
-                .reduce((aggregate, current) => aggregate + current.cardDesignName + '\n', '');
-            setCurrentTagLinksText(tagLinksText);
         }
     }
 
@@ -68,19 +62,16 @@ const CardTagsManager = ( props ) => {
         if (currentTag === null) {
             return;
         }
-
-        deleteTag(currentTag.tag);
-        setCurrentTagText('');
-        setCurrentTagDescriptionText('');
-        setCurrentTagLinksText('');
+        clearLocalFormData();
+        setEditMode(false);
         setCurrentTag(null);
+        deleteTag(currentTag.tag);
     };
 
     const addTagClickHandler = () => {
         clearMessage();
         setEditMode(false);
-        setCurrentTagDescriptionText('');
-        setCurrentTagLinksText('');
+        clearLocalFormData();
         if (tagCreateText === '') {
             return;
         }
