@@ -47,6 +47,7 @@ const CardTagsManager = ( props ) => {
     }
 
     const saveTagClickHandler = () => {
+        setEditMode(false);
         updateTag(currentTag.id, currentTagText, currentTagDescriptionText, currentTagLinksText);
     }
 
