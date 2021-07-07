@@ -8,6 +8,7 @@ import { Provider } from 'react-redux';
 
 
 export const store = configureStore();
+
 ReactDOM.render(
   <Provider store={store}>
       <App />

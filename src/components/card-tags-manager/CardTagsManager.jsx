@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import '../../App.css';
 import '../../components/orders/Orders.css';
 import './CardTagsManager.css';
+import DeleteTagConfirmationDialog from "../../containers/notification/DeleteTagConfirmationDialog";
 
 const CardTagsManager = ( props ) => {
     const {tags, currentTag, message} = props;
-    const {createTag, updateTag, deleteTag, clearMessage, setCurrentTag} = props;
+    const {createTag, updateTag, clearMessage, setMessage, setCurrentTag, setConfirmationMessage} = props;
 
     const [tagSearchText, setTagSearchText] = useState('');
     const [tagCreateText, setTagCreateText] = useState('');
@@ -62,21 +63,22 @@ const CardTagsManager = ( props ) => {
         if (currentTag === null) {
             return;
         }
+
         clearLocalFormData();
         setEditMode(false);
-        setCurrentTag(null);
-        deleteTag(currentTag.tag);
+        setConfirmationMessage("Are you sure you want to delete the tag?");
     };
 
     const addTagClickHandler = () => {
         clearMessage();
         setEditMode(false);
         clearLocalFormData();
-        if (tagCreateText === '') {
+        if (tagCreateText.trim() === '') {
+            setMessage("Creation of an empty tag is not allowed.");
             return;
         }
 
-        createTag(tagCreateText);
+        createTag(tagCreateText.trim());
     }
 
     const renderTagButton = (index, tag) => {
@@ -111,6 +113,7 @@ const CardTagsManager = ( props ) => {
 
     return (
         <div>
+            <DeleteTagConfirmationDialog />
             <div className='orderTotal'>
                 Tags Manager
             </div>

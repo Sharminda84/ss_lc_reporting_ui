@@ -1,3 +1,6 @@
+import _get from 'lodash.get';
+import { store } from '../../index';
+
 export const FETCH_TAGS = 'cardTags/FETCH_TAGS';
 export const LOAD_TAGS = 'orders/LOAD_TAGS';
 export const CREATE_TAG = 'cardTags/CREATE_TAG';
@@ -52,10 +55,10 @@ export const postUpdateTag = (tag) => ({
     }
 });
 
-export const deleteTag = (tagText) => ({
+export const deleteTag = () => ({
     type: DELETE_TAG,
     payload: {
-        tagText
+        tagText: _get(store.getState(), 'cardTags.currentTag.tag')
     }
 });
 

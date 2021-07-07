@@ -1,16 +1,12 @@
 import React from 'react';
 import '../../App.css';
 import './NotificationDialog.css';
-import closeIcon from '../../icons/close.jpg';
 import warningIcon from '../../icons/warning.svg';
 import * as globalConstants from '../../store/actions/global';
-import { useHistory } from 'react-router-dom';
 
 function NotificationDialog(props) {
     const { notificationType, notificationMessage } = props;
     const { clearNotification } = props;
-
-    const history = useHistory();
 
     const onOKButtonClick = () => {
         clearNotification();
