@@ -119,7 +119,6 @@ const CardTagsManager = ( props ) => {
             </div>
             <div className='tagSearchPanel'>
                 <input type='text' className='tagSearchInput' placeholder='Tag Search...' onChange={e => setTagSearchText(e.target.value)} maxLength={200} />
-                <button className='deleteButton' onClick={deleteTagClickHandler}>-</button>
             </div>
             <div className='tagsViewPanel'>
                 {renderMatchingTags()}
@@ -127,6 +126,7 @@ const CardTagsManager = ( props ) => {
             <div className='tagSearchPanel'>
                 <input type='text' className='tagAddInput' placeholder='Create Tag...' onChange={e => setTagCreateText(e.target.value)} maxLength={200} />
                 <button className='addButton' onClick={addTagClickHandler}>+</button>
+                <button className='deleteButton' onClick={deleteTagClickHandler}>-</button>
             </div>
             <div className='tagEditPanel'>
                 <h6>

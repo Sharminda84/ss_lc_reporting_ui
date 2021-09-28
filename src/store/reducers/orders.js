@@ -258,48 +258,48 @@ const initialState = {
         'FT Search - New Daddy Cards - Exact': 'New Daddy Cards',
 
         // Retirement
-        'FT Search - Retirement Card - Exact': 'Retirement Cards',
+        'FT Search - Retirement Card - Maximise Clicks': 'Retirement Cards',
+        'FT IND Search - Retirement Card - Exact': 'Retirement Cards',
+        'FT IND Search - Retirement Card - BMM': 'Retirement Cards',
         'FT Search - Retirement Card - BMM': 'Retirement Cards',
         'FT US Search - Retirement Card - Exact': 'Retirement Cards',
-        'FT IND Search - Retirement Card - BMM': 'Retirement Cards',
-        'FT IND Search - Retirement Card - Exact': 'Retirement Cards',
-        'FT US Search - Retirement Card - BMM': 'Retirement Cards',
         'Retirement Cards - UK Campaign': 'Retirement Cards',
+        'FT US Search - Retirement Card - BMM': 'Retirement Cards',
 
         // Get well
-        'FT IND Search - Get Well Soon Card - BMM': 'Get Well Soon Cards',
-        'FT Search - Get Well Soon Card - BMM': 'Get Well Soon Cards',
-        'FT Search - Get Well Soon Card Generic - Exact': 'Get Well Soon Cards',
         'FT US Search - Get Well Soon Card - BMM': 'Get Well Soon Cards',
         'FT IND Search - Get Well Soon Card - Exact': 'Get Well Soon Cards',
         'FT US Search - Get Well Soon Card - Exact': 'Get Well Soon Cards',
+        'FT Search - Get Well Soon Card Generic - Exact': 'Get Well Soon Cards',
+        'FT Search - Get Well Soon Card - BMM': 'Get Well Soon Cards',
+        'FT IND Search - Get Well Soon Card - BMM': 'Get Well Soon Cards',
         'FT Search - Get Well Soon Card - Exact': 'Get Well Soon Cards',
 
         // Congratulations
-        'FT Search - Congratulations Card - BMM': 'Congratulations Cards',
-        'FT Search - Congratulations Card - Exact': 'Congratulations Cards',
-        'FT Search - Congratulations Card Generic - Exact': 'Congratulations Cards',
         'FT US Search - Congratulations Card - Exact': 'Congratulations Cards',
-        'FT IND Search - Congratulations Card - Exact': 'Congratulations Cards',
-        'FT IND Search - Congratulations Card - BMM': 'Congratulations Cards',
+        'FT Search - Congratulations Card - Generic': 'Congratulations Cards',
+        'FT Search - Congratulations Card Generic - Exact': 'Congratulations Cards',
+        'FT Search - Congratulations Card - Exact': 'Congratulations Cards',
         'FT US Search - Congratulations Card - BMM': 'Congratulations Cards',
+        'FT IND Search - Congratulations Card - BMM': 'Congratulations Cards',
+        'FT IND Search - Congratulations Card - Exact': 'Congratulations Cards',
 
         // Good luck
-        'FT Search - Good Luck Card - BMM': 'Good Luck Cards',
         'FT Search - Good Luck Card - Exact': 'Good Luck Cards',
-        'FT IND Search - Good Luck Card - BMM': 'Good Luck Cards',
-        'FT US Search - Good Luck Card - BMM': 'Good Luck Cards',
-        'FT US Search - Good Luck Card - Exact': 'Good Luck Cards',
         'FT IND Search - Good Luck Card - Exact': 'Good Luck Cards',
+        'FT IND Search - Good Luck Card - BMM': 'Good Luck Cards',
+        'FT US Search - Good Luck Card - Exact': 'Good Luck Cards',
+        'FT US Search - Good Luck Card - BMM': 'Good Luck Cards',
+        'FT Search - Good Luck Card - BMM': 'Good Luck Cards',
 
         // Thank you
-        'FT Search - Thank You Card - BMM': 'Thank You Cards',
-        'FT Search - Thank You Card - Exact': 'Thank You Cards',
-        'FT IND Search - Thank You Card - BMM': 'Thank You Cards',
-        'FT IND Search - Thank You Card - Exact': 'Thank You Cards',
         'FT US Search - Thank You Card - BMM': 'Thank You Cards',
+        'FT IND Search - Thank You Card - Exact': 'Thank You Cards',
+        'FT IND Search - Thank You Card - BMM': 'Thank You Cards',
         'FT US Search - Thank You Card - Exact': 'Thank You Cards',
+        'FT Search - Thank You Card - BMM': 'Thank You Cards',
         'FT Search - Thank You Card Generic - Exact': 'Thank You Cards',
+        'FT Search - Thank You Card - Exact': 'Thank You Cards',
 
         // Random
         'FT Search - Cards Types - DSA': 'Misc',
