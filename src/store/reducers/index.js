@@ -7,6 +7,7 @@ import refData from './refData';
 import reports from './reports';
 import global from './global';
 import cardTags from './cardTags';
+import adAnalytics from './adAnalytics';
 
 export const rootReducer = combineReducers({
   navigation,
@@ -17,4 +18,5 @@ export const rootReducer = combineReducers({
   reports,
   global,
   cardTags,
+  adAnalytics,
 });

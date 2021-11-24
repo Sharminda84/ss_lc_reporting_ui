@@ -4,6 +4,7 @@ import { fetchCardInfo, fetchCardDesignCounts } from '../actions/refData';
 import { fetchSalesReport, fetchTopCards } from '../actions/orders';
 import { fetchCardsForMembers } from '../actions/members';
 import { fetchTags } from '../actions/cardTags';
+import { fetchAdMetrics } from '../actions/adAnalytics';
 import * as globalActions from "../actions/global";
 import { getStartOfTodayInMillis } from '../../utils';
 import { NOTIFICATION_INFO, ROLE_ADMIN, ROLE_TAG_MANAGER } from '../../ReportingUIConstants';
@@ -28,6 +29,7 @@ export function* loginUser(action) {
             yield put(fetchCardsForMembers(getStartOfTodayInMillis()));
             yield put(fetchCardDesignCounts());
             yield put(fetchSalesReport());
+            yield put(fetchAdMetrics());
         }
 
         if (loginResponse.userRoles.includes(ROLE_TAG_MANAGER)) {

@@ -7,6 +7,7 @@ import {
 import { TRIGGER_LOGIN } from '../actions/security';
 import { FETCH_CARD_INFO, FETCH_CARD_DESIGN_COUNTS } from '../actions/refData';
 import * as cardTagActoions from '../actions/cardTags';
+import * as adAnalyticsActions from '../actions/adAnalytics';
 import { fetchMemberSignups, fetchCardsForMembers } from './members';
 import {
     fetchDailyOrders, fetchTodaysOrders, fetchWeeklyOrders, fetchMonthlyOrders, fetchAllOrders,
@@ -15,6 +16,7 @@ import {
 import { loginUser } from './security';
 import { fetchCardInfo, fetchCardDesignCounts } from './refData';
 import * as cardTags from './cardTags';
+import * as adAnalytics from './adAnalytics';
 
 export function* watchMembersActions() {
     yield takeEvery(FETCH_MEMBERS_DATA, fetchMemberSignups);
@@ -86,4 +88,8 @@ export function* watchUpdateCardTagAction() {
 
 export function* watchDeleteCardTagAction() {
     yield takeEvery(cardTagActoions.DELETE_TAG, cardTags.deleteTag);
+}
+
+export function* watchFetchAdMetricsAction() {
+    yield takeEvery(adAnalyticsActions.FETCH_AD_METRICS, adAnalytics.fetchAdMetrics)
 }

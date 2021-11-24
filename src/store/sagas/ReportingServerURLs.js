@@ -20,3 +20,4 @@ export const FETCH_CARD_TAGS = URL_PREFIX + '/card-tagging/find-all-tags';
 export const CREATE_TAG = URL_PREFIX + '/card-tagging/create-tag';
 export const UPDATE_TAG = URL_PREFIX + '/card-tagging/update-tag';
 export const DELETE_TAG = URL_PREFIX + '/card-tagging/delete-tag';
+export const FETCH_AD_METRICS = URL_PREFIX + '/ads/fetch-metrics';
