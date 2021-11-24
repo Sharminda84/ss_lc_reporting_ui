@@ -28,6 +28,7 @@ import DesignerReport from './containers/card-designer/DesignerReport';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import FunnelAnalysis from './containers/orders/FunnelAnalysis';
 import CardTagsManager from "./containers/card-tags-manager/CardTagsManager";
+import AdMetrics from "./containers/ad-analytics/AdMetrics";
 
 function App() {
   return (
@@ -42,6 +43,8 @@ function App() {
             <Switch>
                 <Route path='/' exact component={Home} />
                 <Route path='/members/signups' exact component={MemberSignUps} />
+
+                <Route path='/ad-analytics/metrics' exact component={AdMetrics} />
 
                 <Route path='/orders/card-stream' exact component={MemberCardsStream} />
                 <Route path='/orders/sales' exact component={SalesReport} />

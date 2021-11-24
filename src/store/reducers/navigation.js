@@ -20,6 +20,17 @@ const initialState = {
           ],
       },
       {
+          name: 'Ad Analytics',
+          allowedRoles: [ ROLE_ADMIN ],
+          navigationSubItems: [
+              {
+                  subItemName: 'Ad Metrics',
+                  subItemPath: '/ad-analytics/metrics',
+                  selected: false,
+              }
+          ],
+      },
+      {
           name: 'Business Overview',
           allowedRoles: [ ROLE_ADMIN, ROLE_INVESTOR ],
           navigationSubItems: [
