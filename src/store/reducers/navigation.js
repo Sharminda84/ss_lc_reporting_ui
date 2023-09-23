@@ -129,8 +129,13 @@ const initialState = {
                   selected: false,
               },
               {
-                  subItemName: 'Chistmas - Weekly Top 10',
+                  subItemName: 'Christmas - Weekly Top 10',
                   subItemPath: '/orders/top10/christmas',
+                  selected: false,
+              },
+              {
+                  subItemName: 'Retirement - Weekly Top 10',
+                  subItemPath: '/orders/top10/retirement',
                   selected: false,
               },
           ]

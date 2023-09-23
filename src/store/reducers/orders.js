@@ -314,6 +314,7 @@ const initialState = {
 };
 
 const orders = (state = initialState, action) => {
+
     switch (action.type) {
         case LOAD_ORDERS_DATA:
             return {...state, orders: action.payload.ordersData, adCampaignsData: action.payload.adCampaignsData};

@@ -6,7 +6,6 @@ function Login(props) {
     const { loggedIn, logInError, triggerLogin } = props;
     const [user, setUser] = useState('');
     const [password, setPassword] = useState('');
-
     if (loggedIn) {
         return <Redirect to={'/'} />
     }

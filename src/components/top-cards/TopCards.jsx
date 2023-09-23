@@ -4,12 +4,14 @@ import { getCardName } from '../../utils';
 
 function TopCards(props) {
     const { cardTypeId, cards } = props;
+    console.log("cardTypeId " + cardTypeId + " total" + cards.length)
     const cardsToDisplay = cards
         .map(cardArray => {
             cardArray[2] = cardArray[2].replace("Thumb", "Sample");
             return cardArray;
         })
         .filter(cardArray => cardArray[0] == cardTypeId).slice(0, 10);
+    console.log("cardTypeId " + cardTypeId + " cards number" + cardsToDisplay.length)
     const renderImages = cardsToDisplay
         .map((card, index) =>
             <div className='TopCardsItem'>

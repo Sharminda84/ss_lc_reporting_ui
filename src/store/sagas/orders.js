@@ -139,11 +139,15 @@ export function* fetchCardSalesInDateRange(action) {
         yield put(globalActions.setNotification(NOTIFICATION_INFO, 'Loading Top Cards...'));
 
         const fetchCardSalesURL = ReportingServerURLs.FETCH_CARD_DESIGNS_SALES_IN_DATE_RANGE + `?fromDate=${action.payload.fromDate}&toDate=${action.payload.toDate}`;
+        console.log("fetch card sales in date range :" + fetchCardSalesURL);
         const cardSales = yield call(sendGetRequest, fetchCardSalesURL);
+        console.log("fetch card sales in date range cards:" + cardSales.length);
         const fetchCardViewsURL = ReportingServerURLs.FETCH_CARD_VIEWS_IN_DATE_RANGE + `?fromDate=${action.payload.fromDate}&toDate=${action.payload.toDate}`;
+        console.log("fetch card view:" + fetchCardViewsURL);
         const cardViews = yield call(sendGetRequest, fetchCardViewsURL);
+        console.log("fetch card view result:" + cardViews.length);
         yield put(loadCardDesignsSalesInDateRange(cardSales, cardViews));
-
+        console.log("fetch card view result:" + cardViews.length);
         yield put(globalActions.clearNotification());
     } catch (error) {
         console.log(error);

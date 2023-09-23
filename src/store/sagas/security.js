@@ -45,7 +45,7 @@ const sendLogInRequest = (user, password) => {
         username: user,
         password: password,
     };
-
+    console.log("url "+ ReportingServerURLs.LOGIN_URL);
     return axios
         .post(ReportingServerURLs.LOGIN_URL, payload)
         .then(response => {

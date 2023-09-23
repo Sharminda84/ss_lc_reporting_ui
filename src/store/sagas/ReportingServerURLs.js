@@ -1,5 +1,5 @@
-export const REPORTING_SERVER_URL = 'http://lcreportingapplication-dev.eba-mtgham92.eu-west-2.elasticbeanstalk.com';
-// export const REPORTING_SERVER_URL = 'http://localhost:5000';
+// export const REPORTING_SERVER_URL = 'http://localhost:8080';
+ export const REPORTING_SERVER_URL = 'http://18.169.192.23:5000';
 export const URL_PREFIX = REPORTING_SERVER_URL + '/v1/lc/reporting';
 export const LOGIN_URL = URL_PREFIX + '/user/login';
 export const FETCH_ALL_MEMBERS_URL = URL_PREFIX + '/members/range';

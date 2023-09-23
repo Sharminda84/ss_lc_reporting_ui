@@ -28,6 +28,7 @@ import DesignerReport from './containers/card-designer/DesignerReport';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import FunnelAnalysis from './containers/orders/FunnelAnalysis';
 import CardTagsManager from "./containers/card-tags-manager/CardTagsManager";
+import TopRetirementCardsContainer from "./containers/orders/TopRetirementCardsContainer";
 
 function App() {
   return (
@@ -60,7 +61,7 @@ function App() {
                 <Route path='/orders/top10/new-daddy' exact component={TopNewDaddyCardsContainer} />
                 <Route path='/orders/top10/welcome' exact component={TopNewWelcomeCardsContainer} />
                 <Route path='/orders/top10/christmas' exact component={TopChristmasCardsContainer} />
-
+                <Route path='/orders/top10/retirement' exact component={TopRetirementCardsContainer} />
                 <Route path='/card-designer/report' exact component={DesignerReport} />
 
                 <Route path='/analytics/reports' exact component={ReportingContainer} />
