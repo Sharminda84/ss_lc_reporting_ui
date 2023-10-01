@@ -10,7 +10,6 @@ function Login(props) {
         return <Redirect to={'/'} />
     }
 
-
     return (
         !loggedIn &&
         <div className='LoginPanel'>
