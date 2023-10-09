@@ -14,29 +14,19 @@ function MemberSignUps(props) {
 
     useEffect(() => {fetchMembersData(startDate, endDate)}, [fetchMembersData]);
 
-    const memberSignUpsForTable = memberSignUps.map(member => {
-       member.memberCreateUpdateTime = new Date(member.memberCreateUpdateTime).toDateString();
-       member.emailValidated = member.emailValidated ? 'yes' : 'no';
-       return member;
+    const memberSignUpsForTable = memberSignUps.flatMap(signUps => {
+       return signUps.members;
     });
 
     const convertToChartData = () => {
-        const chartData = [];
-        memberSignUps
-            .reduce((members, member) => {
-                const joinedDate = new Date(member.memberCreateUpdateTime);
+        const dataX = memberSignUps.flatMap(signUps => {
+            return signUps.joinStats;
+        }).map(stat => {
+                const joinedDate = new Date(stat.date);
                 joinedDate.setHours(0, 0, 0, 0);
-                const key = joinedDate.getTime() + 24*60*60*1000;
-                if (!members.has(key)) {
-                    members.set(key, 0);
-                }
-
-                members.set(key, members.get(key) + 1);
-                return members;
-            }, new Map())
-            .forEach((count, date) => chartData.push([date, count]));
-
-        return _.orderBy(chartData, data => data[0], 'asc')
+                return ([joinedDate.getTime(), stat.count])
+         })
+        return dataX
     }
 
     return (
